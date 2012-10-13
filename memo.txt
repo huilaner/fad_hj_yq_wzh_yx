@@ -1,0 +1,15 @@
+################## updated by 2012-10-12 ##################
+Figured out how to run google map.
+generate the google map API key according to instruction, change it into map.xml.
+
+every time need to locate, should go to terminal type:
+telnet localhost 5554
+geo fix -75.200987 39.951481
+
+
+*find bugs in backend: provider.php
+	last line: echo $sql -> getProviderName($pid);
+	should be echo $sql -> getProviderInfo($pid);
+need access to server to update php file or have new space to implement.
+
+######################################################
