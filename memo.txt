@@ -12,4 +12,12 @@ geo fix -75.200987 39.951481
 	should be echo $sql -> getProviderInfo($pid);
 need access to server to update php file or have new space to implement.
 
-######################################################
+###########################################################
+################## updated by 2012-10-20 ##################
+
+After meeting with Scott, the new feature is assigned to be added before the first demo in next next week (week of oct 29th, probably Friday).
+
+Add three pros and cons for the doctor, and it should be chosen from the options not text fields. 
+(yuhui, please add more details if any, thx:) )
+
+###########################################################
