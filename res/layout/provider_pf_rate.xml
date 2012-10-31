@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/layout_root"
               android:orientation="vertical"
@@ -70,11 +76,50 @@
         android:numStars="5"
         android:stepSize="1.0"/>
       
+            <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Professional Skills"
+        />
+      <RatingBar android:id="@+id/providerpf_rate_professsionalSkills_bar"
+        android:layout_width="wrap_content"
+    	style="?android:attr/ratingBarStyleIndicator"
+    	android:isIndicator="false"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1.0"/>
+      
+                  <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Costs"
+        />
+      <RatingBar android:id="@+id/providerpf_rate_costs_bar"
+        android:layout_width="wrap_content"
+    	style="?android:attr/ratingBarStyleIndicator"
+    	android:isIndicator="false"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1.0"/>
+      
+                  <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Availability"
+        />
+      <RatingBar android:id="@+id/providerpf_rate_availability_bar"
+        android:layout_width="wrap_content"
+    	style="?android:attr/ratingBarStyleIndicator"
+    	android:isIndicator="false"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1.0"/>
 
     <Button
         android:id="@+id/providerpf_rate_button_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/submit" />
-	    
+
 </LinearLayout>
+</ScrollView>

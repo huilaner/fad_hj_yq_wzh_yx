@@ -16,6 +16,8 @@
         android:textSize="7dp"
 		android:layout_alignParentRight="true"
         android:drawableTop="@drawable/map" />
+    
+    
 
     <LinearLayout
         android:id="@+id/providerpf_top"
@@ -168,7 +170,7 @@
         android:layout_below="@+id/providerpf_middle"
         android:layout_marginTop="40dp"
         android:layout_centerInParent="true"
-        android:text="Reviews"
+        android:text="All previous Reviews"
         android:textSize="20dp" />
     
 	<ListView
@@ -178,7 +180,13 @@
 	    
 	    android:layout_below="@id/providerpf_comment_header"
 	    />
-    
 
+	<Button
+	    android:id="@+id/providerpf_all_previous_reviews_button"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/providerpf_rate_button"
+	    android:layout_centerHorizontal="true"
+	    android:text="Average Feature Rating" />
 
 </RelativeLayout>

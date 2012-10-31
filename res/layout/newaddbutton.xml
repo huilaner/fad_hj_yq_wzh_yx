@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+   
+
+   <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Overall:
+        "
+        />
+         <RatingBar android:id="@+id/average_overall_bar"
+        android:layout_width="wrap_content"
+    	style="?android:attr/ratingBarStyleIndicator"
+    	android:isIndicator="false"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1.0"/>
+   
+   <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Friendliness:
+        "     
+        
+        />
+   
+            <RatingBar android:id="@+id/average_friendliness_bar"
+        android:layout_width="wrap_content"
+    	style="?android:attr/ratingBarStyleIndicator"
+    	android:isIndicator="false"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1.0"/>
+            
+   <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Office Environment:
+        "
+        />
+            <RatingBar android:id="@+id/average_environment_bar"
+        android:layout_width="wrap_content"
+    	style="?android:attr/ratingBarStyleIndicator"
+    	android:isIndicator="false"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1.0"/>
+   
+   <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Communication:
+        "
+        />
+            <RatingBar android:id="@+id/average_communication_bar"
+        android:layout_width="wrap_content"
+    	style="?android:attr/ratingBarStyleIndicator"
+    	android:isIndicator="false"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1.0"/>
+   
+   <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Professional Skills:
+        "
+        />
+   
+            <RatingBar android:id="@+id/average_professionalskills_bar"
+        android:layout_width="wrap_content"
+    	style="?android:attr/ratingBarStyleIndicator"
+    	android:isIndicator="false"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1.0"/>
+            
+   <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Costs:
+        "
+        />
+            <RatingBar android:id="@+id/average_costs_bar"
+        android:layout_width="wrap_content"
+    	style="?android:attr/ratingBarStyleIndicator"
+    	android:isIndicator="false"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1.0"/>
+   
+   <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Availability:
+        "
+        />
+            <RatingBar android:id="@+id/average_availability_bar"
+        android:layout_width="wrap_content"
+    	style="?android:attr/ratingBarStyleIndicator"
+    	android:isIndicator="false"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1.0"/>
+    </LinearLayout>
