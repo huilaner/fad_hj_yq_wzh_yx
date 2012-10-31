@@ -21,3 +21,19 @@ Add three pros and cons for the doctor, and it should be chosen from the options
 (yuhui, please add more details if any, thx:) )
 
 ###########################################################
+add more respect to rating
+list the cons and pros based on the analysis of the rating for each respect.
+add a button like "analyze pros and cons" -> new page, show pros and cons
+add button -> "all reviews" pop out or new page
+
+add 3 more features:
+1. professional skills
+2. availability
+3. costs
+
+
+Features can be done in the next round:
+type of the provider be more specific: dermatologist, surgeons…
+display of the reviews like roll...
+compare 2 docs
+sort by
