@@ -1,0 +1,44 @@
+################## updated by 2012-10-12 ##################
+Figured out how to run google map.
+generate the google map API key according to instruction, change it into map.xml.
+
+every time need to locate, should go to terminal type:
+telnet localhost 5554
+geo fix -75.200987 39.951481
+
+
+*find bugs in backend: provider.php
+	last line: echo $sql -> getProviderName($pid);
+	should be echo $sql -> getProviderInfo($pid);
+need access to server to update php file or have new space to implement.
+
+###########################################################
+################## updated by 2012-10-20 ##################
+
+After meeting with Scott, the new feature is assigned to be added before the first demo in next next week (week of oct 29th, probably Friday).
+
+Add three pros and cons for the doctor, and it should be chosen from the options not text fields. 
+(yuhui, please add more details if any, thx:) )
+
+###########################################################
+add more respect to rating
+list the cons and pros based on the analysis of the rating for each respect.
+add a button like "analyze pros and cons" -> new page, show pros and cons
+add button -> "all reviews" pop out or new page
+
+add 3 more features:
+1. professional skills
+2. availability
+3. costs
+
+
+Features can be done in the next round:
+type of the provider be more specific: dermatologist, surgeons…
+display of the reviews like roll...
+compare 2 docs
+sort by
+###########################################################
+################## updated by 2012-10-31 ##################
+added new features, transfer the backend files to our server:
+
+https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/
