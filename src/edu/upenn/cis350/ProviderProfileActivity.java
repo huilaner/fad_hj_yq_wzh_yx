@@ -36,13 +36,14 @@ import android.widget.Toast;
  */
 public class ProviderProfileActivity extends Activity{
 
-	private static final String BASE_URL="http://spectrackulo.us/350/ratings.php?mode=view&pid=";
+	private static final String BASE_URL="https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/ratings.php?mode=view&pid=";
 	private TextView m_provider_name;
 	private TextView m_provider_phone;
 	private TextView m_provider_address;
 	private TextView m_provider_rating;
 	
 	private Dialog dialog;
+	private Dialog dialog2;
 
 	private EditText reviewText;
 	private Button reviewButton;
@@ -50,10 +51,22 @@ public class ProviderProfileActivity extends Activity{
 	private RatingBar rating_friendliness_bar;
 	private RatingBar rating_communication_bar;
 	private RatingBar rating_environment_bar;
+	//new features!!!!!
+	private RatingBar rating_professionalSkills_bar;
+	private RatingBar rating_costs_bar;
+	private RatingBar rating_availability_bar;
 	
+	private RatingBar avg_rating_overall_bar;
+	private RatingBar avg_rating_friendliness_bar;
+	private RatingBar avg_rating_communication_bar;
+	private RatingBar avg_rating_environment_bar;
+	private RatingBar avg_rating_professionalskills_bar;
+	private RatingBar avg_rating_costs_bar;
+	private RatingBar avg_rating_availability_bar;
 
 	private Button m_button_map;
 	private Button m_button_review;
+	private Button m_button_avgfeature;
 	private final Context m_context = this;
 	private ArrayList<Rating> m_ratings;
 	private Provider m_provider;
@@ -81,7 +94,8 @@ public class ProviderProfileActivity extends Activity{
 		m_comments = (ListView)this.findViewById(R.id.providerpf_comments);
 		m_adapter = new RatingAdapter(m_context);
 		m_comments.setAdapter(m_adapter);
-
+		m_button_avgfeature=(Button)this.findViewById(R.id.providerpf_all_previous_reviews_button);
+		
 		//provider metadata
 		m_provider_name = (TextView)this.findViewById(R.id.provider_name);
 		m_provider_phone = (TextView)this.findViewById(R.id.provider_phone);
@@ -156,6 +170,46 @@ public class ProviderProfileActivity extends Activity{
 				startActivity(intent);
 			}
 		});
+		
+		m_button_avgfeature.setOnClickListener(new OnClickListener(){
+
+			// add feature button
+				public void onClick(View v) {
+					dialog2=new Dialog(m_context);
+					dialog2.setContentView(R.layout.newaddbutton);
+					dialog2.setTitle("Average Feature Rating");
+
+					Integer overallAvg = (int) m_provider.getAverageRating();
+					avg_rating_overall_bar = (RatingBar) dialog2.findViewById(R.id.average_overall_bar);
+					avg_rating_overall_bar.setRating(overallAvg);
+					
+					Integer fAvg = (int) m_provider.getAverage_friendliness_rating();
+					avg_rating_friendliness_bar = (RatingBar) dialog2.findViewById(R.id.average_friendliness_bar);
+					avg_rating_friendliness_bar.setRating(fAvg);
+					
+					Integer comAvg = (int) m_provider.getAverage_communication_rating();
+					avg_rating_communication_bar = (RatingBar) dialog2.findViewById(R.id.average_communication_bar);
+					avg_rating_communication_bar.setRating(comAvg);
+					
+					Integer environAvg = (int) m_provider.getAverage_environment_rating();
+					avg_rating_environment_bar = (RatingBar) dialog2.findViewById(R.id.average_environment_bar);
+					avg_rating_environment_bar.setRating(environAvg);
+					
+					Integer proAvg = (int) m_provider.getAverage_professional_rating();
+					avg_rating_professionalskills_bar = (RatingBar) dialog2.findViewById(R.id.average_professionalskills_bar);
+					avg_rating_professionalskills_bar.setRating(proAvg);
+					
+					Integer costAvg = (int) m_provider.getAverage_costs_rating();
+					avg_rating_costs_bar = (RatingBar) dialog2.findViewById(R.id.average_costs_bar);
+					avg_rating_costs_bar.setRating(costAvg);
+					
+					Integer avaiAvg = (int) m_provider.getAverage_availability_rating();
+					avg_rating_availability_bar = (RatingBar) dialog2.findViewById(R.id.average_availability_bar);
+					avg_rating_availability_bar.setRating(avaiAvg);
+					
+					dialog2.show();
+					
+				}});
 
 		//review dialog pops up.
 		m_button_review.setOnClickListener(new OnClickListener() {
@@ -173,6 +227,11 @@ public class ProviderProfileActivity extends Activity{
 				rating_communication_bar = (RatingBar) dialog.findViewById(R.id.providerpf_rate_communication_bar);
 				rating_environment_bar = (RatingBar) dialog.findViewById(R.id.providerpf_rate_environment_bar);
 				rating_friendliness_bar = (RatingBar) dialog.findViewById(R.id.providerpf_rate_friendly_bar);
+				
+				//new features!!!!!!!!
+				rating_professionalSkills_bar = (RatingBar) dialog.findViewById(R.id.providerpf_rate_professsionalSkills_bar);
+				rating_costs_bar = (RatingBar) dialog.findViewById(R.id.providerpf_rate_costs_bar);
+				rating_availability_bar = (RatingBar) dialog.findViewById(R.id.providerpf_rate_availability_bar);
 				
 				reviewButton.setOnClickListener(new OnClickListener(){
 
@@ -201,11 +260,18 @@ public class ProviderProfileActivity extends Activity{
 						float friendliness = rating_friendliness_bar.getRating();
 						float communication = rating_communication_bar.getRating();
 						float environment = rating_environment_bar.getRating();
+						//new features!!!!!!!!!
+						float professionalSkills = rating_professionalSkills_bar.getRating();
+						float costs = rating_costs_bar.getRating();
+						float availability = rating_availability_bar.getRating();
+						
 						m_provider.getID();
-						String temp_base = "http://www.spectrackulo.us/350/ratings.php?mode=insert";
+						String temp_base = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/ratings.php?mode=insert";
 						String url = temp_base + "&pid=" + m_provider.getID() + "&uid=" + id + "&rating=" + 
 								(int)rating + "&review=" + review + "&friendliness=" + (int)friendliness + 
-								"&communication=" + (int)communication + "&office_environment=" + (int)environment;
+								"&communication=" + (int)communication + "&office_environment=" + (int)environment +
+								"&professional=" + (int)professionalSkills + "&costs=" + (int)costs + 
+								"&availability=" + (int)availability;
 						System.out.println(url);
 						InternetHelper.httpGetRequest(url);
 						Toast.makeText(m_context, "Review submitted!", Toast.LENGTH_LONG).show();
@@ -257,8 +323,11 @@ public class ProviderProfileActivity extends Activity{
 				float friendliness = Float.parseFloat(current.getString("friendliness"));
 				float communication = Float.parseFloat(current.getString("communication"));
 				float environment = Float.parseFloat(current.getString("office_environment"));
+				float professional = Float.parseFloat(current.getString("professional"));
+				float costs = Float.parseFloat(current.getString("costs"));
+				float availability = Float.parseFloat(current.getString("availability"));
 				
-				Rating currentRating = new Rating(user_id, provider_id, time, review, (int)rating, (int)communication, (int)environment, (int)friendliness);
+				Rating currentRating = new Rating(user_id, provider_id, time, review, (int)rating, (int)communication, (int)environment, (int)friendliness, (int)professional, (int)costs, (int)availability);
 				m_ratings.add(currentRating);
 				m_adapter.notifyDataSetChanged();
 				
@@ -348,6 +417,11 @@ public class ProviderProfileActivity extends Activity{
 			RatingBar friendliness = (RatingBar)list_result.findViewById(R.id.providerpf_comment_friendliness);
 			RatingBar environment = (RatingBar)list_result.findViewById(R.id.providerpf_comment_environment);
 			RatingBar communication = (RatingBar)list_result.findViewById(R.id.providerpf_comment_communication);
+			//wolaiwanyiwan
+			RatingBar professional = (RatingBar)list_result.findViewById(R.id.providerpf_comment_professionalskills);
+			RatingBar costs = (RatingBar)list_result.findViewById(R.id.providerpf_comment_costs);
+			RatingBar availability = (RatingBar)list_result.findViewById(R.id.providerpf_comment_availability);
+			
 			
 			if (rating==5) {
 				stars.setImageResource(R.drawable.fivestars);
@@ -365,6 +439,11 @@ public class ProviderProfileActivity extends Activity{
 
 			environment.setRating(currentRating.getOffice_environment_rating());
 			communication.setRating(currentRating.getCommunication_rating());
+			
+			//wolaiwanyiwan
+			professional.setRating(currentRating.getProfessional_rating());
+			costs.setRating(currentRating.getCosts_rating());
+			availability.setRating(currentRating.getAvailability_rating());
 			
 			String review = currentRating.getReview();
 			String date = currentRating.getDate();
