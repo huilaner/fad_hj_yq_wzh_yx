@@ -50,9 +50,9 @@ public class ProviderTest extends ActivityInstrumentationTestCase2<ProviderProfi
 		ratings.add(fourth);
 
 		// initialize a dummy provider.
-		return new Provider(1, name, "3400 Spruce Street", "Philadelphia",
-				"PA", "19104", "(215)662-3228", "yes", "yes", "PCP", "yes",
-				"yes", "yes", 3, longitude, latitude, "None", "stfu");
+		return null;//new Provider(1, name, "3400 Spruce Street", "Philadelphia",
+				//"PA", "19104", "(215)662-3228", "yes", "yes", "PCP", "yes",
+				//"yes", "yes", 3, longitude, latitude, "None", "stfu");
 	}
 
 	

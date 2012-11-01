@@ -13,10 +13,15 @@ public class Rating implements Serializable{
 	private Integer communication_rating = 0;
 	private Integer office_environment_rating = 0;
 	private Integer friendliness_rating = 0;
+	private Integer professional_rating = 0;
+
+	private Integer costs_rating = 0;
+	private Integer availability_rating = 0;
 	
 	public Rating(long user, long provider, String date, String desc, int rate,
 			int communication_rating, int office_environment_rating,
-			int friendliness_rating) {
+			int friendliness_rating, int professional_rating, int costs_rating,
+			int availability_rating) {
 		this.user_id = user;
 		this.provider_id = provider;
 		this.date = date;
@@ -25,6 +30,9 @@ public class Rating implements Serializable{
 		this.communication_rating = communication_rating;
 		this.office_environment_rating = office_environment_rating;
 		this.friendliness_rating = friendliness_rating;
+		this.professional_rating = professional_rating;
+		this.costs_rating = costs_rating;
+		this.availability_rating = availability_rating;
 	}
 	
 	public Rating(long user, long provider, String date, String desc, int rate) {
@@ -61,5 +69,17 @@ public class Rating implements Serializable{
 
 	public Integer getFriendliness_rating() {
 		return friendliness_rating;
+	}
+	
+	public Integer getProfessional_rating() {
+		return professional_rating;
+	}
+
+	public Integer getCosts_rating() {
+		return costs_rating;
+	}
+
+	public Integer getAvailability_rating() {
+		return availability_rating;
 	}
 }

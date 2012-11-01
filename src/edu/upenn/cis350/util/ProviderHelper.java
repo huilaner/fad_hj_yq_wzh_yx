@@ -16,7 +16,7 @@ import edu.upenn.cis350.entities.Provider;
  */
 public class ProviderHelper {
 	
-	private static final String DATABASE_SITE = "http://spectrackulo.us/350/";
+	private static final String DATABASE_SITE = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/";
 
 	
 	/**
@@ -98,14 +98,29 @@ public class ProviderHelper {
 			String appointment_only = json.getString("appointment_only");
 			Double average_rating = Double.parseDouble(json
 					.getString("average_rating"));
+			Double average_friendliness_rating = Double.parseDouble(json
+					.getString("average_friendliness_rating"));
+			Double average_environment_rating = Double.parseDouble(json
+					.getString("average_environment_rating"));
+			Double average_communication_rating = Double.parseDouble(json
+					.getString("average_communication_rating"));
+			Double average_professional_rating = Double.parseDouble(json
+					.getString("average_professional_rating"));
+			Double average_costs_rating = Double.parseDouble(json
+					.getString("average_costs_rating"));
+			Double average_availability_rating = Double.parseDouble(json
+					.getString("average_availability_rating"));
 			Double longitude = Double.parseDouble(json.getString("longitude"));
 			Double latitude = Double.parseDouble(json.getString("latitude"));
 			String website = json.getString("website");
 			String hours = json.getString("hours");
-		
+			
 			provider = new Provider(pid, name, address, city, state, zip,
 					phone, accepting_new, has_parking, type, credit_cards,
 					handicap_access, appointment_only, average_rating,
+					average_friendliness_rating, average_environment_rating,
+					average_communication_rating, average_professional_rating,
+					average_costs_rating, average_availability_rating,
 					longitude, latitude, website, hours);
 
 		}catch(Exception e){

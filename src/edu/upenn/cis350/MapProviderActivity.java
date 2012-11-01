@@ -113,7 +113,7 @@ public class MapProviderActivity extends MapActivity {
 		// ratings.
 		Provider personal = new Provider(1, "Your Current Location", "You are located near",
 				"", "", "", "(" + m_lat.toString() + "," + m_long.toString() + ")", "", "",
-				"", "", "", "", -1, 0, 0, "", "");
+				"", "", "", "", -1, -1, -1, -1, -1, -1, -1, 0, 0, "", "");
 		// create an array list just containing this to pass to the map itemized
 		// overlay
 		ArrayList<Provider> personal_templist = new ArrayList<Provider>();
@@ -277,7 +277,7 @@ public class MapProviderActivity extends MapActivity {
 
 	public void generateProviderList() {
 		try{
-			String uri = "http://spectrackulo.us/350/";
+			String uri = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/";
 			String history_JSON = InternetHelper.httpGetRequest(uri);
 			_providers = ProviderHelper.createListOfProvidersFromJson(history_JSON);
 		} catch (Exception e){

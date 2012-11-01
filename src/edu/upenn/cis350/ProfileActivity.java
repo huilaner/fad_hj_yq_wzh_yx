@@ -126,7 +126,7 @@ public class ProfileActivity extends Activity{
     		gender = "Female";
 		
 		//get the user's id via the http request, and store it in the database
-		String uri = "http://spectrackulo.us/350/register.php?name=" + encoded_name + 
+		String uri = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/register.php?name=" + encoded_name + 
 				"&address=" + encoded_address + "&gender=" + gender + "&email=" + email + "&phone=" + phone;
 		String id = InternetHelper.httpGetRequest(uri);
 		

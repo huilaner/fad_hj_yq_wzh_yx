@@ -22,6 +22,12 @@ public class Provider implements Serializable{
 	private String handicap_access;
 	private String appointment;
 	double averageRating;
+	double average_friendliness_rating;
+	double average_environment_rating;
+	double average_communication_rating;
+	double average_professional_rating;
+	double average_costs_rating;
+	double average_availability_rating;
 	private Double longitude;
 	private Double latitude;
 	private String website;
@@ -29,7 +35,9 @@ public class Provider implements Serializable{
 	
 	public Provider(long id, String name, String address, String city, String state, String zip, String phone, 
 			String accepting_new, String has_parking, String type, String credit_cards, String handicap_access,
-			String appointment, double averageRating, 
+			String appointment, double averageRating, double average_friendliness_rating,
+			double average_environment_rating, double average_communication_rating,
+			double average_professional_rating,	double average_costs_rating, double average_availability_rating, 
 			double longitude, double latitude, String website, String hours){
 		this.id = id;
 		this.name = name;
@@ -44,6 +52,12 @@ public class Provider implements Serializable{
 		this.credit_cards = credit_cards;
 		this.appointment = appointment;
 		this.averageRating = averageRating;
+		this.average_friendliness_rating = average_friendliness_rating;
+		this.average_environment_rating = average_environment_rating;
+		this.average_communication_rating = average_communication_rating;
+		this.average_professional_rating = average_professional_rating;
+		this.average_costs_rating = average_costs_rating;
+		this.average_availability_rating = average_availability_rating;
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.handicap_access = handicap_access;
@@ -51,6 +65,54 @@ public class Provider implements Serializable{
 		this.hours = hours;
 	}
 	
+	public double getAverage_friendliness_rating() {
+		return average_friendliness_rating;
+	}
+
+	public void setAverage_friendliness_rating(double average_friendliness_rating) {
+		this.average_friendliness_rating = average_friendliness_rating;
+	}
+
+	public double getAverage_environment_rating() {
+		return average_environment_rating;
+	}
+
+	public void setAverage_environment_rating(double average_environment_rating) {
+		this.average_environment_rating = average_environment_rating;
+	}
+
+	public double getAverage_communication_rating() {
+		return average_communication_rating;
+	}
+
+	public void setAverage_communication_rating(double average_communication_rating) {
+		this.average_communication_rating = average_communication_rating;
+	}
+
+	public double getAverage_professional_rating() {
+		return average_professional_rating;
+	}
+
+	public void setAverage_professional_rating(double average_professional_rating) {
+		this.average_professional_rating = average_professional_rating;
+	}
+
+	public double getAverage_costs_rating() {
+		return average_costs_rating;
+	}
+
+	public void setAverage_costs_rating(double average_costs_rating) {
+		this.average_costs_rating = average_costs_rating;
+	}
+
+	public double getAverage_availability_rating() {
+		return average_availability_rating;
+	}
+
+	public void setAverage_availability_rating(double average_availability_rating) {
+		this.average_availability_rating = average_availability_rating;
+	}
+
 	public long getID(){
 		return id;
 	}

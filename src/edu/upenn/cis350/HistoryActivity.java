@@ -32,7 +32,7 @@ import android.widget.TextView;
  * 
  */
 public class HistoryActivity extends Activity{
-	private static final String BASE_P_URL = "http://spectrackulo.us/350/history.php?uid=";
+	private static final String BASE_P_URL = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/history.php?uid=";
 	private ArrayList<Rating> _ratings;
 	private ListView m_results;
 
@@ -151,7 +151,7 @@ public class HistoryActivity extends Activity{
 
 			//populate the inflated view.
 			TextView providerName = (TextView)list_result.findViewById(R.id.history_activity_provider_name);
-			String uri = "http://spectrackulo.us/350/provider.php?pid=" + currentRating.getProvider();
+			String uri = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/provider.php?pid=" + currentRating.getProvider();
 			
 			final String pid = InternetHelper.httpGetRequest(uri);
 			providerName.setText(pid);
@@ -171,7 +171,7 @@ public class HistoryActivity extends Activity{
 			button.setOnClickListener(new OnClickListener(){
 				public void onClick(View arg0) {
 					Intent intent = new Intent(m_context, ProviderProfileActivity.class);
-					String uri = "http://spectrackulo.us/350/?pid=" + _ratings.get(position).getProvider();
+					String uri = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/?pid=" + _ratings.get(position).getProvider();
 
 					String provider = InternetHelper.httpGetRequest(uri);
 							
