@@ -14,7 +14,7 @@
          <RatingBar android:id="@+id/average_overall_bar"
         android:layout_width="wrap_content"
     	style="?android:attr/ratingBarStyleIndicator"
-    	android:isIndicator="false"
+    	android:isIndicator="true"
         android:layout_height="wrap_content"
         android:numStars="5"
         android:stepSize="1.0"/>
@@ -30,7 +30,7 @@
             <RatingBar android:id="@+id/average_friendliness_bar"
         android:layout_width="wrap_content"
     	style="?android:attr/ratingBarStyleIndicator"
-    	android:isIndicator="false"
+    	android:isIndicator="true"
         android:layout_height="wrap_content"
         android:numStars="5"
         android:stepSize="1.0"/>
@@ -44,7 +44,7 @@
             <RatingBar android:id="@+id/average_environment_bar"
         android:layout_width="wrap_content"
     	style="?android:attr/ratingBarStyleIndicator"
-    	android:isIndicator="false"
+    	android:isIndicator="true"
         android:layout_height="wrap_content"
         android:numStars="5"
         android:stepSize="1.0"/>
@@ -58,7 +58,7 @@
             <RatingBar android:id="@+id/average_communication_bar"
         android:layout_width="wrap_content"
     	style="?android:attr/ratingBarStyleIndicator"
-    	android:isIndicator="false"
+    	android:isIndicator="true"
         android:layout_height="wrap_content"
         android:numStars="5"
         android:stepSize="1.0"/>
@@ -73,7 +73,7 @@
             <RatingBar android:id="@+id/average_professionalskills_bar"
         android:layout_width="wrap_content"
     	style="?android:attr/ratingBarStyleIndicator"
-    	android:isIndicator="false"
+    	android:isIndicator="true"
         android:layout_height="wrap_content"
         android:numStars="5"
         android:stepSize="1.0"/>
@@ -87,7 +87,7 @@
             <RatingBar android:id="@+id/average_costs_bar"
         android:layout_width="wrap_content"
     	style="?android:attr/ratingBarStyleIndicator"
-    	android:isIndicator="false"
+    	android:isIndicator="true"
         android:layout_height="wrap_content"
         android:numStars="5"
         android:stepSize="1.0"/>
@@ -101,7 +101,7 @@
             <RatingBar android:id="@+id/average_availability_bar"
         android:layout_width="wrap_content"
     	style="?android:attr/ratingBarStyleIndicator"
-    	android:isIndicator="false"
+    	android:isIndicator="true"
         android:layout_height="wrap_content"
         android:numStars="5"
         android:stepSize="1.0"/>
