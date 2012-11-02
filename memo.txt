@@ -45,7 +45,7 @@ https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/
 
 
 ###########################################################
-################## updated by 2012-11-01 ##################
+################## updated by 2012-11-02 ##################
 New Features to be implemented:
 1.choose up to 3 for (Best & Worst) each from this list(more than 3) 
 2. text comments
