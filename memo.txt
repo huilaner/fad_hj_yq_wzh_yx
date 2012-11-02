@@ -42,3 +42,25 @@ sort by
 added new features, transfer the backend files to our server:
 
 https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/
+
+
+###########################################################
+################## updated by 2012-11-01 ##################
+New Features to be implemented:
+1.choose up to 3 for (Best & Worst) each from this list(more than 3) 
+2. text comments
+	- 1 line summary top for full comments(expand full commends, other wise just display the summary)
+
+3.
+	- search by more categories (more fields)
+		-primary care -specialist (-> specialties)
+	other providers rather just doctors
+	
+	doctors' office, pharmacy, urgent care
+		then categories
+*Search icon
+ **Parmacy -> ****search(like original)
+ **Urgent -> ****search
+ **Office -> ***GP, Ped, Cardio… ->****Search
+
+$$$ Next meeting: 2pm Fri. $$$
