@@ -13,6 +13,8 @@
     <string name="contact_info_number">1-215-255-2555</string>
     <string name="search_title">Search for Provider</string>
 
+    <string name="providerpf_rate_comment_label2">&quot;One Line Comment Summary&quot;</string>
+    <string name="providerpf_rate_comment_label3">&quot;More Comments&quot;</string>
     
     <string name="provider_prompt">Select your insurance provider</string>
     <string-array name="provider_array">
@@ -28,6 +30,25 @@
         <item>Doesn\'t matter</item>
         <item>Yes</item>
     </string-array>
+    
+    <string name="pros_prompt">Best things (up to 3)</string>
+    <string-array name="pros_array">
+        <item>care about patient</item>
+        <item>quick diagnosis</item>
+        <item>easy for parking</item>
+        <item>cost reasonable</item>
+        <item>easy to make appointment</item>
+    </string-array>
+    
+        <string name="cons_prompt">Worst things (up to 3)</string>
+    <string-array name="cons_array">
+        <item>don\'t care about patient</item>
+        <item>slow diagnosis</item>
+        <item>hard for parking</item>
+        <item>cost not reasonable</item>
+        <item>hard to make appointment</item>
+    </string-array>
+    
     
     <string name="newpatient_prompt">Accept new patient</string>
     <string-array name="newpatient_array">
