@@ -28,6 +28,7 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.CheckBox;
 
 /**
  * Contains information about a provider
@@ -41,7 +42,7 @@ public class ProviderProfileActivity extends Activity{
 	private TextView m_provider_phone;
 	private TextView m_provider_address;
 	private TextView m_provider_rating;
-	
+
 	private Dialog dialog;
 	private Dialog dialog2;
 
@@ -55,7 +56,7 @@ public class ProviderProfileActivity extends Activity{
 	private RatingBar rating_professionalSkills_bar;
 	private RatingBar rating_costs_bar;
 	private RatingBar rating_availability_bar;
-	
+
 	private RatingBar avg_rating_overall_bar;
 	private RatingBar avg_rating_friendliness_bar;
 	private RatingBar avg_rating_communication_bar;
@@ -78,7 +79,26 @@ public class ProviderProfileActivity extends Activity{
 	private Button appointment; 
 	private Button PCP; 
 	private Button specialist;
+
+	//add for pros and cons
+	private Button m_button_pros;
+	private Button m_button_cons;
+	private Dialog dialog_pros;
+	private Dialog dialog_cons;
+	private CheckBox checkBox_pros1;
+	private CheckBox checkBox_pros2;
+	private CheckBox checkBox_pros3;
+	private CheckBox checkBox_pros4;
+	private CheckBox checkBox_pros5;
+	private CheckBox checkBox_cons1;
+	private CheckBox checkBox_cons2;
+	private CheckBox checkBox_cons3;
+	private CheckBox checkBox_cons4;
+	private CheckBox checkBox_cons5;
+	private Button button_pros_ok;
+	private Button button_cons_ok;
 	
+
 	private RatingAdapter m_adapter;
 
 	/**
@@ -95,7 +115,9 @@ public class ProviderProfileActivity extends Activity{
 		m_adapter = new RatingAdapter(m_context);
 		m_comments.setAdapter(m_adapter);
 		m_button_avgfeature=(Button)this.findViewById(R.id.providerpf_all_previous_reviews_button);
-		
+
+
+
 		//provider metadata
 		m_provider_name = (TextView)this.findViewById(R.id.provider_name);
 		m_provider_phone = (TextView)this.findViewById(R.id.provider_phone);
@@ -113,7 +135,7 @@ public class ProviderProfileActivity extends Activity{
 	 * toast is shown to explain what the icon means once being clicked
 	 */
 	private void initializeIcons() {
-		
+
 		parking = (Button) this.findViewById(R.id.provider_parking);
 		this.addDescriptionToast(parking, "The provider has parking");
 		creditcard = (Button) this.findViewById(R.id.provider_creditcard);
@@ -144,7 +166,7 @@ public class ProviderProfileActivity extends Activity{
 				toast.show();
 			}
 		});
-		
+
 	}
 
 
@@ -170,46 +192,51 @@ public class ProviderProfileActivity extends Activity{
 				startActivity(intent);
 			}
 		});
-		
+
 		m_button_avgfeature.setOnClickListener(new OnClickListener(){
+//			public void onCreate(){
+//				
+//			}
 
 			// add feature button
-				public void onClick(View v) {
-					dialog2=new Dialog(m_context);
-					dialog2.setContentView(R.layout.newaddbutton);
-					dialog2.setTitle("Average Feature Rating");
+			public void onClick(View v) {
+				dialog2=new Dialog(m_context);
+				dialog2.setContentView(R.layout.newaddbutton);
+				dialog2.setTitle("Average Feature Rating");
 
-					Integer overallAvg = (int) m_provider.getAverageRating();
-					avg_rating_overall_bar = (RatingBar) dialog2.findViewById(R.id.average_overall_bar);
-					avg_rating_overall_bar.setRating(overallAvg);
-					
-					Integer fAvg = (int) m_provider.getAverage_friendliness_rating();
-					avg_rating_friendliness_bar = (RatingBar) dialog2.findViewById(R.id.average_friendliness_bar);
-					avg_rating_friendliness_bar.setRating(fAvg);
-					
-					Integer comAvg = (int) m_provider.getAverage_communication_rating();
-					avg_rating_communication_bar = (RatingBar) dialog2.findViewById(R.id.average_communication_bar);
-					avg_rating_communication_bar.setRating(comAvg);
-					
-					Integer environAvg = (int) m_provider.getAverage_environment_rating();
-					avg_rating_environment_bar = (RatingBar) dialog2.findViewById(R.id.average_environment_bar);
-					avg_rating_environment_bar.setRating(environAvg);
-					
-					Integer proAvg = (int) m_provider.getAverage_professional_rating();
-					avg_rating_professionalskills_bar = (RatingBar) dialog2.findViewById(R.id.average_professionalskills_bar);
-					avg_rating_professionalskills_bar.setRating(proAvg);
-					
-					Integer costAvg = (int) m_provider.getAverage_costs_rating();
-					avg_rating_costs_bar = (RatingBar) dialog2.findViewById(R.id.average_costs_bar);
-					avg_rating_costs_bar.setRating(costAvg);
-					
-					Integer avaiAvg = (int) m_provider.getAverage_availability_rating();
-					avg_rating_availability_bar = (RatingBar) dialog2.findViewById(R.id.average_availability_bar);
-					avg_rating_availability_bar.setRating(avaiAvg);
-					
-					dialog2.show();
-					
-				}});
+				Integer overallAvg = (int) m_provider.getAverageRating();
+				avg_rating_overall_bar = (RatingBar) dialog2.findViewById(R.id.average_overall_bar);
+				avg_rating_overall_bar.setRating(overallAvg);
+
+				Integer fAvg = (int) m_provider.getAverage_friendliness_rating();
+				avg_rating_friendliness_bar = (RatingBar) dialog2.findViewById(R.id.average_friendliness_bar);
+				avg_rating_friendliness_bar.setRating(fAvg);
+
+				Integer comAvg = (int) m_provider.getAverage_communication_rating();
+				avg_rating_communication_bar = (RatingBar) dialog2.findViewById(R.id.average_communication_bar);
+				avg_rating_communication_bar.setRating(comAvg);
+
+				Integer environAvg = (int) m_provider.getAverage_environment_rating();
+				avg_rating_environment_bar = (RatingBar) dialog2.findViewById(R.id.average_environment_bar);
+				avg_rating_environment_bar.setRating(environAvg);
+
+				Integer proAvg = (int) m_provider.getAverage_professional_rating();
+				avg_rating_professionalskills_bar = (RatingBar) dialog2.findViewById(R.id.average_professionalskills_bar);
+				avg_rating_professionalskills_bar.setRating(proAvg);
+
+				Integer costAvg = (int) m_provider.getAverage_costs_rating();
+				avg_rating_costs_bar = (RatingBar) dialog2.findViewById(R.id.average_costs_bar);
+				avg_rating_costs_bar.setRating(costAvg);
+
+				Integer avaiAvg = (int) m_provider.getAverage_availability_rating();
+				avg_rating_availability_bar = (RatingBar) dialog2.findViewById(R.id.average_availability_bar);
+				avg_rating_availability_bar.setRating(avaiAvg);
+
+				dialog2.show();
+
+			}});
+
+
 
 		//review dialog pops up.
 		m_button_review.setOnClickListener(new OnClickListener() {
@@ -218,28 +245,185 @@ public class ProviderProfileActivity extends Activity{
 
 				dialog.setContentView(R.layout.provider_pf_rate);
 				dialog.setTitle("Rate and Review this Provider!");
+
+//				//add for pros and cons
+				m_button_pros = (Button)dialog.findViewById(R.id.button_pros);
+				m_button_cons = (Button)dialog.findViewById(R.id.button_cons);
 				
 				
+				//add for pros and cons
+				//pros checkbox pops up
+				m_button_pros.setOnClickListener(new OnClickListener() {
+					int countCheck = 0;
+					
+					public void onClick(View v) {
+						
+						dialog_pros = new Dialog(m_context);
+						dialog_pros.setContentView(R.layout.best_checkbox);
+						dialog_pros.setTitle("Best thing about this provider ");
+						
+						//checkbox
+						checkBox_pros1 = (CheckBox)dialog_pros.findViewById(R.id.pros_checkbox1);
+						checkBox_pros2 = (CheckBox)dialog_pros.findViewById(R.id.pros_checkbox2);
+						checkBox_pros3 = (CheckBox)dialog_pros.findViewById(R.id.pros_checkbox3);
+						checkBox_pros4 = (CheckBox)dialog_pros.findViewById(R.id.pros_checkbox4);
+						checkBox_pros5 = (CheckBox)dialog_pros.findViewById(R.id.pros_checkbox5);
+						button_pros_ok = (Button)dialog_pros.findViewById(R.id.pros_ok);
+						button_pros_ok.setOnClickListener(new OnClickListener(){
+							public void onClick(View v) {
+								dialog_pros.hide();
+							}
+						});
+						
+						checkBox_pros1.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_pros1);
+							}});
+						
+						checkBox_pros2.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_pros2);
+							}});
+						
+						checkBox_pros3.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_pros3);
+							}});						
+						
+						checkBox_pros4.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_pros4);
+							}});
+						
+						checkBox_pros5.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_pros5);
+							}});
+						
+						dialog_pros.show();
+					}
+					
+					public void onCheckboxClicked(View view) {
+					    // Is the view now checked?
+					    boolean checked = ((CheckBox) view).isChecked();
+					    
+					    if(checked){
+					    	if(countCheck >= 3){// it will allow 3 checkboxes only
+			                     Toast.makeText(m_context, "Should not check more than 3!", Toast.LENGTH_LONG).show();
+			                     ((CheckBox) view).setChecked(false);
+			                 }
+					    	else countCheck++;
+					    }
+					    else countCheck--;
+					    // Check which checkbox was clicked
+//					    switch(view.getId()) {
+//					        case R.id.pros_checkbox1:
+////					            if (checked) countCheck++;
+//					            break;
+//					        case R.id.pros_checkbox2:
+////					            if (checked) countCheck++;
+//					            break;
+//					        // TODO: Veggie sandwich
+//					    }
+					}
+					
+					
+					});
 				
+				//cons checkbox pops up
+				m_button_cons.setOnClickListener(new OnClickListener() {
+					int countCheck = 0;
+					public void onClick(View v) {
+						dialog_cons = new Dialog(m_context);
+						dialog_cons.setContentView(R.layout.worst_checkbox);
+						dialog_cons.setTitle("Worst thing about this provider");
+						//checkbox
+						checkBox_cons1 = (CheckBox)dialog_cons.findViewById(R.id.cons_checkbox1);
+						checkBox_cons2 = (CheckBox)dialog_cons.findViewById(R.id.cons_checkbox2);
+						checkBox_cons3 = (CheckBox)dialog_cons.findViewById(R.id.cons_checkbox3);
+						checkBox_cons4 = (CheckBox)dialog_cons.findViewById(R.id.cons_checkbox4);
+						checkBox_cons5 = (CheckBox)dialog_cons.findViewById(R.id.cons_checkbox5);
+						button_cons_ok = (Button)dialog_cons.findViewById(R.id.cons_ok);
+						
+						button_cons_ok.setOnClickListener(new OnClickListener(){
+							public void onClick(View v) {
+								dialog_cons.hide();
+							}
+						});
+						
+						checkBox_cons1.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons1);
+							}});
+						
+						checkBox_cons2.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons2);
+							}});
+						
+						checkBox_cons3.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons3);
+							}});						
+						
+						checkBox_cons4.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons4);
+							}});
+						
+						checkBox_cons5.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons5);
+							}});
+						
+						dialog_cons.show();
+					}
+					
+					public void onCheckboxClicked(View view) {
+					    // Is the view now checked?
+					    boolean checked = ((CheckBox) view).isChecked();
+
+					    if(checked) {
+					    	if(countCheck >= 3){// it will allow 3 checkboxes only
+			                     Toast.makeText(m_context, "Should not check more than 3!", Toast.LENGTH_LONG).show();
+			                     ((CheckBox) view).setChecked(false);
+			                 }
+					    	else countCheck++;
+					    }
+					    else countCheck--;
+					    // Check which checkbox was clicked
+//					    switch(view.getId()) {
+//					        case R.id.pros_checkbox1:
+////					            if (checked) countCheck++;
+//					            break;
+//					        case R.id.pros_checkbox2:
+////					            if (checked) countCheck++;
+//					            break;
+//					        // TODO: Veggie sandwich
+//					    }
+					}
+					});
+
+
 				reviewText = (EditText) dialog.findViewById(R.id.providerpf_rate_review);
 				reviewButton = (Button) dialog.findViewById(R.id.providerpf_rate_button_submit);
 				ratingbar = (RatingBar) dialog.findViewById(R.id.providerpf_rate_bar);
 				rating_communication_bar = (RatingBar) dialog.findViewById(R.id.providerpf_rate_communication_bar);
 				rating_environment_bar = (RatingBar) dialog.findViewById(R.id.providerpf_rate_environment_bar);
 				rating_friendliness_bar = (RatingBar) dialog.findViewById(R.id.providerpf_rate_friendly_bar);
-				
+
 				//new features!!!!!!!!
 				rating_professionalSkills_bar = (RatingBar) dialog.findViewById(R.id.providerpf_rate_professsionalSkills_bar);
 				rating_costs_bar = (RatingBar) dialog.findViewById(R.id.providerpf_rate_costs_bar);
 				rating_availability_bar = (RatingBar) dialog.findViewById(R.id.providerpf_rate_availability_bar);
-				
+
 				reviewButton.setOnClickListener(new OnClickListener(){
 
 					public void onClick(View arg0) {
-						
+
 
 						String review = reviewText.getText().toString();
-						
+
 						//make sure the input for keyword search is correct
 						if (review.length()>0 && !review.matches("[A-Za-z0-9\\s\\.,'!?&&[^\\n]]+?")){
 							//tell user the input was invalid
@@ -251,8 +435,8 @@ public class ProviderProfileActivity extends Activity{
 						}else{
 							review = review.replace(" ", "%20");
 						}
-						
-						
+
+
 						SharedPreferences settings = getSharedPreferences("UserData", 0);
 						System.out.println(settings);
 						String id = settings.getString("Id", null);
@@ -264,7 +448,7 @@ public class ProviderProfileActivity extends Activity{
 						float professionalSkills = rating_professionalSkills_bar.getRating();
 						float costs = rating_costs_bar.getRating();
 						float availability = rating_availability_bar.getRating();
-						
+
 						m_provider.getID();
 						String temp_base = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/ratings.php?mode=insert";
 						String url = temp_base + "&pid=" + m_provider.getID() + "&uid=" + id + "&rating=" + 
@@ -280,6 +464,7 @@ public class ProviderProfileActivity extends Activity{
 					}
 				});
 				dialog.show();
+				
 			}
 		});
 
@@ -299,16 +484,18 @@ public class ProviderProfileActivity extends Activity{
 		toggleIconVisibility(appointment,m_provider.getAppointment());
 		toggleIconVisibility(accepting,m_provider.getAccepting());
 		toggleIconVisibility(PCP,m_provider.getType());
-		
+
 		setRatingImage();
+		
+
 	}
 
-	
+
 	private void populateRatings() {
 		// make the HttpRequest
 		String uri = BASE_URL + m_provider.getID();		
 		String ratingsJSON = InternetHelper.httpGetRequest(uri);
-		
+
 		// parse the JSON and populate m_ratings from JSON for m_provider
 		try {
 			JSONObject json = new JSONObject(ratingsJSON);
@@ -326,11 +513,11 @@ public class ProviderProfileActivity extends Activity{
 				float professional = Float.parseFloat(current.getString("professional"));
 				float costs = Float.parseFloat(current.getString("costs"));
 				float availability = Float.parseFloat(current.getString("availability"));
-				
+
 				Rating currentRating = new Rating(user_id, provider_id, time, review, (int)rating, (int)communication, (int)environment, (int)friendliness, (int)professional, (int)costs, (int)availability);
 				m_ratings.add(currentRating);
 				m_adapter.notifyDataSetChanged();
-				
+
 			}
 		} catch (Exception e) {
 			// for logging
@@ -338,7 +525,7 @@ public class ProviderProfileActivity extends Activity{
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void setRatingImage(){
 		Integer avg = (int) m_provider.getAverageRating();
 
@@ -372,32 +559,32 @@ public class ProviderProfileActivity extends Activity{
 			button.setVisibility(Button.GONE);
 		}
 	}
-	
+
 	//inner class for rating adapter. Needs to reference m_ratings
 	class RatingAdapter extends BaseAdapter{
 		private Context m_context;
 		public RatingAdapter(Context c){
 			m_context = c;
 		}
-		
+
 		public int getCount() {
 			if(m_ratings != null)
 				return m_ratings.size();
 			else
 				return 0;
 		}
-		
+
 		public Object getItem(int position) {
 			if(m_ratings != null)
 				return m_ratings.get(position);
 			else
 				return 0;
 		}
-		
+
 		public long getItemId(int position) {
 			return position;
 		}
-		
+
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			//inflate the view
 			LinearLayout list_result;
@@ -408,7 +595,7 @@ public class ProviderProfileActivity extends Activity{
 			}
 			else
 				list_result = (LinearLayout)convertView;
-			
+
 			Rating currentRating = m_ratings.get(position);
 			//populate the new view
 			//TextView tv_rating = (TextView)list_result.findViewById(R.id.providerpf_comment_rating);
@@ -421,8 +608,8 @@ public class ProviderProfileActivity extends Activity{
 			RatingBar professional = (RatingBar)list_result.findViewById(R.id.providerpf_comment_professionalskills);
 			RatingBar costs = (RatingBar)list_result.findViewById(R.id.providerpf_comment_costs);
 			RatingBar availability = (RatingBar)list_result.findViewById(R.id.providerpf_comment_availability);
-			
-			
+
+
 			if (rating==5) {
 				stars.setImageResource(R.drawable.fivestars);
 			} else if (rating==4) {
@@ -434,17 +621,17 @@ public class ProviderProfileActivity extends Activity{
 			} else if (rating==1) {
 				stars.setImageResource(R.drawable.onestar);
 			}
-			
+
 			friendliness.setRating(currentRating.getFriendliness_rating());
 
 			environment.setRating(currentRating.getOffice_environment_rating());
 			communication.setRating(currentRating.getCommunication_rating());
-			
+
 			//wolaiwanyiwan
 			professional.setRating(currentRating.getProfessional_rating());
 			costs.setRating(currentRating.getCosts_rating());
 			availability.setRating(currentRating.getAvailability_rating());
-			
+
 			String review = currentRating.getReview();
 			String date = currentRating.getDate();
 
