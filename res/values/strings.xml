@@ -15,7 +15,20 @@
 
     <string name="providerpf_rate_comment_label2">&quot;One Line Comment Summary&quot;</string>
     <string name="providerpf_rate_comment_label3">&quot;More Comments&quot;</string>
+    <string name="pros">(up to 3 choices)</string>
+    <string name="cons">(up to 3 choices)</string>
+    <string name="pros1">&quot;care about patient&quot;</string>
+    <string name="pros2">&quot;quick diagnosis&quot;</string>
+    <string name="pros3">&quot;easy for parking&quot;</string>
+    <string name="pros4">&quot;cost reasonable&quot;</string>
+    <string name="pros5">&quot;easy to make appointment&quot;</string>
     
+    <string name="cons1">&quot;don\'t care about patient&quot;</string>
+    <string name="cons2">&quot;slow diagnosis&quot;</string>
+    <string name="cons3">&quot;hard for parking&quot;</string>
+    <string name="cons4">&quot;cost not reasonable&quot;</string>
+    <string name="cons5">&quot;hard to make appointment&quot;</string>
+            
     <string name="provider_prompt">Select your insurance provider</string>
     <string-array name="provider_array">
         <item>Aetna</item>
