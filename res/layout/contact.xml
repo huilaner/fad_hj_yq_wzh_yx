@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/cubes"
+    android:gravity="center">
+     
+    <TextView
+        android:id="@+id/contact_copyright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#000"
+        android:text="@string/contact_copyright" />
+    
+    <TextView
+        android:id="@+id/contact_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:text="@string/contact_more"
+        />
+    
+    <TextView
+        android:id="@+id/contact_info_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:text="@string/contact_info_name"
+        />
+    
+    
+
+    
+    <Button android:id="@+id/contact_info_email_now"
+        
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textColor="#000"
+        android:text="evanswu@nursingupenn.edu"
+		
+         />
+    
+    <Button android:id="@+id/contact_info_call"
+        
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textColor="#000"
+        android:text="1-215-255-2555"
+		
+         />
+    
+    <ImageView 
+        android:id="@+id/nursinglogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/nursing"
+        />
+    
+    
+    
+    
+    
+
+</LinearLayout>
