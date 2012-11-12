@@ -1,125 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/TableLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:shrinkColumns="0" 
+    android:stretchColumns="1,2" >
 
-    <TextView
-        android:id="@+id/providerpf_comment_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TableRow>
+        <RatingBar
+            android:id="@+id/providerpf_comment_stars"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_width="0dp"
+            android:numStars="5"
+            android:stepSize="1.0" />
+        
+         <TextView
+            android:id="@+id/providerpf_comment_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Sample Date" />
 
-        android:layout_above="@+id/providerpf_comment_stars"
-	    android:layout_centerHorizontal="true"
-        android:text="Sample Date" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Overall"
-        android:textSize="12dp" />
-
-    <ImageView
-        android:id="@+id/providerpf_comment_stars"
-        android:layout_width="fill_parent"
-        android:layout_height="20dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Friendliness"
-        android:textSize="10dp" />
-
-    <RatingBar
-        android:id="@+id/providerpf_comment_friendliness"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:numStars="5"
-        android:stepSize="1.0" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Communication"
-        android:textSize="10dp" />
-
-    <RatingBar
-        android:id="@+id/providerpf_comment_communication"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:numStars="5"
-        android:stepSize="1.0" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Office Environment"
-        android:textSize="10dp" />
-
-    <RatingBar
-        android:id="@+id/providerpf_comment_environment"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:numStars="5"
-        android:stepSize="1.0" />
-    
         <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Professional Skills"
-        android:textSize="10dp" />
+            android:id="@+id/providerpf_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="User" />
+        
+    </TableRow>
 
-    <RatingBar
-        android:id="@+id/providerpf_comment_professionalskills"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:numStars="5"
-        android:stepSize="1.0" />
-    
+    <TableRow>
         <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Costs"
-        android:textSize="10dp" />
+            android:id="@+id/providerpf_rate_review_summary"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold|italic"
+            android:maxLines="1"
+            android:text="One line comment" />
+    </TableRow>
 
-    <RatingBar
-        android:id="@+id/providerpf_comment_costs"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:numStars="5"
-        android:stepSize="1.0" />
-    
+    <TableRow>
+
         <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Availability"
-        android:textSize="10dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pros"
+            android:textSize="12dp" />
 
-    <RatingBar
-        android:id="@+id/providerpf_comment_availability"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:numStars="5"
-        android:stepSize="1.0" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cons"
+            android:textSize="12dp" />
+    </TableRow>
 
-    <TextView
-        android:id="@+id/providerpf_comment_review"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="No Review" />
+    <TableRow>
+        <TextView
+            android:id="@+id/providerpf_review_pro1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/providerpf_review_con1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+    </TableRow>
+    
+    <TableRow>
+        <TextView
+            android:id="@+id/providerpf_review_pro2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
 
-        <!-- android:layout_gravity="right" -->
+        <TextView
+            android:id="@+id/providerpf_review_con2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+    </TableRow>
+    
+    <TableRow>
+        <TextView
+            android:id="@+id/providerpf_review_pro3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/providerpf_review_con3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/providerpf_comment_review"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="No Review" />
+    </TableRow>
+
+</TableLayout> <!-- android:layout_gravity="right" -->

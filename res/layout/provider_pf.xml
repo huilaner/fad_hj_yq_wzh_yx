@@ -177,7 +177,7 @@
 	    android:id="@+id/providerpf_comments"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    
+
 	    android:layout_below="@id/providerpf_comment_header"
 	    />
 
