@@ -80,10 +80,11 @@ public class HistoryActivity extends Activity{
 				JSONObject current = reviews.getJSONObject(i);
 				long provider_id = Long.parseLong(current.getString("pid"));
 				String time = current.getString("time");
+				String review_summary = current.getString("review_summary");
 				String review = current.getString("review");
 				int rating = (int)Float.parseFloat(current.getString("rating"));
 				//Create a Ratings instance for each provider and add to the _ratings array
-				Rating currentRating = new Rating(user_id, provider_id, time, review, rating);
+				Rating currentRating = new Rating(user_id, provider_id, time, review_summary, review, rating);
 				ratings.add(currentRating);
 			}
 		} catch (Exception e){

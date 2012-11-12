@@ -97,7 +97,7 @@ public class ProviderProfileActivity extends Activity{
 	private CheckBox checkBox_cons5;
 	private Button button_pros_ok;
 	private Button button_cons_ok;
-	
+
 
 	private RatingAdapter m_adapter;
 
@@ -194,9 +194,9 @@ public class ProviderProfileActivity extends Activity{
 		});
 
 		m_button_avgfeature.setOnClickListener(new OnClickListener(){
-//			public void onCreate(){
-//				
-//			}
+			//			public void onCreate(){
+			//				
+			//			}
 
 			// add feature button
 			public void onClick(View v) {
@@ -246,22 +246,22 @@ public class ProviderProfileActivity extends Activity{
 				dialog.setContentView(R.layout.provider_pf_rate);
 				dialog.setTitle("Rate and Review this Provider!");
 
-//				//add for pros and cons
+				//				//add for pros and cons
 				m_button_pros = (Button)dialog.findViewById(R.id.button_pros);
 				m_button_cons = (Button)dialog.findViewById(R.id.button_cons);
-				
-				
+
+
 				//add for pros and cons
 				//pros checkbox pops up
 				m_button_pros.setOnClickListener(new OnClickListener() {
 					int countCheck = 0;
-					
+
 					public void onClick(View v) {
-						
+
 						dialog_pros = new Dialog(m_context);
 						dialog_pros.setContentView(R.layout.best_checkbox);
 						dialog_pros.setTitle("Best thing about this provider ");
-						
+
 						//checkbox
 						checkBox_pros1 = (CheckBox)dialog_pros.findViewById(R.id.pros_checkbox1);
 						checkBox_pros2 = (CheckBox)dialog_pros.findViewById(R.id.pros_checkbox2);
@@ -274,62 +274,62 @@ public class ProviderProfileActivity extends Activity{
 								dialog_pros.hide();
 							}
 						});
-						
+
 						checkBox_pros1.setOnClickListener(new OnClickListener() {
 							public void onClick(View v) {
 								onCheckboxClicked(checkBox_pros1);
 							}});
-						
+
 						checkBox_pros2.setOnClickListener(new OnClickListener() {
 							public void onClick(View v) {
 								onCheckboxClicked(checkBox_pros2);
 							}});
-						
+
 						checkBox_pros3.setOnClickListener(new OnClickListener() {
 							public void onClick(View v) {
 								onCheckboxClicked(checkBox_pros3);
 							}});						
-						
+
 						checkBox_pros4.setOnClickListener(new OnClickListener() {
 							public void onClick(View v) {
 								onCheckboxClicked(checkBox_pros4);
 							}});
-						
+
 						checkBox_pros5.setOnClickListener(new OnClickListener() {
 							public void onClick(View v) {
 								onCheckboxClicked(checkBox_pros5);
 							}});
-						
+
 						dialog_pros.show();
 					}
-					
+
 					public void onCheckboxClicked(View view) {
-					    // Is the view now checked?
-					    boolean checked = ((CheckBox) view).isChecked();
-					    
-					    if(checked){
-					    	if(countCheck >= 3){// it will allow 3 checkboxes only
-			                     Toast.makeText(m_context, "Should not check more than 3!", Toast.LENGTH_LONG).show();
-			                     ((CheckBox) view).setChecked(false);
-			                 }
-					    	else countCheck++;
-					    }
-					    else countCheck--;
-					    // Check which checkbox was clicked
-//					    switch(view.getId()) {
-//					        case R.id.pros_checkbox1:
-////					            if (checked) countCheck++;
-//					            break;
-//					        case R.id.pros_checkbox2:
-////					            if (checked) countCheck++;
-//					            break;
-//					        // TODO: Veggie sandwich
-//					    }
+						// Is the view now checked?
+						boolean checked = ((CheckBox) view).isChecked();
+
+						if(checked){
+							if(countCheck >= 3){// it will allow 3 checkboxes only
+								Toast.makeText(m_context, "Should not check more than 3!", Toast.LENGTH_LONG).show();
+								((CheckBox) view).setChecked(false);
+							}
+							else countCheck++;
+						}
+						else countCheck--;
+						// Check which checkbox was clicked
+						//					    switch(view.getId()) {
+						//					        case R.id.pros_checkbox1:
+						////					            if (checked) countCheck++;
+						//					            break;
+						//					        case R.id.pros_checkbox2:
+						////					            if (checked) countCheck++;
+						//					            break;
+						//					        // TODO: Veggie sandwich
+						//					    }
 					}
-					
-					
-					});
-				
+
+
+				});
+
 				//cons checkbox pops up
 				m_button_cons.setOnClickListener(new OnClickListener() {
 					int countCheck = 0;
@@ -344,65 +344,65 @@ public class ProviderProfileActivity extends Activity{
 						checkBox_cons4 = (CheckBox)dialog_cons.findViewById(R.id.cons_checkbox4);
 						checkBox_cons5 = (CheckBox)dialog_cons.findViewById(R.id.cons_checkbox5);
 						button_cons_ok = (Button)dialog_cons.findViewById(R.id.cons_ok);
-						
+
 						button_cons_ok.setOnClickListener(new OnClickListener(){
 							public void onClick(View v) {
 								dialog_cons.hide();
 							}
 						});
-						
+
 						checkBox_cons1.setOnClickListener(new OnClickListener() {
 							public void onClick(View v) {
 								onCheckboxClicked(checkBox_cons1);
 							}});
-						
+
 						checkBox_cons2.setOnClickListener(new OnClickListener() {
 							public void onClick(View v) {
 								onCheckboxClicked(checkBox_cons2);
 							}});
-						
+
 						checkBox_cons3.setOnClickListener(new OnClickListener() {
 							public void onClick(View v) {
 								onCheckboxClicked(checkBox_cons3);
 							}});						
-						
+
 						checkBox_cons4.setOnClickListener(new OnClickListener() {
 							public void onClick(View v) {
 								onCheckboxClicked(checkBox_cons4);
 							}});
-						
+
 						checkBox_cons5.setOnClickListener(new OnClickListener() {
 							public void onClick(View v) {
 								onCheckboxClicked(checkBox_cons5);
 							}});
-						
+
 						dialog_cons.show();
 					}
-					
-					public void onCheckboxClicked(View view) {
-					    // Is the view now checked?
-					    boolean checked = ((CheckBox) view).isChecked();
 
-					    if(checked) {
-					    	if(countCheck >= 3){// it will allow 3 checkboxes only
-			                     Toast.makeText(m_context, "Should not check more than 3!", Toast.LENGTH_LONG).show();
-			                     ((CheckBox) view).setChecked(false);
-			                 }
-					    	else countCheck++;
-					    }
-					    else countCheck--;
-					    // Check which checkbox was clicked
-//					    switch(view.getId()) {
-//					        case R.id.pros_checkbox1:
-////					            if (checked) countCheck++;
-//					            break;
-//					        case R.id.pros_checkbox2:
-////					            if (checked) countCheck++;
-//					            break;
-//					        // TODO: Veggie sandwich
-//					    }
+					public void onCheckboxClicked(View view) {
+						// Is the view now checked?
+						boolean checked = ((CheckBox) view).isChecked();
+
+						if(checked) {
+							if(countCheck >= 3){// it will allow 3 checkboxes only
+								Toast.makeText(m_context, "Should not check more than 3!", Toast.LENGTH_LONG).show();
+								((CheckBox) view).setChecked(false);
+							}
+							else countCheck++;
+						}
+						else countCheck--;
+						// Check which checkbox was clicked
+						//					    switch(view.getId()) {
+						//					        case R.id.pros_checkbox1:
+						////					            if (checked) countCheck++;
+						//					            break;
+						//					        case R.id.pros_checkbox2:
+						////					            if (checked) countCheck++;
+						//					            break;
+						//					        // TODO: Veggie sandwich
+						//					    }
 					}
-					});
+				});
 
 
 				reviewText = (EditText) dialog.findViewById(R.id.providerpf_rate_review);
@@ -464,7 +464,7 @@ public class ProviderProfileActivity extends Activity{
 					}
 				});
 				dialog.show();
-				
+
 			}
 		});
 
@@ -486,7 +486,7 @@ public class ProviderProfileActivity extends Activity{
 		toggleIconVisibility(PCP,m_provider.getType());
 
 		setRatingImage();
-		
+
 
 	}
 
@@ -505,6 +505,7 @@ public class ProviderProfileActivity extends Activity{
 				long user_id = Long.parseLong(current.getString("uid"));
 				long provider_id = Long.parseLong(current.getString("pid"));
 				String time = current.getString("time");
+				String review_summary = current.getString("review_summary");
 				String review = current.getString("review");
 				float rating = Float.parseFloat(current.getString("rating"));
 				float friendliness = Float.parseFloat(current.getString("friendliness"));
@@ -513,8 +514,16 @@ public class ProviderProfileActivity extends Activity{
 				float professional = Float.parseFloat(current.getString("professional"));
 				float costs = Float.parseFloat(current.getString("costs"));
 				float availability = Float.parseFloat(current.getString("availability"));
+				int pro1 = Integer.parseInt(current.getString("pro1"));
+				int pro2 = Integer.parseInt(current.getString("pro2"));
+				int pro3 = Integer.parseInt(current.getString("pro3"));
+				int con1 = Integer.parseInt(current.getString("con1"));
+				int con2 = Integer.parseInt(current.getString("con2"));
+				int con3 = Integer.parseInt(current.getString("con3"));
 
-				Rating currentRating = new Rating(user_id, provider_id, time, review, (int)rating, (int)communication, (int)environment, (int)friendliness, (int)professional, (int)costs, (int)availability);
+				Rating currentRating = new Rating(user_id, provider_id, time, review_summary, review, (int)rating, 
+						(int)communication, (int)environment, (int)friendliness, (int)professional, (int)costs, 
+						(int)availability, pro1, pro2, pro3, con1, con2, con3);
 				m_ratings.add(currentRating);
 				m_adapter.notifyDataSetChanged();
 
@@ -524,6 +533,31 @@ public class ProviderProfileActivity extends Activity{
 			System.out.println("Ratings error");
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * get the user name by user id
+	 * @param uid
+	 * @return
+	 */
+	private String getUserNameByUserId(long uid) {
+		// make the HttpRequest
+		String temp_base = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/history.php?uid=";
+		String uri = temp_base + uid;		
+		String usersJSON = InternetHelper.httpGetRequest(uri);
+		String user_name = "";
+		// parse the JSON and populate m_ratings from JSON for m_provider
+		try {
+			JSONObject json = new JSONObject(usersJSON);
+			JSONArray reviews = json.getJSONArray("reviews");
+			JSONObject current = reviews.getJSONObject(0);
+			user_name = current.getString("name");
+		} catch (Exception e) {
+			// for logging
+			System.out.println("Users error");
+			e.printStackTrace();
+		}
+		return user_name;
 	}
 
 	private void setRatingImage(){
@@ -584,6 +618,46 @@ public class ProviderProfileActivity extends Activity{
 		public long getItemId(int position) {
 			return position;
 		}
+		
+		
+		public String getProAndConString(int label) {
+			String message;
+			switch(label) {
+			case 1:
+			    message = getString(R.string.pros1);
+			    break;
+			case 2:
+			    message = getString(R.string.pros2);
+			    break;
+			case 3:
+			    message = getString(R.string.pros3);
+			    break;
+			case 4:
+			    message = getString(R.string.pros4);
+			    break;
+			case 5:
+			    message = getString(R.string.pros5);
+			    break;
+			case -1:
+			    message = getString(R.string.cons1);
+			    break;
+			case -2:
+			    message = getString(R.string.cons2);
+			    break;
+			case -3:
+			    message = getString(R.string.cons3);
+			    break;
+			case -4:
+			    message = getString(R.string.cons4);
+			    break;
+			case -5:
+			    message = getString(R.string.cons5);
+			    break;
+			default:
+			    message = "";
+			}
+			return message;
+		}
 
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			//inflate the view
@@ -597,49 +671,80 @@ public class ProviderProfileActivity extends Activity{
 				list_result = (LinearLayout)convertView;
 
 			Rating currentRating = m_ratings.get(position);
-			//populate the new view
-			//TextView tv_rating = (TextView)list_result.findViewById(R.id.providerpf_comment_rating);
-			Integer rating = currentRating.getRating();
-			ImageView stars= (ImageView)list_result.findViewById(R.id.providerpf_comment_stars);
-			RatingBar friendliness = (RatingBar)list_result.findViewById(R.id.providerpf_comment_friendliness);
-			RatingBar environment = (RatingBar)list_result.findViewById(R.id.providerpf_comment_environment);
-			RatingBar communication = (RatingBar)list_result.findViewById(R.id.providerpf_comment_communication);
-			//wolaiwanyiwan
-			RatingBar professional = (RatingBar)list_result.findViewById(R.id.providerpf_comment_professionalskills);
-			RatingBar costs = (RatingBar)list_result.findViewById(R.id.providerpf_comment_costs);
-			RatingBar availability = (RatingBar)list_result.findViewById(R.id.providerpf_comment_availability);
-
-
-			if (rating==5) {
-				stars.setImageResource(R.drawable.fivestars);
-			} else if (rating==4) {
-				stars.setImageResource(R.drawable.fourstars);
-			} else if (rating==3) {
-				stars.setImageResource(R.drawable.threestars);
-			} else if (rating==2) {
-				stars.setImageResource(R.drawable.twostars);
-			} else if (rating==1) {
-				stars.setImageResource(R.drawable.onestar);
-			}
-
-			friendliness.setRating(currentRating.getFriendliness_rating());
-
-			environment.setRating(currentRating.getOffice_environment_rating());
-			communication.setRating(currentRating.getCommunication_rating());
-
-			//wolaiwanyiwan
-			professional.setRating(currentRating.getProfessional_rating());
-			costs.setRating(currentRating.getCosts_rating());
-			availability.setRating(currentRating.getAvailability_rating());
-
+			String date = currentRating.getDate().substring(0, 11);  //only show the date
+			long user_id = currentRating.getUser();
+			String provider_user_name = "By " + getUserNameByUserId(user_id);
+			String review_summary = currentRating.getReview_summary();
+			String pro1 = getProAndConString(currentRating.getPro1());
+			String pro2 = getProAndConString(currentRating.getPro2());
+			String pro3 = getProAndConString(currentRating.getPro3());
+			String con1 = getProAndConString(currentRating.getCon1());
+			String con2 = getProAndConString(currentRating.getCon2());
+			String con3 = getProAndConString(currentRating.getCon3());
 			String review = currentRating.getReview();
-			String date = currentRating.getDate();
+
+			RatingBar stars= (RatingBar)list_result.findViewById(R.id.providerpf_comment_stars);
+			stars.setRating(currentRating.getFriendliness_rating());
+			TextView tv_provider_date = (TextView)list_result.findViewById(R.id.providerpf_comment_date);
+			tv_provider_date.setText(date);
+			TextView tv_provider_user_name = (TextView)list_result.findViewById(R.id.providerpf_user_name);
+			tv_provider_user_name.setText(provider_user_name);
+			TextView tv_provider_summary = (TextView)list_result.findViewById(R.id.providerpf_rate_review_summary);
+			tv_provider_summary.setText(review_summary);
+
+			TextView tv_pro1 = (TextView)list_result.findViewById(R.id.providerpf_review_pro1);
+			tv_pro1.setText(pro1);
+			TextView tv_pro2 = (TextView)list_result.findViewById(R.id.providerpf_review_pro2);
+			tv_pro2.setText(pro2);
+			TextView tv_pro3 = (TextView)list_result.findViewById(R.id.providerpf_review_pro3);
+			tv_pro3.setText(pro3);
+			TextView tv_con1 = (TextView)list_result.findViewById(R.id.providerpf_review_con1);
+			tv_con1.setText(con1);
+			TextView tv_con2 = (TextView)list_result.findViewById(R.id.providerpf_review_con2);
+			tv_con2.setText(con2);
+			TextView tv_con3 = (TextView)list_result.findViewById(R.id.providerpf_review_con3);
+			tv_con3.setText(con3);
 
 			TextView tv_provider_desc = (TextView)list_result.findViewById(R.id.providerpf_comment_review);
 			tv_provider_desc.setText(review);
 
-			TextView tv_provider_date = (TextView)list_result.findViewById(R.id.providerpf_comment_date);
-			tv_provider_date.setText(date);
+
+			//populate the new view
+			//TextView tv_rating = (TextView)list_result.findViewById(R.id.providerpf_comment_rating);
+			//			Integer rating = currentRating.getRating();
+
+			//			RatingBar friendliness = (RatingBar)list_result.findViewById(R.id.providerpf_comment_friendliness);
+			//			RatingBar environment = (RatingBar)list_result.findViewById(R.id.providerpf_comment_environment);
+			//			RatingBar communication = (RatingBar)list_result.findViewById(R.id.providerpf_comment_communication);
+			//			//wolaiwanyiwan
+			//			RatingBar professional = (RatingBar)list_result.findViewById(R.id.providerpf_comment_professionalskills);
+			//			RatingBar costs = (RatingBar)list_result.findViewById(R.id.providerpf_comment_costs);
+			//			RatingBar availability = (RatingBar)list_result.findViewById(R.id.providerpf_comment_availability);
+
+
+			//			if (rating==5) {
+			//				stars.setImageResource(R.drawable.fivestars);
+			//			} else if (rating==4) {
+			//				stars.setImageResource(R.drawable.fourstars);
+			//			} else if (rating==3) {
+			//				stars.setImageResource(R.drawable.threestars);
+			//			} else if (rating==2) {
+			//				stars.setImageResource(R.drawable.twostars);
+			//			} else if (rating==1) {
+			//				stars.setImageResource(R.drawable.onestar);
+			//			}
+			//
+			//			friendliness.setRating(currentRating.getFriendliness_rating());
+			//
+			//			environment.setRating(currentRating.getOffice_environment_rating());
+			//			communication.setRating(currentRating.getCommunication_rating());
+			//
+			//			//wolaiwanyiwan
+			//			professional.setRating(currentRating.getProfessional_rating());
+			//			costs.setRating(currentRating.getCosts_rating());
+			//			availability.setRating(currentRating.getAvailability_rating());
+
+
 
 			return list_result;
 		}
