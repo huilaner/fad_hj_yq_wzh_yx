@@ -114,7 +114,7 @@ public class SearchActivity extends Activity {
 	private class searchResultInvoker implements OnClickListener {
 
 		public void onClick(View arg0) {
-			
+
 			String providerNameStr =  getEditTextEntry(provider_name);
 			//make sure the input for keyword search is correct
 			if (providerNameStr.length()>0 && !providerNameStr.matches("[A-Za-z0-9\\s&&[^\\n]]+?")){
@@ -125,12 +125,12 @@ public class SearchActivity extends Activity {
 				toast.show();
 				return;
 			}else{
-				
+
 				providerNameStr = providerNameStr.replace(" ", "%20");
 			}
-			
+
 			Intent i = new Intent(SearchActivity.this, SearchResultActivity.class);
-			
+
 			//Pass all the parameters into the intent			
 			i.putExtra("provider_name",providerNameStr);
 			i.putExtra("has_parking", getSpinnerSelection(parking_spinner));
@@ -140,7 +140,7 @@ public class SearchActivity extends Activity {
 			i.putExtra("credit_card", getSpinnerSelection(creditcard_spinner));
 			i.putExtra("type", getSpinnerSelection(providertype_spinner));
 			i.putExtra("distance", getEditTextEntry(distance));
-			
+
 			//Add more information to the intent
 			startActivity(i);
 		}

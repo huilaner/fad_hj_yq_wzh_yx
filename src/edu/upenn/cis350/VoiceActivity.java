@@ -65,7 +65,7 @@ public class VoiceActivity extends Activity {
 		m_button_history = (Button)this.findViewById(R.id.home_btn_history);
 		m_button_map = (Button)this.findViewById(R.id.home_btn_map);
 		m_button_contact = (Button)this.findViewById(R.id.home_btn_contact);
-		
+
 		//set the listeners for each button
 		setListeners();
 
@@ -76,7 +76,8 @@ public class VoiceActivity extends Activity {
 		m_button_search.setOnClickListener(new OnClickListener(){
 
 			public void onClick(View arg0) {
-				Intent intent = new Intent(m_context, SearchActivity.class);
+//				Intent intent = new Intent(m_context, SearchActivity.class);
+				Intent intent = new Intent(m_context, CategoryActivity.class);
 				startActivity(intent);
 			}
 		});

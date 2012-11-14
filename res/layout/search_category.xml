@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/findadoc2"
+    
+    >
+
+    <Button
+        android:id="@+id/category_doctor"
+        style="@style/DashboardButton"
+        android:drawableLeft="@drawable/heart"
+        android:text="Doctor&apos;s Office"
+        android:layout_gravity= "left"
+                android:height="40dp"
+        android:textSize="25dp"
+        android:textColor="#000" />
+
+    <Button
+        android:id="@+id/category_clinic"
+        style="@style/DashboardButton"
+                android:height="40dp"
+        android:drawableLeft="@drawable/health"
+        android:text="Clinic - Urgent Care"
+        android:layout_gravity= "left"
+        android:textSize="25dp"
+        android:textColor="#000" />
+
+    <Button
+        android:id="@+id/category_pharmacy"
+        style="@style/DashboardButton"
+                android:height="40dp"
+        android:drawableLeft="@drawable/pills"
+        android:text="Pharmacy"
+        android:textColor="#000"
+        android:textSize="25dp" />
+    
+    </LinearLayout>
