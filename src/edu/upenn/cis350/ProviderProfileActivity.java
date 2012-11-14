@@ -618,46 +618,6 @@ public class ProviderProfileActivity extends Activity{
 		public long getItemId(int position) {
 			return position;
 		}
-		
-		
-		public String getProAndConString(int label) {
-			String message;
-			switch(label) {
-			case 1:
-			    message = getString(R.string.pros1);
-			    break;
-			case 2:
-			    message = getString(R.string.pros2);
-			    break;
-			case 3:
-			    message = getString(R.string.pros3);
-			    break;
-			case 4:
-			    message = getString(R.string.pros4);
-			    break;
-			case 5:
-			    message = getString(R.string.pros5);
-			    break;
-			case -1:
-			    message = getString(R.string.cons1);
-			    break;
-			case -2:
-			    message = getString(R.string.cons2);
-			    break;
-			case -3:
-			    message = getString(R.string.cons3);
-			    break;
-			case -4:
-			    message = getString(R.string.cons4);
-			    break;
-			case -5:
-			    message = getString(R.string.cons5);
-			    break;
-			default:
-			    message = "";
-			}
-			return message;
-		}
 
 
 		public String getProAndConString(int label) {

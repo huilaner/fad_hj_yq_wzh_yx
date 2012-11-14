@@ -109,8 +109,4 @@
             android:text="No Review" />
     </TableRow>
 
-<<<<<<< HEAD
 </TableLayout> <!-- android:layout_gravity="right" -->
-=======
-</TableLayout> <!-- android:layout_gravity="right" -->
->>>>>>> add new cateogry page (sth wrong with my git, plz check if this version works for you)
