@@ -164,7 +164,7 @@ public class HistoryActivity extends Activity{
 			} catch (JSONException e1) {
 				e1.printStackTrace();
 			}
-			
+
 			//get the rating and display for
 			Integer rating_int = currentRating.getRating();
 			TextView rating_textBox = (TextView)list_result.findViewById(R.id.history_activity_rating);
@@ -183,7 +183,7 @@ public class HistoryActivity extends Activity{
 					String uri = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/?pid=" + _ratings.get(position).getProvider();
 
 					String provider = InternetHelper.httpGetRequest(uri);
-							
+
 					Provider buttonProvider;
 					try{
 						JSONObject fakeJson = new JSONObject(provider);

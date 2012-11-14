@@ -23,8 +23,13 @@ public class Rating implements Serializable{
 	private Integer pro1 = 0;
 	private Integer pro2 = 0;
 	private Integer pro3 = 0;
+<<<<<<< HEAD
 	
 	
+=======
+
+
+>>>>>>> add new cateogry page (sth wrong with my git, plz check if this version works for you)
 	public Rating(long user, long provider, String date, String review_summary, String desc, int rate,
 			int communication_rating, int office_environment_rating,
 			int friendliness_rating, int professional_rating, int costs_rating,
@@ -48,7 +53,11 @@ public class Rating implements Serializable{
 		this.con2 = con2;
 		this.con3 = con3;
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> add new cateogry page (sth wrong with my git, plz check if this version works for you)
 	public Rating(long user, long provider, String review_summary, String date, String desc, int rate) {
 		this.user_id = user;
 		this.provider_id = provider;
@@ -73,7 +82,7 @@ public class Rating implements Serializable{
 	public Integer getRating(){
 		return rating;
 	}
-	
+
 	public Integer getCommunication_rating() {
 		return communication_rating;
 	}
@@ -85,7 +94,7 @@ public class Rating implements Serializable{
 	public Integer getFriendliness_rating() {
 		return friendliness_rating;
 	}
-	
+
 	public Integer getProfessional_rating() {
 		return professional_rating;
 	}
@@ -101,7 +110,11 @@ public class Rating implements Serializable{
 	public String getReview_summary() {
 		return review_summary;
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> add new cateogry page (sth wrong with my git, plz check if this version works for you)
 	public Integer getCon1() {
 		return con1;
 	}
@@ -149,4 +162,8 @@ public class Rating implements Serializable{
 	public void setPro3(Integer pro3) {
 		this.pro3 = pro3;
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> add new cateogry page (sth wrong with my git, plz check if this version works for you)
