@@ -64,3 +64,18 @@ New Features to be implemented:
  **Office -> ***GP, Ped, Cardio… ->****Search
 
 $$$ Next meeting: 2pm Fri. $$$
+
+###########################################################
+################## updated by 2012-11-16 ##################
+a lot of work needs to be done guys
+-finish the requirements demo last time
+-in the provider profile, list the top 3 cons and pros based on the overall comment on the pros and cons
+-(the other group use three searches, but our method is good confirmed by scott)
+-Add tests
+	*Junit tests for methods etc.
+	*script tests for UI (write down after certain actions, what should be done by the app etc.)
+
+$$ next is the demo. focus more on test reports etc. $$
+$$ probably following monday after thanksgiving (11/26) will be discuss time next week $$
+
+
