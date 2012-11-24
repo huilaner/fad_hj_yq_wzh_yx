@@ -6,8 +6,9 @@
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="7" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.location.gps"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
  
     <application
         android:icon="@drawable/health"
@@ -45,13 +46,14 @@
         </activity>
          
         
-        <activity android:name = "edu.upenn.cis350.HistoryActivity" />
-        <activity android:name = "edu.upenn.cis350.MapProviderActivity"/>
+<!--         <activity android:name = "edu.upenn.cis350.HistoryActivity" />
+        <activity android:name = "edu.upenn.cis350.MapProviderActivity"/> -->
         <activity android:name = "edu.upenn.cis350.ProfileActivity"/>
-        <activity android:name = "edu.upenn.cis350.SearchActivity" />
+        <activity android:name = "edu.upenn.cis350.CategoryActivity"/>
+<!--         <activity android:name = "edu.upenn.cis350.SearchActivity" /> -->
         <activity android:name = "edu.upenn.cis350.SearchResultActivity" />
-        <activity android:name = "edu.upenn.cis350.ContactActivity" />
-        <activity android:name = "edu.upenn.cis350.ProviderProfileActivity" />
+<!--         <activity android:name = "edu.upenn.cis350.ContactActivity" />
+        <activity android:name = "edu.upenn.cis350.ProviderProfileActivity" /> -->
         
         
         <uses-library android:name="com.google.android.maps" />

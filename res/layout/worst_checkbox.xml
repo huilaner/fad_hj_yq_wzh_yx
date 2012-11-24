@@ -11,11 +11,11 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
+   <!-- <TextView
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:gravity="center"
-        android:text="@string/cons" />
+        android:text="@string/cons" /> --> 
 
     <CheckBox
         android:id="@+id/cons_checkbox1"

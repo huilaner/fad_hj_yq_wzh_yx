@@ -345,6 +345,8 @@ public class ProviderProfileActivity extends Activity{
 						checkBox_cons5 = (CheckBox)dialog_cons.findViewById(R.id.cons_checkbox5);
 						button_cons_ok = (Button)dialog_cons.findViewById(R.id.cons_ok);
 
+					
+						
 						button_cons_ok.setOnClickListener(new OnClickListener(){
 							public void onClick(View v) {
 								dialog_cons.hide();
@@ -377,8 +379,11 @@ public class ProviderProfileActivity extends Activity{
 							}});
 
 						dialog_cons.show();
+						
 					}
 
+					
+					
 					public void onCheckboxClicked(View view) {
 						// Is the view now checked?
 						boolean checked = ((CheckBox) view).isChecked();
@@ -448,6 +453,47 @@ public class ProviderProfileActivity extends Activity{
 						float professionalSkills = rating_professionalSkills_bar.getRating();
 						float costs = rating_costs_bar.getRating();
 						float availability = rating_availability_bar.getRating();
+						
+						
+						
+						//add 5 pros, 5 cons, see if it is checked and insert into database
+						ArrayList<Integer> proList=new ArrayList<Integer>();
+						ArrayList<Integer> conList=new ArrayList<Integer>();
+						
+						proList.add(checkBox_pros1.isChecked()?1:0);
+						proList.add(checkBox_pros2.isChecked()?2:0);
+						proList.add(checkBox_pros3.isChecked()?3:0);
+						proList.add(checkBox_pros4.isChecked()?4:0);
+						proList.add(checkBox_pros5.isChecked()?5:0);
+						conList.add(checkBox_cons1.isChecked()?-1:0);
+						conList.add(checkBox_cons2.isChecked()?-2:0);
+						conList.add(checkBox_cons3.isChecked()?-3:0);
+						conList.add(checkBox_cons4.isChecked()?-4:0);
+						conList.add(checkBox_cons5.isChecked()?-5:0);
+						
+						int[] pros=new int[3];
+						int[] cons=new int[3];
+						
+						int pIndex=0;
+						int cIndex=0;
+						for(int i=0;i<proList.size();i++){
+							if(proList.get(i)>0) {pros[pIndex]=proList.get(i);
+							pIndex++;
+							}		
+							if(conList.get(i)<0){
+								cons[cIndex]=conList.get(i);
+								cIndex++;
+							}
+						}
+						
+						int pro1=pros[0];
+						int pro2=pros[1];
+						int pro3=pros[2];
+						int con1=cons[0];
+						int con2=cons[1];
+						int con3=cons[2];
+						
+						
 
 						m_provider.getID();
 						String temp_base = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/ratings.php?mode=insert";
@@ -455,7 +501,7 @@ public class ProviderProfileActivity extends Activity{
 								(int)rating + "&review=" + review + "&friendliness=" + (int)friendliness + 
 								"&communication=" + (int)communication + "&office_environment=" + (int)environment +
 								"&professional=" + (int)professionalSkills + "&costs=" + (int)costs + 
-								"&availability=" + (int)availability;
+								"&availability=" + (int)availability+"&pro1"+pro1+"&pro2"+pro2+"&pro3"+pro3+"&con1"+con1+"&con2"+con2+"&con3"+con3;
 						System.out.println(url);
 						InternetHelper.httpGetRequest(url);
 						Toast.makeText(m_context, "Review submitted!", Toast.LENGTH_LONG).show();
