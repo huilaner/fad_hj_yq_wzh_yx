@@ -738,7 +738,7 @@ public class ProviderProfileActivity extends Activity{
 			String review = currentRating.getReview();
 
 			RatingBar stars= (RatingBar)list_result.findViewById(R.id.providerpf_comment_stars);
-			stars.setRating(currentRating.getFriendliness_rating());
+			stars.setRating(currentRating.getRating());
 			TextView tv_provider_date = (TextView)list_result.findViewById(R.id.providerpf_comment_date);
 			tv_provider_date.setText(date);
 			TextView tv_provider_user_name = (TextView)list_result.findViewById(R.id.providerpf_user_name);
