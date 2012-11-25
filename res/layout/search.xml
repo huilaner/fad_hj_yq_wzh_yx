@@ -88,18 +88,20 @@
              android:layout_height="wrap_content"
              android:prompt="@string/appointmentonly_prompt" />
          
+         <!--  
          <TextView
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Provider Type" />
-
+          
          <Spinner
              android:id="@+id/providertype_spinner"
              android:layout_width="fill_parent"
              android:layout_height="wrap_content"
              android:prompt="@string/providertype_prompt" />
-         
+          -->
+          
          <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
