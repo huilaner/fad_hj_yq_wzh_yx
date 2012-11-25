@@ -47,6 +47,7 @@ public class ProviderProfileActivity extends Activity{
 	private Dialog dialog2;
 
 	private EditText reviewText;
+	private EditText reviewSummaryText;
 	private Button reviewButton;
 	private RatingBar ratingbar;
 	private RatingBar rating_friendliness_bar;
@@ -345,8 +346,6 @@ public class ProviderProfileActivity extends Activity{
 						checkBox_cons5 = (CheckBox)dialog_cons.findViewById(R.id.cons_checkbox5);
 						button_cons_ok = (Button)dialog_cons.findViewById(R.id.cons_ok);
 
-					
-						
 						button_cons_ok.setOnClickListener(new OnClickListener(){
 							public void onClick(View v) {
 								dialog_cons.hide();
@@ -379,11 +378,8 @@ public class ProviderProfileActivity extends Activity{
 							}});
 
 						dialog_cons.show();
-						
 					}
 
-					
-					
 					public void onCheckboxClicked(View view) {
 						// Is the view now checked?
 						boolean checked = ((CheckBox) view).isChecked();
@@ -411,6 +407,7 @@ public class ProviderProfileActivity extends Activity{
 
 
 				reviewText = (EditText) dialog.findViewById(R.id.providerpf_rate_review);
+				reviewSummaryText = (EditText) dialog.findViewById(R.id.providerpf_rate_review_summary);
 				reviewButton = (Button) dialog.findViewById(R.id.providerpf_rate_button_submit);
 				ratingbar = (RatingBar) dialog.findViewById(R.id.providerpf_rate_bar);
 				rating_communication_bar = (RatingBar) dialog.findViewById(R.id.providerpf_rate_communication_bar);
@@ -428,18 +425,10 @@ public class ProviderProfileActivity extends Activity{
 
 
 						String review = reviewText.getText().toString();
+						String review_summary = reviewSummaryText.getText().toString();
 
-						//make sure the input for keyword search is correct
-						if (review.length()>0 && !review.matches("[A-Za-z0-9\\s\\.,'!?&&[^\\n]]+?")){
-							//tell user the input was invalid
-							Context context = getApplicationContext();
-							Toast toast = Toast.makeText(context, "The keyword for search should only contains" +
-									" English characters, numbers or white space",Toast.LENGTH_SHORT);
-							toast.show();
-							return;
-						}else{
-							review = review.replace(" ", "%20");
-						}
+						review = parseText(review);
+						review_summary = parseText(review_summary);
 
 
 						SharedPreferences settings = getSharedPreferences("UserData", 0);
@@ -454,12 +443,10 @@ public class ProviderProfileActivity extends Activity{
 						float costs = rating_costs_bar.getRating();
 						float availability = rating_availability_bar.getRating();
 						
-						
-						
 						//add 5 pros, 5 cons, see if it is checked and insert into database
 						ArrayList<Integer> proList=new ArrayList<Integer>();
 						ArrayList<Integer> conList=new ArrayList<Integer>();
-						
+
 						proList.add(checkBox_pros1.isChecked()?1:0);
 						proList.add(checkBox_pros2.isChecked()?2:0);
 						proList.add(checkBox_pros3.isChecked()?3:0);
@@ -470,10 +457,10 @@ public class ProviderProfileActivity extends Activity{
 						conList.add(checkBox_cons3.isChecked()?-3:0);
 						conList.add(checkBox_cons4.isChecked()?-4:0);
 						conList.add(checkBox_cons5.isChecked()?-5:0);
-						
+
 						int[] pros=new int[3];
 						int[] cons=new int[3];
-						
+
 						int pIndex=0;
 						int cIndex=0;
 						for(int i=0;i<proList.size();i++){
@@ -485,31 +472,47 @@ public class ProviderProfileActivity extends Activity{
 								cIndex++;
 							}
 						}
-						
+
 						int pro1=pros[0];
 						int pro2=pros[1];
 						int pro3=pros[2];
 						int con1=cons[0];
 						int con2=cons[1];
 						int con3=cons[2];
-						
-						
+
 
 						m_provider.getID();
 						String temp_base = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/ratings.php?mode=insert";
-						String url = temp_base + "&pid=" + m_provider.getID() + "&uid=" + id + "&rating=" + 
-								(int)rating + "&review=" + review + "&friendliness=" + (int)friendliness + 
+						String url = temp_base + "&uid=" + id + "&pid=" + m_provider.getID() + "&rating=" + 
+								(int)rating + "&review_summary=" + review_summary + "&review=" + review + "&friendliness=" + (int)friendliness + 
 								"&communication=" + (int)communication + "&office_environment=" + (int)environment +
 								"&professional=" + (int)professionalSkills + "&costs=" + (int)costs + 
-								"&availability=" + (int)availability+"&pro1"+pro1+"&pro2"+pro2+"&pro3"+pro3+"&con1"+con1+"&con2"+con2+"&con3"+con3;
+								"&availability=" + (int)availability + 
+								"&pro1=" + pro1 + "&pro2=" + pro2 + "&pro3=" + pro3 + "&con1=" + con1 + "&con2=" + con2 + "&con3=" + con3;
 						System.out.println(url);
 						InternetHelper.httpGetRequest(url);
 						Toast.makeText(m_context, "Review submitted!", Toast.LENGTH_LONG).show();
 						populateRatings();
 						dialog.hide();	
 					}
+
+					public String parseText(String review) {
+						//make sure the input for keyword search is correct
+						if (review.length()>0 && !review.matches("[A-Za-z0-9\\s\\.,'!?&&[^\\n]]+?")){
+							//tell user the input was invalid
+							Context context = getApplicationContext();
+							Toast toast = Toast.makeText(context, "The keyword for search should only contains" +
+									" English characters, numbers or white space",Toast.LENGTH_SHORT);
+							toast.show();
+							return null;
+						}else{
+							review = review.replace(" ", "%20");
+						}
+						return review;
+					}
 				});
 				dialog.show();
+
 
 			}
 		});
@@ -666,6 +669,11 @@ public class ProviderProfileActivity extends Activity{
 		}
 
 
+		/**
+		 * Convert the pros and cons integers into strings
+		 * @param label
+		 * @return
+		 */
 		public String getProAndConString(int label) {
 			String message;
 			switch(label) {

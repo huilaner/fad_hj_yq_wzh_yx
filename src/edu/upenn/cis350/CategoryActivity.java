@@ -50,24 +50,24 @@ public class CategoryActivity extends Activity {
 
 	public void setListeners() {
 		button_category_doctor.setOnClickListener(new OnClickListener(){
-
 			public void onClick(View arg0) {
 				Intent intent = new Intent(m_context, SearchActivity.class);
-				startActivity(intent);
+				intent.putExtra("providerType", "doctor");
+				startActivityForResult(intent, 0);
 			}
 		});
 		button_category_clinic.setOnClickListener(new OnClickListener(){
-
 			public void onClick(View arg0) {
 				Intent intent = new Intent(m_context, SearchActivity.class);
-				startActivity(intent);
+				intent.putExtra("providerType", "clinic");
+				startActivityForResult(intent, 0);
 			}
 		});
 		button_category_pharmacy.setOnClickListener(new OnClickListener(){
-
 			public void onClick(View arg0) {
 				Intent intent = new Intent(m_context, SearchActivity.class);
-				startActivity(intent);
+				intent.putExtra("providerType", "pharmacy");
+				startActivityForResult(intent, 0);
 			}
 		});
 	}

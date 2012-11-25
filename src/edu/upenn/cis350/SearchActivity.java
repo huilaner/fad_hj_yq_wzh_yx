@@ -49,7 +49,6 @@ public class SearchActivity extends Activity {
 		// create button listener that fetch all the info.
 		Button b = (Button) findViewById(R.id.search_button);
 		b.setOnClickListener(new searchResultInvoker());
-
 	}
 
 	/**
@@ -84,8 +83,8 @@ public class SearchActivity extends Activity {
 				R.id.appointmentonly_spinner, R.array.appointmentonly_array);
 
 		// The spinner for provider type
-		this.providertype_spinner = this.createSpinner(
-				R.id.providertype_spinner, R.array.providertype_array);
+//		this.providertype_spinner = this.createSpinner(
+//				R.id.providertype_spinner, R.array.providertype_array);
 	}
 
 	/**
@@ -128,6 +127,10 @@ public class SearchActivity extends Activity {
 
 				providerNameStr = providerNameStr.replace(" ", "%20");
 			}
+			
+			//get the provider type from CategoryActivity
+			Bundle bundle = getIntent().getExtras();
+			String type = bundle.getString("providerType");
 
 			Intent i = new Intent(SearchActivity.this, SearchResultActivity.class);
 
@@ -138,7 +141,7 @@ public class SearchActivity extends Activity {
 			i.putExtra("handicap", getSpinnerSelection(handicap_spinner));
 			i.putExtra("appointment_only", getSpinnerSelection(appointmentonly_spinner));
 			i.putExtra("credit_card", getSpinnerSelection(creditcard_spinner));
-			i.putExtra("type", getSpinnerSelection(providertype_spinner));
+			i.putExtra("type", type);
 			i.putExtra("distance", getEditTextEntry(distance));
 
 			//Add more information to the intent

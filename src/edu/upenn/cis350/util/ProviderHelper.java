@@ -52,10 +52,11 @@ public class ProviderHelper {
 		if (!handicap.equals("doesn't matter")) urlBuff.append("&handicap="+handicap);		
 		if (!appointment_only.equals("doesn't matter")) urlBuff.append("&appointment_only="+appointment_only);		
 		if (!credit_card.equals("doesn't matter")) urlBuff.append("&credit_card="+credit_card);
-		if (!type.equals("doesn't matter")) {
-			//Need to convert the naming here
-			urlBuff.append(type.equals("primary care")? "&type=PCP":"&type=Specialist");
-		}
+//		if (!type.equals("doesn't matter")) {
+//			//Need to convert the naming here
+//			urlBuff.append(type.equals("primary care")? "&type=PCP":"&type=Specialist");
+//		}
+		urlBuff.append("&type=" + type);
 		if (distance.length()>0){
 			urlBuff.append("&distance="+distance+"&long="+m_longitude+"&lat="+m_latitude);
 		}
