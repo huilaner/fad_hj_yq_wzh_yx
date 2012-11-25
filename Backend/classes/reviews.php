@@ -34,6 +34,7 @@ class reviews{
 			$temp['rating'] = $row['rating'];
 			$temp['rating'] = number_format($temp['rating'], 2);
 			$temp['time'] = $row['time'];
+                        $temp['review_summary'] = $row['review_summary'];
 			$temp['review'] = $row['review'];
 			$temp['communication'] = $row['communication'];
 			$temp['friendliness'] = $row['friendliness'];
@@ -41,6 +42,12 @@ class reviews{
 			$temp['professional'] = $row['professional'];
 			$temp['costs'] = $row['costs'];
 			$temp['availability'] = $row['availability'];
+                        $temp['pro1'] = $row['pro1'];
+                        $temp['pro2'] = $row['pro2'];
+                        $temp['pro3'] = $row['pro3'];
+                        $temp['con1'] = $row['con1'];
+                        $temp['con2'] = $row['con2'];
+                        $temp['con3'] = $row['con3'];
 			$arr[] = $temp;
 		} 
 		
@@ -66,11 +73,11 @@ class reviews{
 	}
 	
 	//insert a review/rating for a provider
-	function insertReview($pid, $uid, $rating, $review, $friendliness, $communication, $office_environ, $professional, $costs, $availability){
+	function insertReview($pid, $uid, $rating, $review_summary, $review, $friendliness, $communication, $office_environ, $professional, $costs, $availability, $pro1, $pro2, $pro3, $con1, $con2, $con3){
 		$review = addslashes($review);
-		$query = "INSERT INTO `ratings` (`uid`, `pid`, `rating`, `review`, `friendliness`, `communication`, `office_environment`, `professional`, `costs`, `availability`) VALUES ('$uid', '$pid', '$rating', '$review', '$friendliness', '$communication', '$office_environ', '$professional', '$costs', '$availability')";
+		$query = "INSERT INTO `ratings` (`pid`, `uid`, `rating`, `review_summary`, `review`, `friendliness`, `communication`, `office_environment`, `professional`, `costs`, `availability`, `pro1`, `pro2`, `pro3`, `con1`, `con2`, `con3`) VALUES ('$uid', '$pid', '$rating', '$review_summary', '$review', '$friendliness', '$communication', '$office_environ', '$professional', '$costs', '$availability', '$pro1', '$pro2', '$pro3', '$con1', '$con2', '$con3')";
 		$result = mysql_query($query);
 		echo "Success";
-		echo "INSERT INTO `ratings` (`uid`, `pid`, `rating`, `review`, `friendliness`, `communication`, `office_environment`, `professional`, `costs`, `availability`) VALUES ('$uid', '$pid', '$rating', '$review', '$friendliness', '$communication', '$office_environ', '$professional', '$costs', '$availability')";
+		echo "INSERT INTO `ratings` (`pid`, `uid`, `rating`, `review_summary`,`review`, `friendliness`, `communication`, `office_environment`, `professional`, `costs`, `availability`, `pro1`, `pro2`, `pro3`, `con1`, `con2`, `con3`) VALUES ('$uid', '$pid', '$rating', '$review_summary', '$review', '$friendliness', '$communication', '$office_environ', '$professional', '$costs', '$availability', '$pro1', '$pro2', '$pro3', '$con1', '$con2', '$con3')";
 	}
 }

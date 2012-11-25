@@ -107,7 +107,13 @@ class sql{
 					$temp['appointment_only'] = $row['appointment_only'];
 					$temp['website'] = $row['website'];
 					$temp['hours'] = $row['hours'];
-					$temp['average_rating'] = $this->getAvgRating($row['pid']);
+					$temp['average_rating'] = $this->getAvgOverallRating($row['pid']);
+					$temp['average_friendliness_rating'] = $this->getAvgFriendlinessRating($row['pid']);
+					$temp['average_environment_rating'] = $this->getAvgEnvironmentRating($row['pid']);
+					$temp['average_communication_rating'] = $this->getAvgCommunicationRating($row['pid']);
+					$temp['average_professional_rating'] = $this->getAvgProfessionalRating($row['pid']);
+					$temp['average_costs_rating'] = $this->getAvgCostsRating($row['pid']);
+					$temp['average_availability_rating'] = $this->getAvgAvailabilityRating($row['pid']);
 					$arr[] = $temp;
 				}
 			} else {
@@ -135,9 +141,27 @@ class sql{
 				$temp['appointment_only'] = $row['appointment_only'];
 				$temp['website'] = $row['website'];
 				$temp['hours'] = $row['hours'];
-				$temp['average_rating'] = $this->getAvgRating($row['pid']);
+				$temp['average_rating'] = $this->getAvgOverallRating($row['pid']);
 				$temp['average_rating'] = number_format($temp['average_rating'], 2);
 				if($temp['average_rating'] === "0") $temp['average_rating'] = "0.0";
+				$temp['average_friendliness_rating'] = $this->getAvgFriendlinessRating($row['pid']);
+				$temp['average_friendliness_rating'] = number_format($temp['average_friendliness_rating'], 2);
+				if($temp['average_friendliness_rating'] === "0") $temp['average_friendliness_rating'] = "0.0";
+				$temp['average_environment_rating'] = $this->getAvgEnvironmentRating($row['pid']);
+				$temp['average_environment_rating'] = number_format($temp['average_environment_rating'], 2);
+				if($temp['average_environment_rating'] === "0") $temp['average_environment_rating'] = "0.0";
+				$temp['average_communication_rating'] = $this->getAvgCommunicationRating($row['pid']);
+				$temp['average_communication_rating'] = number_format($temp['average_communication_rating'], 2);
+				if($temp['average_communication_rating'] === "0") $temp['average_communication_rating'] = "0.0";
+				$temp['average_professional_rating'] = $this->getAvgProfessionalRating($row['pid']);
+				$temp['average_professional_rating'] = number_format($temp['average_professional_rating'], 2);
+				if($temp['average_professional_rating'] === "0") $temp['average_professional_rating'] = "0.0";
+				$temp['average_costs_rating'] = $this->getAvgCostsRating($row['pid']);
+				$temp['average_costs_rating'] = number_format($temp['average_costs_rating'], 2);
+				if($temp['average_costs_rating'] === "0") $temp['average_costs_rating'] = "0.0";
+				$temp['average_availability_rating'] = $this->getAvgAvailabilityRating($row['pid']);
+				$temp['average_availability_rating'] = number_format($temp['average_availability_rating'], 2);
+				if($temp['average_availability_rating'] === "0") $temp['average_availability_rating'] = "0.0";
 				$arr[] = $temp;
 			}
 		}
@@ -176,9 +200,27 @@ class sql{
 				$temp['appointment_only'] = $row['appointment_only'];
 				$temp['website'] = $row['website'];
 				$temp['hours'] = $row['hours'];
-				$temp['average_rating'] = $this->getAvgRating($row['pid']);
+				$temp['average_rating'] = $this->getAvgOverallRating($row['pid']);
 				$temp['average_rating'] = number_format($temp['average_rating'], 2);
 				if($temp['average_rating'] === "0") $temp['average_rating'] = "0.0";
+				$temp['average_friendliness_rating'] = $this->getAvgFriendlinessRating($row['pid']);
+				$temp['average_friendliness_rating'] = number_format($temp['average_friendliness_rating'], 2);
+				if($temp['average_friendliness_rating'] === "0") $temp['average_friendliness_rating'] = "0.0";
+				$temp['average_environment_rating'] = $this->getAvgEnvironmentRating($row['pid']);
+				$temp['average_environment_rating'] = number_format($temp['average_environment_rating'], 2);
+				if($temp['average_environment_rating'] === "0") $temp['average_environment_rating'] = "0.0";
+				$temp['average_communication_rating'] = $this->getAvgCommunicationRating($row['pid']);
+				$temp['average_communication_rating'] = number_format($temp['average_communication_rating'], 2);
+				if($temp['average_communication_rating'] === "0") $temp['average_communication_rating'] = "0.0";
+				$temp['average_professional_rating'] = $this->getAvgProfessionalRating($row['pid']);
+				$temp['average_professional_rating'] = number_format($temp['average_professional_rating'], 2);
+				if($temp['average_professional_rating'] === "0") $temp['average_professional_rating'] = "0.0";
+				$temp['average_costs_rating'] = $this->getAvgCostsRating($row['pid']);
+				$temp['average_costs_rating'] = number_format($temp['average_costs_rating'], 2);
+				if($temp['average_costs_rating'] === "0") $temp['average_costs_rating'] = "0.0";
+				$temp['average_availability_rating'] = $this->getAvgAvailabilityRating($row['pid']);
+				$temp['average_availability_rating'] = number_format($temp['average_availability_rating'], 2);
+				if($temp['average_availability_rating'] === "0") $temp['average_availability_rating'] = "0.0";
 				$return = array();
 				$return["provider"] = $temp;
 				echo json_encode($return);
@@ -187,8 +229,8 @@ class sql{
 		}
 	}
 	
-	//calculate and return the average rating for a given provider
-	function getAvgRating($pid){
+	//calculate and return the average overall rating for a given provider
+	function getAvgOverallRating($pid){
 		//create and executequery
 		$query = "SELECT * FROM `ratings` WHERE `pid` = $pid";
 		$result = mysql_query($query);
@@ -198,6 +240,132 @@ class sql{
 		$count = 0;
 		while($row = mysql_fetch_array($result)){
 			$total += $row['rating'];
+			$count++;
+		}
+		
+		if($count == 0){
+			return 0;
+		} else {
+			return $total/$count;
+		}
+	}
+	
+	//calculate and return the average friendliness rating for a given provider
+	function getAvgFriendlinessRating($pid){
+		//create and executequery
+		$query = "SELECT * FROM `ratings` WHERE `pid` = $pid";
+		$result = mysql_query($query);
+		
+		//calculate average
+		$total = 0;
+		$count = 0;
+		while($row = mysql_fetch_array($result)){
+			$total += $row['friendliness'];
+			$count++;
+		}
+		
+		if($count == 0){
+			return 0;
+		} else {
+			return $total/$count;
+		}
+	}
+	
+	//calculate and return the average office environment rating for a given provider
+	function getAvgEnvironmentRating($pid){
+		//create and executequery
+		$query = "SELECT * FROM `ratings` WHERE `pid` = $pid";
+		$result = mysql_query($query);
+		
+		//calculate average
+		$total = 0;
+		$count = 0;
+		while($row = mysql_fetch_array($result)){
+			$total += $row['office_environment'];
+			$count++;
+		}
+		
+		if($count == 0){
+			return 0;
+		} else {
+			return $total/$count;
+		}
+	}
+	
+	//calculate and return the average communication rating for a given provider
+	function getAvgCommunicationRating($pid){
+		//create and executequery
+		$query = "SELECT * FROM `ratings` WHERE `pid` = $pid";
+		$result = mysql_query($query);
+		
+		//calculate average
+		$total = 0;
+		$count = 0;
+		while($row = mysql_fetch_array($result)){
+			$total += $row['communication'];
+			$count++;
+		}
+		
+		if($count == 0){
+			return 0;
+		} else {
+			return $total/$count;
+		}
+	}
+	
+	//calculate and return the average professional skills rating for a given provider
+	function getAvgProfessionalRating($pid){
+		//create and executequery
+		$query = "SELECT * FROM `ratings` WHERE `pid` = $pid";
+		$result = mysql_query($query);
+		
+		//calculate average
+		$total = 0;
+		$count = 0;
+		while($row = mysql_fetch_array($result)){
+			$total += $row['professional'];
+			$count++;
+		}
+		
+		if($count == 0){
+			return 0;
+		} else {
+			return $total/$count;
+		}
+	}
+	
+	//calculate and return the average costs rating for a given provider
+	function getAvgCostsRating($pid){
+		//create and executequery
+		$query = "SELECT * FROM `ratings` WHERE `pid` = $pid";
+		$result = mysql_query($query);
+		
+		//calculate average
+		$total = 0;
+		$count = 0;
+		while($row = mysql_fetch_array($result)){
+			$total += $row['costs'];
+			$count++;
+		}
+		
+		if($count == 0){
+			return 0;
+		} else {
+			return $total/$count;
+		}
+	}
+	
+	//calculate and return the average availability rating for a given provider
+	function getAvgAvailabilityRating($pid){
+		//create and executequery
+		$query = "SELECT * FROM `ratings` WHERE `pid` = $pid";
+		$result = mysql_query($query);
+		
+		//calculate average
+		$total = 0;
+		$count = 0;
+		while($row = mysql_fetch_array($result)){
+			$total += $row['availability'];
 			$count++;
 		}
 		

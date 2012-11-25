@@ -6,4 +6,4 @@ $sql = new sql();
 $pid = $_GET['pid'];
 
 //do the call and get the name
-echo $sql -> getProviderName($pid);
+echo $sql -> getProviderInfo($pid);

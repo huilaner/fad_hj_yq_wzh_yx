@@ -1,0 +1,3 @@
+INSERT INTO providers VALUES (16, 'CVS', '4314 Locust Street', 'Philadelphia', 'PA', '19104', '(215) 386-2093', 'yes', 'yes', 'yes','yes','yes','www.cvs.com', 'Mon-Fri: 8am–10pm, Sat: 9am–6pm, Sun: 9am–5pm', 'pharmacy', 39.953546, -75.209261, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0);
+
+INSERT INTO providers VALUES (17, 'The Childrens Hospital of Philadelphia', '3819 Chestnut St #120', 'Philadelphia', 'PA', '19104', '(215) 590-5042', 'yes', 'yes', 'yes','yes','yes','www.chop.com', 'Mon-Fri: 8am–10pm, Sat: 9am–6pm, Sun: 9am–5pm', 'clinic', 39.955689,-75.199403, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0);
