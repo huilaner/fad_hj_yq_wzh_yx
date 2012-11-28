@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/TableLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:shrinkColumns="0" 
+    android:stretchColumns="1,2" >
+
+	<TableRow>
+
+    	<ImageView
+        android:id="@+id/providerpf_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left" />
+
+        <RatingBar
+            android:id="@+id/providerpf_comment_stars"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:numStars="5" />
+        
+         <TextView
+            android:id="@+id/providerpf_comment_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="Sample Date" />
+
+        <TextView
+            android:id="@+id/providerpf_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:text="User" />
+        
+    </TableRow>
+
+</TableLayout> <!-- android:layout_gravity="right" -->

@@ -1,6 +1,8 @@
 package edu.upenn.cis350;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,12 +21,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,10 +72,10 @@ public class ProviderProfileActivity extends Activity {
 	private Button m_button_map;
 	private Button m_button_review;
 	private Button m_button_avgfeature;
-	private final Context m_context = this;
+	private final ProviderProfileActivity m_context = this;
 	private ArrayList<Rating> m_ratings;
 	private Provider m_provider;
-	private ListView m_comments;
+	private ExpandableListView m_comments;
 	private ImageView m_provider_star_rating;
 	private Button parking;
 	private Button creditcard;
@@ -102,7 +104,6 @@ public class ProviderProfileActivity extends Activity {
 
 	private RatingAdapter m_adapter;
 	
-	
 	int[] checkBoxRecord=new int[10];
 
 	/**
@@ -116,9 +117,11 @@ public class ProviderProfileActivity extends Activity {
 		m_button_map = (Button) this.findViewById(R.id.button_providerpf_map);
 		m_button_review = (Button) this
 				.findViewById(R.id.providerpf_rate_button);
-		m_comments = (ListView) this.findViewById(R.id.providerpf_comments);
+		m_comments = (ExpandableListView) this.findViewById(R.id.providerpf_comments);
 		m_adapter = new RatingAdapter(m_context);
 		m_comments.setAdapter(m_adapter);
+		m_comments.setGroupIndicator(null);
+		m_comments.setDivider(null);
 		m_button_avgfeature = (Button) this
 				.findViewById(R.id.providerpf_all_previous_reviews_button);
 
@@ -755,37 +758,145 @@ public class ProviderProfileActivity extends Activity {
 	}
 
 	// inner class for rating adapter. Needs to reference m_ratings
-	class RatingAdapter extends BaseAdapter {
-		private Context m_context;
+	class RatingAdapter extends BaseExpandableListAdapter {
+		private ProviderProfileActivity mContext = null;
 
-		public RatingAdapter(Context c) {
-			m_context = c;
+		public RatingAdapter(ProviderProfileActivity context) {
+			this.mContext = context;
 		}
 
-		public int getCount() {
-			if (m_ratings != null)
-				return m_ratings.size();
-			else
-				return 0;
-		}
+        public boolean areAllItemsEnabled() {
+                return false;
+        }
 
-		public Object getItem(int position) {
-			if (m_ratings != null)
-				return m_ratings.get(position);
-			else
-				return 0;
-		}
+        public Object getChild(int groupPosition, int childPosition) {
+                return m_ratings.get(groupPosition);
+        }
 
-		public long getItemId(int position) {
-			return position;
-		}
+        public long getChildId(int groupPosition, int childPosition) {
+                return childPosition;
+        }
 
-		/**
-		 * Convert the pros and cons integers into strings
-		 * 
-		 * @param label
-		 * @return
-		 */
+        public View getChildView(int groupPosition, int childPosition,
+                        boolean isLastChild, View convertView, ViewGroup parent) {
+        	View list_result = convertView;
+			if (list_result == null) {
+				LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				list_result = inflater.inflate(R.layout.provider_pf_comment, null);
+			}
+			
+			Rating currentRating = m_ratings.get(groupPosition);
+			String review_summary = currentRating.getReview_summary();
+			String pro1 = getProAndConString(currentRating.getPro1());
+			String pro2 = getProAndConString(currentRating.getPro2());
+			String pro3 = getProAndConString(currentRating.getPro3());
+			String con1 = getProAndConString(currentRating.getCon1());
+			String con2 = getProAndConString(currentRating.getCon2());
+			String con3 = getProAndConString(currentRating.getCon3());
+			String review = currentRating.getReview();
+
+			TextView tv_provider_summary = (TextView) list_result
+					.findViewById(R.id.providerpf_rate_review_summary);
+			tv_provider_summary.setText(review_summary);
+
+			TextView tv_pro1 = (TextView) list_result
+					.findViewById(R.id.providerpf_review_pro1);
+			tv_pro1.setText(pro1);
+			TextView tv_pro2 = (TextView) list_result
+					.findViewById(R.id.providerpf_review_pro2);
+			tv_pro2.setText(pro2);
+			TextView tv_pro3 = (TextView) list_result
+					.findViewById(R.id.providerpf_review_pro3);
+			tv_pro3.setText(pro3);
+			TextView tv_con1 = (TextView) list_result
+					.findViewById(R.id.providerpf_review_con1);
+			tv_con1.setText(con1);
+			TextView tv_con2 = (TextView) list_result
+					.findViewById(R.id.providerpf_review_con2);
+			tv_con2.setText(con2);
+			TextView tv_con3 = (TextView) list_result
+					.findViewById(R.id.providerpf_review_con3);
+			tv_con3.setText(con3);
+
+			TextView tv_provider_desc = (TextView) list_result
+					.findViewById(R.id.providerpf_comment_review);
+			tv_provider_desc.setText(review);
+
+			return list_result;
+        }
+
+        public int getChildrenCount(int groupPosition) {
+                return 1;
+        }
+
+        public Object getGroup(int groupPosition) {
+                return m_ratings.get(groupPosition);
+        }
+
+        public int getGroupCount() {
+        	if (m_ratings != null)
+                return m_ratings.size();
+        	return 0;
+        }
+
+        public long getGroupId(int groupPosition) {
+                return groupPosition;
+        }
+
+        public View getGroupView(int groupPosition, boolean isExpanded,
+                        View convertView, ViewGroup parent) {
+        	
+        	View view = convertView;
+			if (view == null) {
+				LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				view = inflater.inflate(R.layout.provider_pf_comment_title, null);
+			}
+				
+			View list_result = view;
+			
+			Rating currentRating = m_ratings.get(groupPosition);
+			String date = currentRating.getDate().substring(0, 11); // only show
+																	// the date
+			long user_id = currentRating.getUser();
+			String provider_user_name = "By " + getUserNameByUserId(user_id);
+
+			RatingBar stars = (RatingBar) list_result
+					.findViewById(R.id.providerpf_comment_stars);
+			stars.setRating(currentRating.getRating());
+			TextView tv_provider_date = (TextView) list_result
+					.findViewById(R.id.providerpf_comment_date);
+			tv_provider_date.setText(date);
+			TextView tv_provider_user_name = (TextView) list_result
+					.findViewById(R.id.providerpf_user_name);
+			tv_provider_user_name.setText(provider_user_name);
+        	
+			ImageView image=(ImageView) view.findViewById(R.id.providerpf_details);
+			if(isExpanded)
+				image.setBackgroundResource(R.drawable.btn_browser2);
+			else image.setBackgroundResource(R.drawable.btn_browser);
+			
+			return list_result;
+        }
+
+        public boolean isEmpty() {
+                return false;
+        }
+
+        /*
+         * Indicates whether the child and group IDs are stable across changes to
+         * the underlying data.
+         */
+        public boolean hasStableIds() {
+                return false;
+        }
+
+        /*
+         * Whether the child at the specified position is selectable.
+         */
+        public boolean isChildSelectable(int groupPosition, int childPosition) {
+                return false;
+        }
+		
 		public String getProAndConString(int label) {
 			String message;
 			switch (label) {
@@ -824,111 +935,6 @@ public class ProviderProfileActivity extends Activity {
 			}
 			return message;
 		}
-
-		public View getView(final int position, View convertView,
-				ViewGroup parent) {
-			// inflate the view
-			LinearLayout list_result;
-			if (convertView == null) {
-				LayoutInflater inf = (LayoutInflater) m_context
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				list_result = (LinearLayout) inf.inflate(
-						R.layout.provider_pf_comment, null);
-			} else
-				list_result = (LinearLayout) convertView;
-
-			Rating currentRating = m_ratings.get(position);
-			String date = currentRating.getDate().substring(0, 11); // only show
-																	// the date
-			long user_id = currentRating.getUser();
-			String provider_user_name = "By " + getUserNameByUserId(user_id);
-			String review_summary = currentRating.getReview_summary();
-			String pro1 = getProAndConString(currentRating.getPro1());
-			String pro2 = getProAndConString(currentRating.getPro2());
-			String pro3 = getProAndConString(currentRating.getPro3());
-			String con1 = getProAndConString(currentRating.getCon1());
-			String con2 = getProAndConString(currentRating.getCon2());
-			String con3 = getProAndConString(currentRating.getCon3());
-			String review = currentRating.getReview();
-
-			RatingBar stars = (RatingBar) list_result
-					.findViewById(R.id.providerpf_comment_stars);
-			stars.setRating(currentRating.getRating());
-			TextView tv_provider_date = (TextView) list_result
-					.findViewById(R.id.providerpf_comment_date);
-			tv_provider_date.setText(date);
-			TextView tv_provider_user_name = (TextView) list_result
-					.findViewById(R.id.providerpf_user_name);
-			tv_provider_user_name.setText(provider_user_name);
-			TextView tv_provider_summary = (TextView) list_result
-					.findViewById(R.id.providerpf_rate_review_summary);
-			tv_provider_summary.setText(review_summary);
-
-			TextView tv_pro1 = (TextView) list_result
-					.findViewById(R.id.providerpf_review_pro1);
-			tv_pro1.setText(pro1);
-			TextView tv_pro2 = (TextView) list_result
-					.findViewById(R.id.providerpf_review_pro2);
-			tv_pro2.setText(pro2);
-			TextView tv_pro3 = (TextView) list_result
-					.findViewById(R.id.providerpf_review_pro3);
-			tv_pro3.setText(pro3);
-			TextView tv_con1 = (TextView) list_result
-					.findViewById(R.id.providerpf_review_con1);
-			tv_con1.setText(con1);
-			TextView tv_con2 = (TextView) list_result
-					.findViewById(R.id.providerpf_review_con2);
-			tv_con2.setText(con2);
-			TextView tv_con3 = (TextView) list_result
-					.findViewById(R.id.providerpf_review_con3);
-			tv_con3.setText(con3);
-
-			TextView tv_provider_desc = (TextView) list_result
-					.findViewById(R.id.providerpf_comment_review);
-			tv_provider_desc.setText(review);
-
-			// populate the new view
-			// TextView tv_rating =
-			// (TextView)list_result.findViewById(R.id.providerpf_comment_rating);
-			// Integer rating = currentRating.getRating();
-
-			// RatingBar friendliness =
-			// (RatingBar)list_result.findViewById(R.id.providerpf_comment_friendliness);
-			// RatingBar environment =
-			// (RatingBar)list_result.findViewById(R.id.providerpf_comment_environment);
-			// RatingBar communication =
-			// (RatingBar)list_result.findViewById(R.id.providerpf_comment_communication);
-			// //wolaiwanyiwan
-			// RatingBar professional =
-			// (RatingBar)list_result.findViewById(R.id.providerpf_comment_professionalskills);
-			// RatingBar costs =
-			// (RatingBar)list_result.findViewById(R.id.providerpf_comment_costs);
-			// RatingBar availability =
-			// (RatingBar)list_result.findViewById(R.id.providerpf_comment_availability);
-
-			// if (rating==5) {
-			// stars.setImageResource(R.drawable.fivestars);
-			// } else if (rating==4) {
-			// stars.setImageResource(R.drawable.fourstars);
-			// } else if (rating==3) {
-			// stars.setImageResource(R.drawable.threestars);
-			// } else if (rating==2) {
-			// stars.setImageResource(R.drawable.twostars);
-			// } else if (rating==1) {
-			// stars.setImageResource(R.drawable.onestar);
-			// }
-			//
-			// friendliness.setRating(currentRating.getFriendliness_rating());
-			//
-			// environment.setRating(currentRating.getOffice_environment_rating());
-			// communication.setRating(currentRating.getCommunication_rating());
-			//
-			// //wolaiwanyiwan
-			// professional.setRating(currentRating.getProfessional_rating());
-			// costs.setRating(currentRating.getCosts_rating());
-			// availability.setRating(currentRating.getAvailability_rating());
-
-			return list_result;
-		}
+		
 	}
 }

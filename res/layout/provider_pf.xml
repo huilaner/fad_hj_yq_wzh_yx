@@ -173,7 +173,7 @@
         android:text="All Previous Reviews"
         android:textSize="20dp" />
     
-	<ListView
+	<ExpandableListView
 	    android:id="@+id/providerpf_comments"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
