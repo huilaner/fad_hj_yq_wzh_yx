@@ -8,14 +8,14 @@
         android:id="@+id/providerpf_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left" />
+        android:layout_gravity="center" />
 
     <RatingBar
         android:id="@+id/providerpf_comment_stars"
         style="?android:attr/ratingBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
+        android:layout_gravity="center"
         android:numStars="5" />
 
     <TextView
