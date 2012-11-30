@@ -1,8 +1,6 @@
 package edu.upenn.cis350;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,7 +24,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -853,7 +850,11 @@ public class ProviderProfileActivity extends Activity {
 			String date = currentRating.getDate().substring(0, 11); // only show
 																	// the date
 			long user_id = currentRating.getUser();
-			String provider_user_name = "By " + getUserNameByUserId(user_id);
+			String review_user_name = "By ";
+			if(user_id == 0)
+				review_user_name += "Anonymous";
+			else
+				review_user_name += getUserNameByUserId(user_id);
 
 			RatingBar stars = (RatingBar) list_result
 					.findViewById(R.id.providerpf_comment_stars);
@@ -863,7 +864,7 @@ public class ProviderProfileActivity extends Activity {
 			tv_provider_date.setText(date);
 			TextView tv_provider_user_name = (TextView) list_result
 					.findViewById(R.id.providerpf_user_name);
-			tv_provider_user_name.setText(provider_user_name);
+			tv_provider_user_name.setText(review_user_name);
         	
 			ImageView image=(ImageView) view.findViewById(R.id.providerpf_details);
 			if(isExpanded)
