@@ -536,39 +536,12 @@ public class ProviderProfileActivity extends Activity {
 						
 						
 						//clear checkBoxRecord array
-						checkBoxRecord=new int[10];
+						
 
-						// add 5 pros, 5 cons, see if it is checked and insert
-						// into database
-						ArrayList<Integer> proList = new ArrayList<Integer>();
-						ArrayList<Integer> conList = new ArrayList<Integer>();
-
-						proList.add(checkBox_pros1.isChecked() ? 1 : 0);
-						proList.add(checkBox_pros2.isChecked() ? 2 : 0);
-						proList.add(checkBox_pros3.isChecked() ? 3 : 0);
-						proList.add(checkBox_pros4.isChecked() ? 4 : 0);
-						proList.add(checkBox_pros5.isChecked() ? 5 : 0);
-						conList.add(checkBox_cons1.isChecked() ? -1 : 0);
-						conList.add(checkBox_cons2.isChecked() ? -2 : 0);
-						conList.add(checkBox_cons3.isChecked() ? -3 : 0);
-						conList.add(checkBox_cons4.isChecked() ? -4 : 0);
-						conList.add(checkBox_cons5.isChecked() ? -5 : 0);
-
-						int[] pros = new int[3];
-						int[] cons = new int[3];
-
-						int pIndex = 0;
-						int cIndex = 0;
-						for (int i = 0; i < proList.size(); i++) {
-							if (proList.get(i) > 0) {
-								pros[pIndex] = proList.get(i);
-								pIndex++;
-							}
-							if (conList.get(i) < 0) {
-								cons[cIndex] = conList.get(i);
-								cIndex++;
-							}
-						}
+						int[] pros=insertProToDB();
+						int[] cons=insertConToDB();
+						
+						for(int i=0;i<10;i++) checkBoxRecord[i]=0;
 
 						int pro1 = pros[0];
 						int pro2 = pros[1];
@@ -597,6 +570,28 @@ public class ProviderProfileActivity extends Activity {
 								Toast.LENGTH_LONG).show();
 						populateRatings();
 						dialog.hide();
+					}
+
+					private int[] insertConToDB() {
+						// TODO Auto-generated method stub
+						int[] cons=new int[3];
+						for(int i=5,j=0;i<10;i++){
+							if(checkBoxRecord[i]==1){
+								cons[j]=4-i;j++;
+							}
+						}
+						return cons;
+					}
+
+					private int[] insertProToDB() {
+				
+						int[] pros = new int[3];
+						for(int i=0,j=0;i<5;i++){
+							if(checkBoxRecord[i]==1){
+								pros[j]=i+1;j++;
+							}
+						}
+						return pros;
 					}
 
 					public String parseText(String review) {
