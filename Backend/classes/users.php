@@ -58,6 +58,7 @@ class users{
 			$temp['rating'] = $row['rating'];
 			$temp['rating'] = number_format($temp['rating'], 2);
 			$temp['time'] = $row['time'];
+			$temp['review_summary'] = $row['review_summary'];
 			$temp['review'] = $row['review'];
 			$arr[] = $temp;
 		} 
