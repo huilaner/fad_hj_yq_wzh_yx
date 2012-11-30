@@ -654,6 +654,10 @@ public class ProviderProfileActivity extends Activity {
 				JSONObject current = reviews.getJSONObject(i);
 				long user_id = Long.parseLong(current.getString("uid"));
 				long provider_id = Long.parseLong(current.getString("pid"));
+				String user_name = "Anonymous";
+				if(user_id != 0) {
+					user_name = getUserNameByUserId(user_id);
+				}
 				String time = current.getString("time");
 				String review_summary = current.getString("review_summary");
 				String review = current.getString("review");
@@ -676,15 +680,18 @@ public class ProviderProfileActivity extends Activity {
 				int con2 = Integer.parseInt(current.getString("con2"));
 				int con3 = Integer.parseInt(current.getString("con3"));
 
-				Rating currentRating = new Rating(user_id, provider_id, time,
+				Rating currentRating = new Rating(user_id, provider_id, user_name, time,
 						review_summary, review, (int) rating,
 						(int) communication, (int) environment,
 						(int) friendliness, (int) professional, (int) costs,
 						(int) availability, pro1, pro2, pro3, con1, con2, con3);
+
 				m_ratings.add(currentRating);
 				m_adapter.notifyDataSetChanged();
-
 			}
+			Double averageRating = m_provider.getAverageRating();
+			m_provider_rating.setText(averageRating.toString());
+			setRatingImage();
 		} catch (Exception e) {
 			// for logging
 			System.out.println("Ratings error");
@@ -849,13 +856,10 @@ public class ProviderProfileActivity extends Activity {
 			Rating currentRating = m_ratings.get(groupPosition);
 			String date = currentRating.getDate().substring(0, 11); // only show
 																	// the date
-			long user_id = currentRating.getUser();
+			//long user_id = currentRating.getUser();
 			String review_user_name = "By ";
-			if(user_id == 0)
-				review_user_name += "Anonymous";
-			else
-				review_user_name += getUserNameByUserId(user_id);
-
+			review_user_name += currentRating.getUser_name();
+			
 			RatingBar stars = (RatingBar) list_result
 					.findViewById(R.id.providerpf_comment_stars);
 			stars.setRating(currentRating.getRating());

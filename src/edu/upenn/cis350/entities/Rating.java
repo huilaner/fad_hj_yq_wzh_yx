@@ -7,6 +7,7 @@ public class Rating implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long user_id;
 	private Long provider_id;
+	private String user_name;
 	private String date;
 	private String review_summary;
 	private String review;
@@ -25,12 +26,13 @@ public class Rating implements Serializable{
 	private Integer pro3 = 0;
 
 
-	public Rating(long user, long provider, String date, String review_summary, String desc, int rate,
+	public Rating(long user, long provider, String user_name, String date, String review_summary, String desc, int rate,
 			int communication_rating, int office_environment_rating,
 			int friendliness_rating, int professional_rating, int costs_rating,
 			int availability_rating, int pro1, int pro2, int pro3, int con1, int con2, int con3) {
 		this.user_id = user;
 		this.provider_id = provider;
+		this.user_name = user_name;
 		this.date = date;
 		this.review_summary = review_summary;
 		this.review = desc;
@@ -64,6 +66,14 @@ public class Rating implements Serializable{
 	public Long getProvider(){
 		return provider_id;
 	}
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
 	public String getDate(){
 		return date;
 	}
