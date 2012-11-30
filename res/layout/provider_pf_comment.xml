@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:shrinkColumns="0" 
-    android:stretchColumns="1,2" >
+    android:stretchColumns="*" >
 
     <TableRow>
         <TextView
@@ -18,29 +18,30 @@
     </TableRow>
 
     <TableRow>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pros"
+            android:text="► Pros"
             android:textSize="12dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cons"
+            android:text="► Cons"
             android:textSize="12dp" />
     </TableRow>
 
     <TableRow>
         <TextView
             android:id="@+id/providerpf_review_pro1"
+            android:drawableLeft="@drawable/bullet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12dp" />
 
         <TextView
             android:id="@+id/providerpf_review_con1"
+            android:drawableLeft="@drawable/bullet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12dp" />
@@ -49,12 +50,14 @@
     <TableRow>
         <TextView
             android:id="@+id/providerpf_review_pro2"
+            android:drawableLeft="@drawable/bullet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12dp" />
 
         <TextView
             android:id="@+id/providerpf_review_con2"
+            android:drawableLeft="@drawable/bullet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12dp" />
@@ -63,12 +66,14 @@
     <TableRow>
         <TextView
             android:id="@+id/providerpf_review_pro3"
+            android:drawableLeft="@drawable/bullet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12dp" />
 
         <TextView
             android:id="@+id/providerpf_review_con3"
+            android:drawableLeft="@drawable/bullet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12dp" />
