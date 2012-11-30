@@ -78,4 +78,33 @@ a lot of work needs to be done guys
 $$ next is the demo. focus more on test reports etc. $$
 $$ probably following monday after thanksgiving (11/26) will be discuss time next week $$
 
+###########################################################
+################## updated by 2012-11-30 ##################
+Several Specifications need to be done
+(We'd better finish the functionality this coming week, and do the tests for the next week before the final demo)
+
+$$ final demo time: Dec. 14th (Fri.) $$
+
+Specifications:
+1. Limit number of reviews a user can post to particular provider (e.g. one user can only comment a provider within 6 months) 
+   --- yuhui
+
+2. provider can identify themselves and post "philosophy of care" (after our group discussion, this can be done within the profile<register part> with a button and pop up screen) and also make sure only the right provider and comment him or her self
+   --- hui and quan
+
+3. add new sub-categories of doctors (specialist) between the category and search view to narrow down the search, and it should be multiple choices   
+   --- hui (may involve yuhui)
+
+4. display the overall of top 3 pros and cons on the provider profile. And add a button "more details" to pop out a new view, which has all the pros and cons related to this provider, and the percentage respectively. 
+*For example: easy for parking (5/15) <-this means 15 people rate this provider, and 5 of them think it is this provider's pros.
+   --- wenbin (as its last specification we hasn't finished)
+
+5. search the provider by zip code
+   this is optional, wenbin if you've finished the last specification, please begin this one.
+
+** yuhui is also mainly responsible for database and php files.
+
+Please add if I miss something :)
+
+
 
