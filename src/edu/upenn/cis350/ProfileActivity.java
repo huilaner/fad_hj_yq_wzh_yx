@@ -24,31 +24,31 @@ import android.content.SharedPreferences;
 public class ProfileActivity extends Activity{
 	private User _userToLoad;
 	private Button save;
-	
+
 	private String gender;
 	private String phone;
 	private String address;
 	private String email;
 	private String name;
-	
+
 	private EditText nameField;
 	private EditText emailField;
 	private EditText addressField;
 	private EditText phoneField;
 	private RadioGroup genderField;
-	
+
 	private EditText providerNameField;
 	private EditText providerPhilosophyField;
 	private String providerName;
 	private String philosophy;
-	
+
 	private Context ownContext = this;
-	
-	
+
+
 	private Dialog dialog_poc;
 	private Button button_poc;
 	private Button button_submit_poc;
-	
+
 	/**
 	 * Initialize the user's profile on creation
 	 */
@@ -78,26 +78,26 @@ public class ProfileActivity extends Activity{
 					// TODO Auto-generated method stub
 					dialog_poc=new Dialog(ownContext);
 					dialog_poc.setContentView(R.layout.profile_poc);
-					
+
 					providerNameField = (EditText)dialog_poc.findViewById(R.id.provider_poc_name);
 					providerPhilosophyField = (EditText)dialog_poc.findViewById(R.id.provider_poc_text);
-					
+
 					button_submit_poc=(Button)dialog_poc.findViewById(R.id.submit_poc);
 					button_submit_poc.setOnClickListener(new OnClickListener(){
 
 						public void onClick(View v) {
 							providerName = providerNameField.getText().toString();
 							philosophy = providerPhilosophyField.getText().toString();
-							
+
 							//TODO should check if the provider Name exist in the list of providers
 							//if so insert philosophy into database
 							//if not toast "No such provider exists!"
-							
+
 							dialog_poc.hide();
 						}});
 					dialog_poc.show();
-				
-					
+
+
 				}});
         	
         	//clicking this button saves the information
@@ -117,7 +117,7 @@ public class ProfileActivity extends Activity{
 		super.onResume();
         
 	}
-	
+
 	/**
 	 * The method reads all the user inputs, do the basic scan of illegal
 	 * characters using regular expressions. It then interact with the backend
@@ -129,7 +129,7 @@ public class ProfileActivity extends Activity{
 		//User info is set in the shared preferences.
 		SharedPreferences settings = getSharedPreferences("UserData", 0);
 		SharedPreferences.Editor editor = settings.edit();
-		
+
 		//Do the error check for input
 		name = nameField.getText().toString();
 		String encoded_name; 
@@ -139,14 +139,14 @@ public class ProfileActivity extends Activity{
 		}else{
 			encoded_name = name.replace(" ", "%20");
 		}
-		
+
 		email = emailField.getText().toString();
 		if (!email.matches("[A-Za-z0-9@\\_\\.\\_&&[^\\n]]+?")){
 			//tell user the input was invalid
 			displayToast("The email should not be empty and should only contains English characters, numbers or \"@\", \".\",\"_\" ");
 			return;
 		}
-		
+
 		address = addressField.getText().toString();
 		String encoded_address;
 		if (!address.matches("[A-Za-z0-9,\\s&&[^\\n]]+?")){
@@ -155,23 +155,23 @@ public class ProfileActivity extends Activity{
 		}else{
 			encoded_address = address.replace(" ", "%20");
 		}
-		
+
 		phone = phoneField.getText().toString();
 		if (!phone.matches("[0-9]+?")){
 			displayToast("The phone should not be empty and should only contains numbers");
 			return;
 		}
-		
+
 		if(genderField.getCheckedRadioButtonId() == R.id.profile_new_male)
     		gender = "Male";
     	else
     		gender = "Female";
-		
+
 		//get the user's id via the http request, and store it in the database
 		String uri = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/register.php?name=" + encoded_name + 
 				"&address=" + encoded_address + "&gender=" + gender + "&email=" + email + "&phone=" + phone;
 		String id = InternetHelper.httpGetRequest(uri);
-		
+
 		//store the information on the device
 		editor.putString("Id", id);
 		editor.putString("Name", name);
@@ -180,12 +180,12 @@ public class ProfileActivity extends Activity{
 		editor.putString("Phone", phone);
 		editor.putString("Gender", gender);
 		editor.commit();
-		
+
 		//let the user know that their information has been saved
 		Toast.makeText(ownContext, "Your information has been saved", Toast.LENGTH_SHORT).show();
 		finish();
 	}
-	
+
 	/**
 	 * A method that display a toast with the specified text
 	 * @param msg The toast message
@@ -195,8 +195,8 @@ public class ProfileActivity extends Activity{
 		Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
 		toast.show();
 	}
-	
-	
+
+
 	public void loadProfile() {
 		//this user already has a profile, set view to profile_existing
     	setContentView(R.layout.profile_existing);

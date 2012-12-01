@@ -29,7 +29,7 @@ public class ProviderHelper {
 	 * @param handicap Handicap facility available
 	 * @param appointment_only Is the provider appointment only
 	 * @param credit_card Accepts credit card or not
-	 * @param type Primary Care or Specialist
+	 * @param typeList Primary Care or Specialist
 	 * @param distance 
 	 * @param m_longitude
 	 * @param m_latitude
@@ -38,7 +38,7 @@ public class ProviderHelper {
 	 */
 	public static ArrayList<Provider> getSatisfiedProvider(String provider_name, String has_parking, 
 			String accepting_new, String handicap, String appointment_only, String credit_card, 
-			String type, String distance, Double m_latitude, Double m_longitude) {
+			ArrayList<String> typeList, String distance, Double m_latitude, Double m_longitude) {
 		
 		ArrayList<Provider> allproviders = new ArrayList<Provider>();
 		StringBuffer urlBuff = new StringBuffer();
@@ -56,7 +56,12 @@ public class ProviderHelper {
 //			//Need to convert the naming here
 //			urlBuff.append(type.equals("primary care")? "&type=PCP":"&type=Specialist");
 //		}
-		urlBuff.append("&type=" + type);
+		String types = "";
+		for(String s : typeList) {
+			types += s + "%20";
+		}
+		types = types.substring(0, types.length() - 3);
+		urlBuff.append("&type=" + types);
 		if (distance.length()>0){
 			urlBuff.append("&distance="+distance+"&long="+m_longitude+"&lat="+m_latitude);
 		}
@@ -64,8 +69,8 @@ public class ProviderHelper {
 		//Send the request
 		String jsonString = InternetHelper.httpGetRequest(urlBuff.toString());
 		
-//		System.out.println(urlBuff.toString());
-//		System.out.println(jsonString);
+		System.out.println("url = "+urlBuff.toString());
+		System.out.println("urljson = " + jsonString);
 		
 		if (jsonString!=null && jsonString.length()>0){
 			allproviders = ProviderHelper.createListOfProvidersFromJson(jsonString);

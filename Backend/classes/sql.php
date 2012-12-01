@@ -44,7 +44,11 @@ class sql{
 			} else {
 				$query = $query." AND ";
 			}
-			$query = $query."type = '$type' ";
+			$types = explode(" ", $type);  
+			foreach ($types as &$value) {
+                            $query = $query."type = '$value' OR ";
+                        }
+                        $query = substr($query, 0, -4);	
 		}
 		if(!empty($handicap)){
 			if($flag == 1){

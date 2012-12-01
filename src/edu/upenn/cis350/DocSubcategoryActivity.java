@@ -1,5 +1,7 @@
 package edu.upenn.cis350;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +20,7 @@ public class DocSubcategoryActivity extends Activity{
 	private CheckBox doc_dental;
 	private Button doc_submit;
 	int[] checkBoxRecord = new int[10];
+	String[] docTypeList = new String[10];
 
 	private final Context m_context = this;
 
@@ -41,7 +44,11 @@ public class DocSubcategoryActivity extends Activity{
 		doc_pediatric=(CheckBox)this.findViewById(R.id.doc_pediatric);
 		doc_dental=(CheckBox)this.findViewById(R.id.doc_dental);
 		doc_submit=(Button)this.findViewById(R.id.doc_submit);
-
+		docTypeList[0] = "immunology";
+		docTypeList[1] = "radiology";
+		docTypeList[2] = "cardiology";
+		docTypeList[3] = "pediatric";
+		docTypeList[4] = "dental";
 		doc_immunology.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				onCheckboxClicked(doc_immunology,1);
@@ -83,11 +90,15 @@ public class DocSubcategoryActivity extends Activity{
 
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				ArrayList<String> typeList = new ArrayList<String>();
+				for(int i = 0; i < checkBoxRecord.length; i++) {
+					if(checkBoxRecord[i] != 0)
+						typeList.add(docTypeList[i]);
+				}
 				Intent intent = new Intent(m_context, SearchActivity.class);
-				intent.putExtra("providerType", "pharmacy");
+				intent.putStringArrayListExtra("typeList", typeList);
 				// TODO check which check box is checked by checking the checkBoxRecord, then send corresponding intents
 				startActivityForResult(intent, 0);
-
 			}
 
 		});

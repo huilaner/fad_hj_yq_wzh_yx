@@ -34,7 +34,7 @@ class reviews{
 			$temp['rating'] = $row['rating'];
 			$temp['rating'] = number_format($temp['rating'], 2);
 			$temp['time'] = $row['time'];
-                        $temp['review_summary'] = $row['review_summary'];
+            $temp['review_summary'] = $row['review_summary'];
 			$temp['review'] = $row['review'];
 			$temp['communication'] = $row['communication'];
 			$temp['friendliness'] = $row['friendliness'];
@@ -42,12 +42,12 @@ class reviews{
 			$temp['professional'] = $row['professional'];
 			$temp['costs'] = $row['costs'];
 			$temp['availability'] = $row['availability'];
-                        $temp['pro1'] = $row['pro1'];
-                        $temp['pro2'] = $row['pro2'];
-                        $temp['pro3'] = $row['pro3'];
-                        $temp['con1'] = $row['con1'];
-                        $temp['con2'] = $row['con2'];
-                        $temp['con3'] = $row['con3'];
+            $temp['pro1'] = $row['pro1'];
+            $temp['pro2'] = $row['pro2'];
+            $temp['pro3'] = $row['pro3'];
+            $temp['con1'] = $row['con1'];
+            $temp['con2'] = $row['con2'];
+            $temp['con3'] = $row['con3'];
 			$arr[] = $temp;
 		} 
 		

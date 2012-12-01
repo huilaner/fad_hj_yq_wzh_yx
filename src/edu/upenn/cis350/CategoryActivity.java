@@ -1,5 +1,7 @@
 package edu.upenn.cis350;
 
+import java.util.ArrayList;
+
 import edu.upenn.cis350.entities.User;
 
 import android.app.Activity;
@@ -43,30 +45,32 @@ public class CategoryActivity extends Activity {
 		button_category_doctor = (Button)this.findViewById(R.id.category_doctor);
 		button_category_clinic = (Button)this.findViewById(R.id.category_clinic);
 		button_category_pharmacy = (Button)this.findViewById(R.id.category_pharmacy);
-		
+
 		//set the listeners for each button
 		setListeners();
 	}
 
 	public void setListeners() {
+		final ArrayList<String> typeList = new ArrayList<String>();
 		button_category_doctor.setOnClickListener(new OnClickListener(){
 			public void onClick(View arg0) {
 				Intent intent = new Intent(m_context, DocSubcategoryActivity.class);
-				intent.putExtra("providerType", "doctor");
-				startActivityForResult(intent, 0);
+				startActivity(intent);
 			}
 		});
 		button_category_clinic.setOnClickListener(new OnClickListener(){
 			public void onClick(View arg0) {
 				Intent intent = new Intent(m_context, SearchActivity.class);
-				intent.putExtra("providerType", "clinic");
+				typeList.add("clinic");
+				intent.putStringArrayListExtra("typeList", typeList);
 				startActivityForResult(intent, 0);
 			}
 		});
 		button_category_pharmacy.setOnClickListener(new OnClickListener(){
 			public void onClick(View arg0) {
 				Intent intent = new Intent(m_context, SearchActivity.class);
-				intent.putExtra("providerType", "pharmacy");
+				typeList.add("pharmacy");
+				intent.putStringArrayListExtra("typeList", typeList);
 				startActivityForResult(intent, 0);
 			}
 		});

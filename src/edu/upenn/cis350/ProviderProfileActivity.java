@@ -1,6 +1,10 @@
 package edu.upenn.cis350;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -100,8 +104,10 @@ public class ProviderProfileActivity extends Activity {
 	private Button button_cons_ok;
 
 	private RatingAdapter m_adapter;
-	
+
 	int[] checkBoxRecord=new int[10];
+	boolean isMultipleReviewer = false;
+	long SIX_MONTH = 15778500000L;
 
 	/**
 	 * Create each provider's profile
@@ -259,6 +265,17 @@ public class ProviderProfileActivity extends Activity {
 		// review dialog pops up.
 		m_button_review.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
+				SharedPreferences settings = getSharedPreferences("UserData", 0);
+				String uid = settings.getString("Id", null);	
+				if(uid==null) {
+					Toast.makeText(m_context, "Please first register to post review.", Toast.LENGTH_LONG).show();
+					return;
+				}
+				if(isMultipleReviewer) {
+					Toast.makeText(m_context, "You can't post a review for the same provider within six months.", Toast.LENGTH_LONG).show();
+					return;
+				}
+				
 				dialog = new Dialog(m_context);
 
 				dialog.setContentView(R.layout.provider_pf_rate);
@@ -282,7 +299,7 @@ public class ProviderProfileActivity extends Activity {
 						// checkbox
 						checkBox_pros1 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox1);
-					
+
 						checkBox_pros1.setChecked(checkBoxRecord[0]==1?true:false);
 						checkBox_pros2 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox2);
@@ -360,7 +377,7 @@ public class ProviderProfileActivity extends Activity {
 								countCheck++;
 								checkBoxRecord[index-1]=checked?1:0;
 							}
-							
+
 						} else
 							countCheck--;
 						// Check which checkbox was clicked
@@ -514,10 +531,9 @@ public class ProviderProfileActivity extends Activity {
 						review = parseText(review);
 						review_summary = parseText(review_summary);
 
-						SharedPreferences settings = getSharedPreferences(
-								"UserData", 0);
+						SharedPreferences settings = getSharedPreferences("UserData", 0);
 						System.out.println(settings);
-						String id = settings.getString("Id", null);
+						String uid = settings.getString("Id", null);					
 						float rating = ratingbar.getRating();
 						float friendliness = rating_friendliness_bar
 								.getRating();
@@ -530,14 +546,14 @@ public class ProviderProfileActivity extends Activity {
 						float costs = rating_costs_bar.getRating();
 						float availability = rating_availability_bar
 								.getRating();
-						
-						
+
+
 						//clear checkBoxRecord array
-						
+
 
 						int[] pros=insertProToDB();
 						int[] cons=insertConToDB();
-						
+
 						for(int i=0;i<10;i++) checkBoxRecord[i]=0;
 
 						int pro1 = pros[0];
@@ -548,8 +564,10 @@ public class ProviderProfileActivity extends Activity {
 						int con3 = cons[2];
 
 						m_provider.getID();
+						
+						
 						String temp_base = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/ratings.php?mode=insert";
-						String url = temp_base + "&uid=" + id + "&pid="
+						String url = temp_base + "&uid=" + uid + "&pid="
 								+ m_provider.getID() + "&rating="
 								+ (int) rating + "&review_summary="
 								+ review_summary + "&review=" + review
@@ -563,8 +581,7 @@ public class ProviderProfileActivity extends Activity {
 								+ con1 + "&con2=" + con2 + "&con3=" + con3;
 						System.out.println(url);
 						InternetHelper.httpGetRequest(url);
-						Toast.makeText(m_context, "Review submitted!",
-								Toast.LENGTH_LONG).show();
+						Toast.makeText(m_context, "Review submitted!", Toast.LENGTH_LONG).show();
 						populateRatings();
 						dialog.hide();
 					}
@@ -581,7 +598,7 @@ public class ProviderProfileActivity extends Activity {
 					}
 
 					private int[] insertProToDB() {
-				
+
 						int[] pros = new int[3];
 						for(int i=0,j=0;i<5;i++){
 							if(checkBoxRecord[i]==1){
@@ -640,12 +657,16 @@ public class ProviderProfileActivity extends Activity {
 		setRatingImage();
 
 	}
+	
+	
 
 	private void populateRatings() {
 		// make the HttpRequest
 		String uri = BASE_URL + m_provider.getID();
 		String ratingsJSON = InternetHelper.httpGetRequest(uri);
-
+		SharedPreferences settings = getSharedPreferences("UserData", 0);
+		String currentUid = settings.getString("Id", null);	
+		
 		// parse the JSON and populate m_ratings from JSON for m_provider
 		try {
 			JSONObject json = new JSONObject(ratingsJSON);
@@ -654,10 +675,7 @@ public class ProviderProfileActivity extends Activity {
 				JSONObject current = reviews.getJSONObject(i);
 				long user_id = Long.parseLong(current.getString("uid"));
 				long provider_id = Long.parseLong(current.getString("pid"));
-				String user_name = "Anonymous";
-				if(user_id != 0) {
-					user_name = getUserNameByUserId(user_id);
-				}
+				String user_name = getUserNameByUserId(user_id);
 				String time = current.getString("time");
 				String review_summary = current.getString("review_summary");
 				String review = current.getString("review");
@@ -685,7 +703,7 @@ public class ProviderProfileActivity extends Activity {
 						(int) communication, (int) environment,
 						(int) friendliness, (int) professional, (int) costs,
 						(int) availability, pro1, pro2, pro3, con1, con2, con3);
-
+				checkMultipleReviewer(time, currentUid, String.valueOf(user_id));
 				m_ratings.add(currentRating);
 				m_adapter.notifyDataSetChanged();
 			}
@@ -697,6 +715,31 @@ public class ProviderProfileActivity extends Activity {
 			System.out.println("Ratings error");
 			e.printStackTrace();
 		}
+	}
+
+	private void checkMultipleReviewer(String time, String currentUid, String user_id) {
+		if(currentUid != null && currentUid.equals(user_id)) {
+			if(withinSixMonth(time)) {
+				System.out.println("isMultipleReviewer = " + isMultipleReviewer);
+				isMultipleReviewer = true;
+			}
+		}
+	}
+	
+	private boolean withinSixMonth(String d) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");  
+		java.util.Date lastTime = null;
+		try {
+			lastTime = sdf.parse(d);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		if (System.currentTimeMillis() - lastTime.getTime() < SIX_MONTH) {
+			return true;
+		}
+		return false;
+
 	}
 
 	/**
@@ -783,7 +826,7 @@ public class ProviderProfileActivity extends Activity {
 				LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				list_result = inflater.inflate(R.layout.provider_pf_comment, null);
 			}
-			
+
 			Rating currentRating = m_ratings.get(groupPosition);
 			String review_summary = currentRating.getReview_summary();
 			String pro1 = getProAndConString(currentRating.getPro1());
@@ -850,16 +893,16 @@ public class ProviderProfileActivity extends Activity {
 				LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				view = inflater.inflate(R.layout.provider_pf_comment_title, null);
 			}
-				
+
 			View list_result = view;
-			
+
 			Rating currentRating = m_ratings.get(groupPosition);
 			String date = currentRating.getDate().substring(0, 11); // only show
 																	// the date
 			//long user_id = currentRating.getUser();
 			String review_user_name = "By ";
 			review_user_name += currentRating.getUser_name();
-			
+
 			RatingBar stars = (RatingBar) list_result
 					.findViewById(R.id.providerpf_comment_stars);
 			stars.setRating(currentRating.getRating());
@@ -874,7 +917,7 @@ public class ProviderProfileActivity extends Activity {
 			if(isExpanded)
 				image.setBackgroundResource(R.drawable.btn_browser2);
 			else image.setBackgroundResource(R.drawable.btn_browser);
-			
+
 			return list_result;
         }
 
@@ -896,7 +939,7 @@ public class ProviderProfileActivity extends Activity {
         public boolean isChildSelectable(int groupPosition, int childPosition) {
                 return false;
         }
-		
+
 		public String getProAndConString(int label) {
 			String message;
 			switch (label) {
@@ -935,6 +978,6 @@ public class ProviderProfileActivity extends Activity {
 			}
 			return message;
 		}
-		
+
 	}
 }

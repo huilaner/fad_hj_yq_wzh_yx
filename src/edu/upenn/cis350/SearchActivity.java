@@ -1,6 +1,8 @@
 package edu.upenn.cis350;
 
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -127,11 +129,11 @@ public class SearchActivity extends Activity {
 
 				providerNameStr = providerNameStr.replace(" ", "%20");
 			}
-			
+
 			//get the provider type from CategoryActivity
 			Bundle bundle = getIntent().getExtras();
-			String type = bundle.getString("providerType");
-
+			ArrayList<String> typeList = bundle.getStringArrayList("typeList");
+			
 			Intent i = new Intent(SearchActivity.this, SearchResultActivity.class);
 
 			//Pass all the parameters into the intent			
@@ -141,7 +143,7 @@ public class SearchActivity extends Activity {
 			i.putExtra("handicap", getSpinnerSelection(handicap_spinner));
 			i.putExtra("appointment_only", getSpinnerSelection(appointmentonly_spinner));
 			i.putExtra("credit_card", getSpinnerSelection(creditcard_spinner));
-			i.putExtra("type", type);
+			i.putStringArrayListExtra("typeList", typeList);
 			i.putExtra("distance", getEditTextEntry(distance));
 
 			//Add more information to the intent
