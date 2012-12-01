@@ -171,6 +171,12 @@ public class ProfileActivity extends Activity{
 		String uri = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/register.php?name=" + encoded_name + 
 				"&address=" + encoded_address + "&gender=" + gender + "&email=" + email + "&phone=" + phone;
 		String id = InternetHelper.httpGetRequest(uri);
+		//duplicate user name insertion
+		if(id.equals("0")){
+			Toast.makeText(ownContext, "This user name already exist, please choose other name.", Toast.LENGTH_SHORT).show();
+			finish();
+			return;
+		}
 
 		//store the information on the device
 		editor.putString("Id", id);
