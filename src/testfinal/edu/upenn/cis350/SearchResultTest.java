@@ -19,7 +19,7 @@ import android.widget.TextView;
 public class SearchResultTest extends ActivityInstrumentationTestCase2<SearchResultActivity> {
 
 	public SearchResultTest() {
-		super("edu.upenn.cis350", SearchResultActivity.class);
+		super(SearchResultActivity.class);
 		// TODO Auto-generated constructor stub
 	}
 	private Activity activity;

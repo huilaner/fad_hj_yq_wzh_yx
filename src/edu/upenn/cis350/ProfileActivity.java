@@ -3,6 +3,7 @@ package edu.upenn.cis350;
 import edu.upenn.cis350.entities.User;
 import edu.upenn.cis350.util.InternetHelper;
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,7 +37,17 @@ public class ProfileActivity extends Activity{
 	private EditText phoneField;
 	private RadioGroup genderField;
 	
+	private EditText providerNameField;
+	private EditText providerPhilosophyField;
+	private String providerName;
+	private String philosophy;
+	
 	private Context ownContext = this;
+	
+	
+	private Dialog dialog_poc;
+	private Button button_poc;
+	private Button button_submit_poc;
 	
 	/**
 	 * Initialize the user's profile on creation
@@ -57,6 +68,37 @@ public class ProfileActivity extends Activity{
         	addressField = (EditText)this.findViewById(R.id.profile_new_address);
         	phoneField = (EditText)this.findViewById(R.id.profile_new_phone);
         	genderField = (RadioGroup)this.findViewById(R.id.profile_new_genderGroup);
+        	
+        	button_poc=(Button)this.findViewById(R.id.profile_poc);
+        	
+        	
+        	button_poc.setOnClickListener(new OnClickListener(){
+
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					dialog_poc=new Dialog(ownContext);
+					dialog_poc.setContentView(R.layout.profile_poc);
+					
+					providerNameField = (EditText)dialog_poc.findViewById(R.id.provider_poc_name);
+					providerPhilosophyField = (EditText)dialog_poc.findViewById(R.id.provider_poc_text);
+					
+					button_submit_poc=(Button)dialog_poc.findViewById(R.id.submit_poc);
+					button_submit_poc.setOnClickListener(new OnClickListener(){
+
+						public void onClick(View v) {
+							providerName = providerNameField.getText().toString();
+							philosophy = providerPhilosophyField.getText().toString();
+							
+							//TODO should check if the provider Name exist in the list of providers
+							//if so insert philosophy into database
+							//if not toast "No such provider exists!"
+							
+							dialog_poc.hide();
+						}});
+					dialog_poc.show();
+				
+					
+				}});
         	
         	//clicking this button saves the information
         	save.setOnClickListener(new OnClickListener(){

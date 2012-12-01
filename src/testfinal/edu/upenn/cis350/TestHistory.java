@@ -20,7 +20,7 @@ public class TestHistory extends ActivityInstrumentationTestCase2<HistoryActivit
 	
 	
 	public TestHistory() {
-		super("edu.upenn.cis350", HistoryActivity.class);
+		super(HistoryActivity.class);
 	}
 	
 	public void setUp() throws Exception {

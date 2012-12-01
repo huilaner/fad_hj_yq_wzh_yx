@@ -127,20 +127,24 @@
         </RadioGroup>
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout1"
+    <Button
+        android:id="@+id/profile_poc"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+         android:layout_marginTop="10dp"
+        android:text="For Provider" />
 
-        <Button
-            android:id="@+id/profile_new_save"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="109dp"
-            android:text="Save" />
 
-    </RelativeLayout>
+
+    <Button
+        android:id="@+id/profile_new_save"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+         android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="20dp"
+        android:text="Save" />
 
 </LinearLayout>

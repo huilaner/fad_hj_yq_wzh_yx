@@ -8,7 +8,7 @@ import edu.upenn.cis350.*;
 
 public class ContactTest extends ActivityInstrumentationTestCase2<ContactActivity> {
 	public ContactTest() {
-		super("edu.upenn.cis350", ContactActivity.class);
+		super( ContactActivity.class);
 	}
 	
 	private Activity activity;
