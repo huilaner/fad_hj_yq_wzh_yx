@@ -38,8 +38,10 @@ public class ProfileActivity extends Activity{
 	private RadioGroup genderField;
 
 	private EditText providerNameField;
+	private EditText providerPWField;
 	private EditText providerPhilosophyField;
 	private String providerName;
+	private String providerPW;
 	private String philosophy;
 
 	private Context ownContext = this;
@@ -75,25 +77,56 @@ public class ProfileActivity extends Activity{
         	button_poc.setOnClickListener(new OnClickListener(){
 
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					dialog_poc=new Dialog(ownContext);
 					dialog_poc.setContentView(R.layout.profile_poc);
-
+					
 					providerNameField = (EditText)dialog_poc.findViewById(R.id.provider_poc_name);
+					providerPWField = (EditText)dialog_poc.findViewById(R.id.provider_poc_pw);
 					providerPhilosophyField = (EditText)dialog_poc.findViewById(R.id.provider_poc_text);
-
 					button_submit_poc=(Button)dialog_poc.findViewById(R.id.submit_poc);
 					button_submit_poc.setOnClickListener(new OnClickListener(){
 
 						public void onClick(View v) {
 							providerName = providerNameField.getText().toString();
-							philosophy = providerPhilosophyField.getText().toString();
-
+							providerPW = providerPWField.getText().toString();
+							philosophy = parseText(providerPhilosophyField.getText().toString());
+							
+							//get the user's id via the http request, and store it in the database
+							String uri = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/register.php?mode=provider&provider_name=" + providerName + 
+									"&password=" + providerPW + "&philosophy=" + philosophy;
+							String id = InternetHelper.httpGetRequest(uri);
+							if(id.equals("0")){
+								Toast.makeText(ownContext, "Incorrect name or password.", Toast.LENGTH_SHORT).show();
+								finish();
+							}
+							else {
+								Toast.makeText(ownContext, "Your philosophy updated.", Toast.LENGTH_SHORT).show();
+								finish();
+							}
 							//TODO should check if the provider Name exist in the list of providers
 							//if so insert philosophy into database
 							//if not toast "No such provider exists!"
 
 							dialog_poc.hide();
+						}
+
+						private String parseText(String s) {
+							// make sure the input for keyword search is correct
+							if (s.length() > 0	&& !s.matches("[A-Za-z0-9\\s\\.,'!?&&[^\\n]]+?")) {
+								// tell user the input was invalid
+								Context context = getApplicationContext();
+								Toast toast = Toast
+										.makeText(
+												context,
+												"The keyword for search should only contains"
+														+ " English characters, numbers or white space",
+												Toast.LENGTH_SHORT);
+								toast.show();
+								return null;
+							} else {
+								s = s.replace(" ", "%20");
+							}
+							return s;
 						}});
 					dialog_poc.show();
 
@@ -168,7 +201,7 @@ public class ProfileActivity extends Activity{
     		gender = "Female";
 
 		//get the user's id via the http request, and store it in the database
-		String uri = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/register.php?name=" + encoded_name + 
+		String uri = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/register.php?mode=user&name=" + encoded_name + 
 				"&address=" + encoded_address + "&gender=" + gender + "&email=" + email + "&phone=" + phone;
 		String id = InternetHelper.httpGetRequest(uri);
 		//duplicate user name insertion

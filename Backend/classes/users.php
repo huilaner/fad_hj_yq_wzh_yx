@@ -76,4 +76,11 @@ class users{
 		$row = mysql_fetch_array($result);
 		return $row['name'];
 	}
+	
+	function updatePhilosophy($provider_name, $password, $philosophy){
+	    $query = "UPDATE `providers` SET `philosophy`= '$philosophy' WHERE `name`='$provider_name' AND `password`='$password'";
+		$result = mysql_query($query);
+                echo $result;
+		return $result;
+	}
 }

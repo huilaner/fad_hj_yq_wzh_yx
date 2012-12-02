@@ -22,6 +22,18 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:maxLines="1" />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Password" />
+        
+        <EditText
+            android:id="@+id/provider_poc_pw"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1" />
 
         <TextView
             android:layout_width="wrap_content"
