@@ -13,7 +13,7 @@ public class MenuTest extends ActivityInstrumentationTestCase2<VoiceActivity> {
 	
 	
 	public MenuTest() {
-		super(VoiceActivity.class);
+		super("edu.upenn.cis350", VoiceActivity.class);
 	}
 	
 	private Activity activity;
