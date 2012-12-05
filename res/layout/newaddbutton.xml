@@ -1,8 +1,220 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
+    
+           <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Statistics on the pros and cons"
+        android:textStyle="bold|italic"
+        android:textSize = "20dp"
+        />
+    
+     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/provider_overall_proscons_table"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_below="@+id/providerpf_rate_button"
+    android:orientation="vertical"
+    android:shrinkColumns="0" 
+    android:stretchColumns="*" >
+
+
+
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="► Pros"
+            android:textStyle="bold"
+            android:textSize="15dp" />
+                <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Percentage"
+            android:textStyle="bold"
+            android:textSize="15dp" />
+
+
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:id="@+id/providerpf_overall_pro1"
+            android:drawableLeft="@drawable/bullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+        <TextView
+            android:id="@+id/providerpf_overall_pro1_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+
+    </TableRow>
+    
+    <TableRow>
+        <TextView
+            android:id="@+id/providerpf_overall_pro2"
+            android:drawableLeft="@drawable/bullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+                <TextView
+            android:id="@+id/providerpf_overall_pro2_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+
+
+    </TableRow>
+    
+    <TableRow>
+        <TextView
+            android:id="@+id/providerpf_overall_pro3"
+            android:drawableLeft="@drawable/bullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+                <TextView
+            android:id="@+id/providerpf_overall_pro3_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+    </TableRow>
+    
+        <TableRow>
+        <TextView
+            android:id="@+id/providerpf_overall_pro4"
+            android:drawableLeft="@drawable/bullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+                <TextView
+            android:id="@+id/providerpf_overall_pro4_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+    </TableRow>
+    
+            <TableRow>
+        <TextView
+            android:id="@+id/providerpf_overall_pro5"
+            android:drawableLeft="@drawable/bullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+                <TextView
+            android:id="@+id/providerpf_overall_pro5_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+    </TableRow>
+    
+    <TableRow>
+                <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="► Cons"
+            android:textStyle="bold"
+            android:textSize="15dp" />
+                
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Percentage"
+            android:textStyle="bold"
+            android:textSize="15dp" />
+     </TableRow>
+     
+    <TableRow>
+                <TextView
+            android:id="@+id/providerpf_overall_con1"
+            android:drawableLeft="@drawable/bullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+                        <TextView
+            android:id="@+id/providerpf_overall_con1_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+     </TableRow>
+     
+    <TableRow>
+                <TextView
+            android:id="@+id/providerpf_overall_con2"
+            android:drawableLeft="@drawable/bullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+                        <TextView
+            android:id="@+id/providerpf_overall_con2_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+    </TableRow>
+    
+    <TableRow>
+                <TextView
+            android:id="@+id/providerpf_overall_con3"
+            android:drawableLeft="@drawable/bullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+                        <TextView
+            android:id="@+id/providerpf_overall_con3_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+    </TableRow>
+
+        <TableRow>
+                <TextView
+            android:id="@+id/providerpf_overall_con4"
+            android:drawableLeft="@drawable/bullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+                        <TextView
+            android:id="@+id/providerpf_overall_con4_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+    </TableRow>
+    
+            <TableRow>
+                <TextView
+            android:id="@+id/providerpf_overall_con5"
+            android:drawableLeft="@drawable/bullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+                        <TextView
+            android:id="@+id/providerpf_overall_con5_percentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp" />
+    </TableRow>
+ 
+
+</TableLayout>
+    
+       <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Average on the features by stars"
+        android:textStyle="bold|italic"
+        android:textSize = "20dp"
+        />
    
 
    <TextView 
@@ -106,3 +318,4 @@
         android:numStars="5"
         android:stepSize="1.0"/>
     </LinearLayout>
+</ScrollView>

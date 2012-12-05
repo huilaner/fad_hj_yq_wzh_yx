@@ -53,6 +53,15 @@
                 android:layout_height="wrap_content"
                 android:text="(215)662-3228" 
                 android:textSize="10dp"/>
+            
+             <TextView
+                android:id="@+id/provider_philosophy_of_care"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold|italic"
+                android:text="Philosophy of Care: I do care about patient." 
+                android:textSize="12dp"/>
+             
         </LinearLayout>
         <LinearLayout
             android:id="@+id/provider_yes_no_properties"
@@ -159,9 +168,89 @@
         android:layout_height="wrap_content"
         
         android:layout_centerInParent="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_below="@+id/providerpf_detailed_rate_button"
         android:text="Rate Your Doctor!" />
+    
+    
+     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/provider_overall_proscons_table"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_below="@+id/providerpf_rate_button"
+    android:orientation="vertical"
+    android:shrinkColumns="0" 
+    android:stretchColumns="*" >
+
+
+
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="► Pros"
+            android:textSize="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="► Cons"
+            android:textSize="10dp" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:id="@+id/providerpf_overall_pro1"
+            android:drawableLeft="@drawable/bullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/providerpf_overall_con1"
+            android:drawableLeft="@drawable/bullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp" />
+    </TableRow>
+    
+    <TableRow>
+        <TextView
+            android:id="@+id/providerpf_overall_pro2"
+            android:drawableLeft="@drawable/bullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/providerpf_overall_con2"
+            android:drawableLeft="@drawable/bullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp" />
+    </TableRow>
+    
+    <TableRow>
+        <TextView
+            android:id="@+id/providerpf_overall_pro3"
+            android:drawableLeft="@drawable/bullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/providerpf_overall_con3"
+            android:drawableLeft="@drawable/bullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp" />
+    </TableRow>
+
+ 
+
+</TableLayout>
+    
+    
     
     <TextView
         android:id="@+id/providerpf_comment_header"
@@ -187,6 +276,6 @@
 	    android:layout_height="wrap_content"
 	    android:layout_above="@+id/providerpf_rate_button"
 	    android:layout_centerHorizontal="true"
-	    android:text="Average Feature Ratings" />
+	    android:text="Statistics on Features (+/-/ratings)" />
 
 </RelativeLayout>
