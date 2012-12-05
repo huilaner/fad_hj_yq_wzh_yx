@@ -19,6 +19,7 @@ public class DocSubcategoryActivity extends Activity{
 	private CheckBox doc_pediatric;
 	private CheckBox doc_dental;
 	private Button doc_submit;
+	private int countCheck = 0;
 	int[] checkBoxRecord = new int[10];
 	String[] docTypeList = new String[10];
 
@@ -87,18 +88,24 @@ public class DocSubcategoryActivity extends Activity{
 	private void setListeners() {
 		// TODO Auto-generated method stub
 		doc_submit.setOnClickListener(new OnClickListener(){
-
+			
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				ArrayList<String> typeList = new ArrayList<String>();
-				for(int i = 0; i < checkBoxRecord.length; i++) {
-					if(checkBoxRecord[i] != 0)
-						typeList.add(docTypeList[i]);
+				if(countCheck <= 0) Toast.makeText(m_context,
+						"Please at least check one of the specialties!",
+						Toast.LENGTH_LONG).show();
+				else{
+					ArrayList<String> typeList = new ArrayList<String>();
+					for(int i = 0; i < checkBoxRecord.length; i++) {
+						if(checkBoxRecord[i] != 0)
+							typeList.add(docTypeList[i]);
+					}
+					Intent intent = new Intent(m_context, SearchActivity.class);
+					intent.putStringArrayListExtra("typeList", typeList);
+					// TODO check which check box is checked by checking the checkBoxRecord, then send corresponding intents
+					startActivityForResult(intent, 0);
 				}
-				Intent intent = new Intent(m_context, SearchActivity.class);
-				intent.putStringArrayListExtra("typeList", typeList);
-				// TODO check which check box is checked by checking the checkBoxRecord, then send corresponding intents
-				startActivityForResult(intent, 0);
+
 			}
 
 		});
@@ -114,9 +121,11 @@ public class DocSubcategoryActivity extends Activity{
 			((CheckBox) view).setChecked(true);
 
 			checkBoxRecord[index-1]=checked?1:0;
+			countCheck++;
 
 		} else{
 			checkBoxRecord[index-1] = 0;
+			countCheck--;
 		}
 
 		// Check which checkbox was clicked
