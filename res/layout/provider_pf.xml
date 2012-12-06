@@ -2,29 +2,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/providerpf_wrapper"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
+    android:layout_height="fill_parent" >
 
     <!-- Provider info -->
 
-    <Button android:id="@+id/button_providerpf_map"
+    <Button
+        android:id="@+id/button_providerpf_map"
         style="@style/DashboardButton"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textColor="#FFF"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:drawableTop="@drawable/map"
         android:text="find on map"
-        android:textSize="7dp"
-		android:layout_alignParentRight="true"
-        android:drawableTop="@drawable/map" />
-    
-    
+        android:textColor="#FFF"
+        android:textSize="7dp" />
 
     <LinearLayout
         android:id="@+id/providerpf_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/button_providerpf_map"
         android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/button_providerpf_map"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -37,245 +35,251 @@
                 android:id="@+id/provider_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Abbasi, Nadeem Ahmed, MD" 
-                android:textSize="20dp"/>
+                android:text="Abbasi, Nadeem Ahmed, MD"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/provider_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3400 Spruce Street, 8 Ravdin, Philadelphia, PA" 
-                android:textSize="10dp"/>
+                android:text="3400 Spruce Street, 8 Ravdin, Philadelphia, PA"
+                android:textSize="10dp" />
 
             <TextView
                 android:id="@+id/provider_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="(215)662-3228" 
-                android:textSize="10dp"/>
-            
-             <TextView
+                android:text="(215)662-3228"
+                android:textSize="10dp" />
+
+            <TextView
                 android:id="@+id/provider_philosophy_of_care"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold|italic"
-                android:text="Philosophy of Care: I do care about patient." 
-                android:textSize="12dp"/>
-             
+                android:text="Philosophy of Care: I do care about patient."
+                android:textSize="12dp"
+                android:textStyle="bold|italic" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/provider_yes_no_properties"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:orientation="horizontal"
-            
-            >
-            
-            <Button android:id="@+id/provider_parking"
-        		style="@style/DashboardButton"
-        		android:text="parking"
-        		android:textColor="#FFFFFF"
-        		android:textSize="8dp"
-        		android:layout_marginLeft="10dp"
-        		android:drawableTop="@drawable/autos" />
-            
-            <Button android:id="@+id/provider_creditcard"
-        		style="@style/DashboardButton"
-        		android:text="credit cards"
-        		android:textColor="#FFFFFF"
-        		android:textSize="8dp"
-        		android:layout_marginLeft="10dp"
-        		android:drawableTop="@drawable/card_credit" />
-            
-            <Button android:id="@+id/provider_accepting"
-        		style="@style/DashboardButton"
-        		android:text="accepting patients"
-        		android:textColor="#FFFFFF"
-        		android:textSize="8dp"
-        		android:layout_marginLeft="10dp"
-        		android:drawableTop="@drawable/group_add" />
-            
-            <Button android:id="@+id/provider_appointments"
-        		style="@style/DashboardButton"
-        		android:text="by appointment"
-        		android:textColor="#FFFFFF"
-        		android:textSize="8dp"
-        		android:layout_marginLeft="10dp"
-        		android:drawableTop="@drawable/session_idle_time" />
-            
-             <Button android:id="@+id/provider_PCP"
-        		style="@style/DashboardButton"
-        		android:text="primary care"
-        		android:textColor="#FFFFFF"
-        		android:textSize="8dp"
-        		android:layout_marginLeft="10dp"
-        		android:drawableTop="@drawable/heart" />
-             
-              <Button android:id="@+id/provider_specialist"
-        		style="@style/DashboardButton"
-        		android:text="specialist"
-        		android:textColor="#FFFFFF"
-        		android:textSize="8dp"
-        		android:layout_marginLeft="10dp"
-        		android:drawableTop="@drawable/heart_add" />
-            
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/provider_parking"
+                style="@style/DashboardButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableTop="@drawable/autos"
+                android:text="parking"
+                android:textColor="#FFFFFF"
+                android:textSize="8dp" />
+
+            <Button
+                android:id="@+id/provider_creditcard"
+                style="@style/DashboardButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableTop="@drawable/card_credit"
+                android:text="credit cards"
+                android:textColor="#FFFFFF"
+                android:textSize="8dp" />
+
+            <Button
+                android:id="@+id/provider_accepting"
+                style="@style/DashboardButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableTop="@drawable/group_add"
+                android:text="accepting patients"
+                android:textColor="#FFFFFF"
+                android:textSize="8dp" />
+
+            <Button
+                android:id="@+id/provider_appointments"
+                style="@style/DashboardButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableTop="@drawable/session_idle_time"
+                android:text="by appointment"
+                android:textColor="#FFFFFF"
+                android:textSize="8dp" />
+
+            <Button
+                android:id="@+id/provider_PCP"
+                style="@style/DashboardButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableTop="@drawable/heart"
+                android:text="primary care"
+                android:textColor="#FFFFFF"
+                android:textSize="8dp" />
+
+            <Button
+                android:id="@+id/provider_specialist"
+                style="@style/DashboardButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableTop="@drawable/heart_add"
+                android:text="specialist"
+                android:textColor="#FFFFFF"
+                android:textSize="8dp" />
         </LinearLayout>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/providerpf_average_stars"
-        android:layout_height="30dp"
+    <LinearLayout
+        android:id="@+id/providerpf_rateLinear"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/providerpf_top"
-        
-        />
-    <TextView 
-        android:id="@+id/providerpf_average_rating_text"
-        android:layout_height="fill_parent"
-        android:layout_width="fill_parent"
-        android:text="average rating"
-        android:textSize="8dp"
-        android:layout_below="@id/providerpf_average_stars"
-        android:gravity="center_horizontal"
-        />
-    
-    <View 
-        android:id="@+id/providerpf_ruler"
-        android:layout_width="fill_parent"
-		android:layout_height="2dip"
-		android:background="#FFFFFFFF" 
-		android:layout_below="@id/providerpf_average_rating_text"/>
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:orientation="vertical"
+             >
+
+            <ImageView
+                android:id="@+id/providerpf_average_stars"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:id="@+id/providerpf_average_rating_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="average rating"
+                android:textSize="8dp"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/providerpf_all_previous_reviews_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Average Feature Ratings" />
+
+            <Button
+                android:id="@+id/providerpf_rate_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rate Your Doctor!" />
+        </LinearLayout>
+
+        <TableLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/provider_overall_proscons_table"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:shrinkColumns="0"
+            android:stretchColumns="*" >
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="► Pros"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="► Cons"
+                    android:textSize="10dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/providerpf_overall_pro1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/bullet"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:id="@+id/providerpf_overall_con1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/bullet"
+                    android:textSize="10dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/providerpf_overall_pro2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/bullet"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:id="@+id/providerpf_overall_con2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/bullet"
+                    android:textSize="10dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/providerpf_overall_pro3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/bullet"
+                    android:textSize="10dp" />
+
+                <TextView
+                    android:id="@+id/providerpf_overall_con3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/bullet"
+                    android:textSize="10dp" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/providerpf_middle"
+        android:id="@+id/providerpf_previsouViewLinear"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/providerpf_rate_button"
-        android:layout_below="@id/providerpf_ruler"
-        android:layout_gravity="center_vertical"
-        android:layout_marginTop="1dp"
-        android:layout_toLeftOf="@+id/providerpf_rate_button"
-        android:gravity="center_vertical" >
-        
-   
+        android:layout_height="fill_parent"
+        android:layout_below="@id/providerpf_rateLinear"
+        android:orientation="vertical" >
 
-        
+        <TextView
+            android:id="@+id/providerpf_comment_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="All Previous Reviews"
+            android:textSize="20dp" />
+
+        <ExpandableListView
+            android:id="@+id/providerpf_comments"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
     </LinearLayout>
-    
-    <Button
-        android:id="@+id/providerpf_rate_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        
-        android:layout_centerInParent="true"
-        android:layout_marginTop="8dp"
-        android:layout_below="@+id/providerpf_detailed_rate_button"
-        android:text="Rate Your Doctor!" />
-    
-    
-     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/provider_overall_proscons_table"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:layout_below="@+id/providerpf_rate_button"
-    android:orientation="vertical"
-    android:shrinkColumns="0" 
-    android:stretchColumns="*" >
-
-
-
-    <TableRow>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="► Pros"
-            android:textSize="10dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="► Cons"
-            android:textSize="10dp" />
-    </TableRow>
-
-    <TableRow>
-        <TextView
-            android:id="@+id/providerpf_overall_pro1"
-            android:drawableLeft="@drawable/bullet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10dp" />
-
-        <TextView
-            android:id="@+id/providerpf_overall_con1"
-            android:drawableLeft="@drawable/bullet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10dp" />
-    </TableRow>
-    
-    <TableRow>
-        <TextView
-            android:id="@+id/providerpf_overall_pro2"
-            android:drawableLeft="@drawable/bullet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10dp" />
-
-        <TextView
-            android:id="@+id/providerpf_overall_con2"
-            android:drawableLeft="@drawable/bullet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10dp" />
-    </TableRow>
-    
-    <TableRow>
-        <TextView
-            android:id="@+id/providerpf_overall_pro3"
-            android:drawableLeft="@drawable/bullet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10dp" />
-
-        <TextView
-            android:id="@+id/providerpf_overall_con3"
-            android:drawableLeft="@drawable/bullet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10dp" />
-    </TableRow>
-
- 
-
-</TableLayout>
-    
-    
-    
-    <TextView
-        android:id="@+id/providerpf_comment_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/providerpf_middle"
-        android:layout_marginTop="40dp"
-        android:layout_centerInParent="true"
-        android:text="All Previous Reviews"
-        android:textSize="20dp" />
-    
-	<ExpandableListView
-	    android:id="@+id/providerpf_comments"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-
-	    android:layout_below="@id/providerpf_comment_header"
-	    />
-
-	<Button
-	    android:id="@+id/providerpf_all_previous_reviews_button"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_above="@+id/providerpf_rate_button"
-	    android:layout_centerHorizontal="true"
-	    android:text="Statistics on Features (+/-/ratings)" />
 
 </RelativeLayout>
