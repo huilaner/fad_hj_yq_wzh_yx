@@ -18,11 +18,10 @@ import android.widget.TextView;
  */
 public class SearchResultTest extends ActivityInstrumentationTestCase2<SearchResultActivity> {
 
-	
 	public SearchResultTest() {
-		super(SearchResultActivity.class);
+		super("edu.upenn.cis350", SearchResultActivity.class);
+		// TODO Auto-generated constructor stub
 	}
-
 	private Activity activity;
 	private ScrollView scroll;
 

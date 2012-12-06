@@ -1,20 +1,16 @@
 package testfinal.edu.upenn.cis350;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.TextView;
 import edu.upenn.cis350.*;
 
-
 public class ContactTest extends ActivityInstrumentationTestCase2<ContactActivity> {
 	public ContactTest() {
-		super(ContactActivity.class);
+		super("edu.upenn.cis350", ContactActivity.class);
 	}
 	
-
-
 	private Activity activity;
 	private TextView copyright;
 	private TextView more;

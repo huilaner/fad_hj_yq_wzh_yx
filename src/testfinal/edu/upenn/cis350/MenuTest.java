@@ -1,6 +1,7 @@
 package testfinal.edu.upenn.cis350;
 
 import edu.upenn.cis350.*;
+import edu.upenn.cis350.R;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
@@ -11,9 +12,8 @@ import android.widget.TextView;
 public class MenuTest extends ActivityInstrumentationTestCase2<VoiceActivity> {
 	
 	
-
 	public MenuTest() {
-		super(VoiceActivity.class);
+		super("edu.upenn.cis350", VoiceActivity.class);
 	}
 	
 	private Activity activity;
