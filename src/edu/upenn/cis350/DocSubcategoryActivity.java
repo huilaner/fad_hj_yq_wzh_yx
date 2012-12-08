@@ -18,10 +18,11 @@ public class DocSubcategoryActivity extends Activity{
 	private CheckBox doc_cardiology;
 	private CheckBox doc_pediatric;
 	private CheckBox doc_dental;
+	private CheckBox doc_internalMedicine, doc_familyPractice, doc_obGyn, doc_mentalHealth, doc_otherSpecialist;
 	private Button doc_submit;
 	private int countCheck = 0;
-	int[] checkBoxRecord = new int[10];
-	String[] docTypeList = new String[10];
+	int[] checkBoxRecord = new int[20];
+	String[] docTypeList = new String[20];
 
 	private final Context m_context = this;
 
@@ -44,12 +45,22 @@ public class DocSubcategoryActivity extends Activity{
 		doc_cardiology = (CheckBox)this.findViewById(R.id.doc_cardiology);
 		doc_pediatric=(CheckBox)this.findViewById(R.id.doc_pediatric);
 		doc_dental=(CheckBox)this.findViewById(R.id.doc_dental);
+		doc_internalMedicine = (CheckBox)this.findViewById(R.id.doc_internal_medicine);
+		doc_familyPractice = (CheckBox)this.findViewById(R.id.doc_family_practice);
+		doc_obGyn = (CheckBox)this.findViewById(R.id.doc_ob_gyn);
+		doc_mentalHealth = (CheckBox)this.findViewById(R.id.doc_mental_health);
+		doc_otherSpecialist = (CheckBox)this.findViewById(R.id.doc_other_specialist);
 		doc_submit=(Button)this.findViewById(R.id.doc_submit);
 		docTypeList[0] = "immunology";
 		docTypeList[1] = "radiology";
 		docTypeList[2] = "cardiology";
 		docTypeList[3] = "pediatric";
 		docTypeList[4] = "dental";
+		docTypeList[5] = "internalMedicine";
+		docTypeList[6] = "familyPractice";
+		docTypeList[7] = "obGyn";
+		docTypeList[8] = "mentalHealth";
+		docTypeList[9] = "otherSpecialist";
 		doc_immunology.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				onCheckboxClicked(doc_immunology,1);
@@ -79,7 +90,36 @@ public class DocSubcategoryActivity extends Activity{
 				onCheckboxClicked(doc_dental,5);
 			}  
 		});
-
+		
+		doc_internalMedicine.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				onCheckboxClicked(doc_internalMedicine,6);
+			}  
+		});
+		
+		doc_familyPractice.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				onCheckboxClicked(doc_familyPractice,7);
+			}  
+		});
+		
+		doc_obGyn.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				onCheckboxClicked(doc_obGyn,8);
+			}  
+		});
+		
+		doc_mentalHealth.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				onCheckboxClicked(doc_mentalHealth,9);
+			}  
+		});
+		
+		doc_otherSpecialist.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				onCheckboxClicked(doc_otherSpecialist,10);
+			}  
+		});
 
 		//set the listeners for each button
 		setListeners();

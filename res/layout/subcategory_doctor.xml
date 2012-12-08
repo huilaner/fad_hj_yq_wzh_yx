@@ -33,12 +33,7 @@
         android:onClick="onCheckboxClicked"
         android:text="Ob-Gyn" />
             
-                    <CheckBox
-        android:id="@+id/doc_pediatrics"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onCheckboxClicked"
-        android:text="Pediatrics" />
+
                     
                         <CheckBox
         android:id="@+id/doc_mental_health"
