@@ -1313,6 +1313,100 @@ public class ProviderProfileActivity extends Activity {
 			case -5:
 				message = getString(R.string.cons5);
 				break;
+				
+			case 6:
+				message = getString(R.string.new_pc1);
+				break;
+			case 7:
+				message = getString(R.string.new_pc2);
+				break;
+			case 8:
+				message = getString(R.string.new_pc3);
+				break;
+			case 9:
+				message = getString(R.string.new_pc4);
+				break;
+			case 10:
+				message = getString(R.string.new_pc5);
+				break;
+			case 11:
+				message = getString(R.string.new_pc6);
+				break;
+			case 12:
+				message = getString(R.string.new_pc7);
+				break;
+			case 13:
+				message = getString(R.string.new_pc8);
+				break;
+			case 14:
+				message = getString(R.string.new_pc9);
+				break;
+			case 15:
+				message = getString(R.string.new_pc10);
+				break;
+			case 16:
+				message = getString(R.string.new_pc11);
+				break;
+			case 17:
+				message = getString(R.string.new_pc12);
+				break;
+			case 18:
+				message = getString(R.string.new_pc13);
+				break;
+			case 19:
+				message = getString(R.string.new_pc14);
+				break;
+			case 20:
+				message = getString(R.string.new_pc15);
+				break;
+				
+			
+			case -6:
+				message = getString(R.string.new_pc1);
+				break;
+			case -7:
+				message = getString(R.string.new_pc2);
+				break;
+			case -8:
+				message = getString(R.string.new_pc3);
+				break;
+			case -9:
+				message = getString(R.string.new_pc4);
+				break;
+			case -10:
+				message = getString(R.string.new_pc5);
+				break;
+			case -11:
+				message = getString(R.string.new_pc6);
+				break;
+			case -12:
+				message = getString(R.string.new_pc7);
+				break;
+			case -13:
+				message = getString(R.string.new_pc8);
+				break;
+			case -14:
+				message = getString(R.string.new_pc9);
+				break;
+			case -15:
+				message = getString(R.string.new_pc10);
+				break;
+			case -16:
+				message = getString(R.string.new_pc11);
+				break;
+			case -17:
+				message = getString(R.string.new_pc12);
+				break;
+			case -18:
+				message = getString(R.string.new_pc13);
+				break;
+			case -19:
+				message = getString(R.string.new_pc14);
+				break;
+			case -20:
+				message = getString(R.string.new_pc15);
+				break;
+				
 			default:
 				message = "";
 			}
