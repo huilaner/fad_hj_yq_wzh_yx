@@ -15,13 +15,17 @@ import android.widget.TextView;
  */
 public class TestHistory extends ActivityInstrumentationTestCase2<HistoryActivity> {
 	
+
+	public TestHistory() {
+		super(HistoryActivity.class);
+		// TODO Auto-generated constructor stub
+	}
+
 	private Activity activity;
 	private ScrollView sv;
 	
 	
-	public TestHistory() {
-		super("edu.upenn.cis350", HistoryActivity.class);
-	}
+	
 	
 	public void setUp() throws Exception {
 		super.setUp();

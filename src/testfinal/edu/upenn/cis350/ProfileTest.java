@@ -8,8 +8,9 @@ import edu.upenn.cis350.*;
 
 
 public class ProfileTest extends ActivityInstrumentationTestCase2<ProfileActivity> {
+
 	public ProfileTest() {
-		super("edu.upenn.cis350", ProfileActivity.class);
+		super(ProfileActivity.class);
 	}
 	private Activity activity;
 

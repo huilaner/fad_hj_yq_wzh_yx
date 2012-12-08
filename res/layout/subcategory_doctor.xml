@@ -11,6 +11,48 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    
+        <CheckBox
+        android:id="@+id/doc_internal_medicine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="Internal Medicine" />
+        
+            <CheckBox
+        android:id="@+id/doc_family_practice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="Family Practice" />
+            
+                <CheckBox
+        android:id="@+id/doc_ob_gyn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="Ob-Gyn" />
+            
+                    <CheckBox
+        android:id="@+id/doc_pediatrics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="Pediatrics" />
+                    
+                        <CheckBox
+        android:id="@+id/doc_mental_health"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="Mental Health" />
+                        
+                            <CheckBox
+        android:id="@+id/doc_other_specialist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="Other Specialist" />
    
     <CheckBox
         android:id="@+id/doc_immunology"

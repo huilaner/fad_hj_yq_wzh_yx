@@ -174,7 +174,7 @@
                 android:id="@+id/providerpf_all_previous_reviews_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Average Feature Ratings" />
+                android:text="Statistics on Features" />
 
             <Button
                 android:id="@+id/providerpf_rate_button"

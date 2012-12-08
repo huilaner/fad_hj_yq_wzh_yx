@@ -16,6 +16,111 @@
         android:layout_height="30dp"
         android:gravity="center"
         android:text="@string/cons" /> -->
+        
+            <CheckBox
+        android:id="@+id/cons_checkbox_new1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/new_pc1" />
+        
+                <CheckBox
+        android:id="@+id/cons_checkbox_new2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/new_pc2" />
+                
+                        <CheckBox
+        android:id="@+id/cons_checkbox_new3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/new_pc3" />
+                        
+                                <CheckBox
+        android:id="@+id/cons_checkbox_new4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/new_pc4" />
+   
+                                        <CheckBox
+        android:id="@+id/cons_checkbox_new5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/new_pc5" />
+                                        
+        <CheckBox
+        android:id="@+id/cons_checkbox_new6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/new_pc6" />
+        
+        <CheckBox
+        android:id="@+id/cons_checkbox_new7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/new_pc7" />
+        
+                                        <CheckBox
+        android:id="@+id/cons_checkbox_new8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/new_pc8" />
+        
+        <CheckBox
+        android:id="@+id/cons_checkbox_new9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/new_pc9" />
+        
+        <CheckBox
+        android:id="@+id/cons_checkbox_new10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/new_pc11" />
+        
+                                        <CheckBox
+        android:id="@+id/cons_checkbox_new11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/new_pc11" />
+                              
+                                        <CheckBox
+        android:id="@+id/cons_checkbox_new12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/new_pc12" />
+                                       
+                                       <CheckBox
+        android:id="@+id/cons_checkbox_new13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/new_pc13" />
+                                       
+                                        <CheckBox
+        android:id="@+id/cons_checkbox_new14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/new_pc14" />
+                                        
+                                        <CheckBox
+        android:id="@+id/cons_checkbox_new15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
+        android:text="@string/new_pc15" />
 
     <CheckBox
         android:id="@+id/cons_checkbox1"

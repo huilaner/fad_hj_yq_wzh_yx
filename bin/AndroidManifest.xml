@@ -62,7 +62,7 @@
         
     </application>
     <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
-    <instrumentation android:name="android.test.InstrumentationTestRunner"
+     <instrumentation android:name="android.test.InstrumentationTestRunner"
         android:targetPackage="edu.upenn.cis350"
         android:label="tests"/>
 </manifest>

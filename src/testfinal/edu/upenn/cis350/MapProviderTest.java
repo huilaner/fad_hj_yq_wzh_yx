@@ -19,10 +19,10 @@ public class MapProviderTest extends ActivityInstrumentationTestCase2<MapProvide
 	
 
 
-	public MapProviderTest(String name) {
-		super("edu.upenn.cis350", MapProviderActivity.class);
-	}
 	
+	public MapProviderTest() {
+		super(MapProviderActivity.class);
+	}
 	private Activity activity;
 	private MapView mapview;
 

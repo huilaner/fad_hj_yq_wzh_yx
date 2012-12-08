@@ -28,7 +28,26 @@
     <string name="cons3">&quot;hard for parking&quot;</string>
     <string name="cons4">&quot;cost not reasonable&quot;</string>
     <string name="cons5">&quot;hard to make appointment&quot;</string>
-            
+    
+    <string name="new_pc1">&quot;adequate parking&quot;</string>
+    <string name="new_pc2">&quot;availability of appointments&quot;</string>
+    <string name="new_pc3">&quot;cleanliness/attractiveness of office&quot;</string>
+    <string name="new_pc4">&quot;communication/patient education&quot;</string>
+    <string name="new_pc5">&quot;continuity of care&quot;</string>
+    
+    <string name="new_pc6">&quot;costs/billling&quot;</string>
+    <string name="new_pc7">&quot;empathy of doctor&quot;</string>
+    <string name="new_pc8">&quot;helpfulness of staff&quot;</string>
+    <string name="new_pc9">&quot;knowledge/clinical skills of doctor&quot;</string>
+    <string name="new_pc10">&quot;office location&quot;</string>
+    
+    <string name="new_pc11">&quot;patient access to health records&quot;</string>
+    <string name="new_pc12">&quot;punctuality/wating time&quot;</string>
+    <string name="new_pc13">&quot;quality of follow up&quot;</string>
+    <string name="new_pc14">&quot;shared decision making&quot;</string>
+    <string name="new_pc15">&quot;time with doctor&quot;</string>
+       
+    
     <string name="provider_prompt">Select your insurance provider</string>
     <string-array name="provider_array">
         <item>Aetna</item>
