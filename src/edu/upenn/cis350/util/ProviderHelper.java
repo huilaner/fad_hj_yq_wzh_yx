@@ -38,7 +38,7 @@ public class ProviderHelper {
 	 */
 	public static ArrayList<Provider> getSatisfiedProvider(String provider_name, String has_parking, 
 			String accepting_new, String handicap, String appointment_only, String credit_card, 
-			ArrayList<String> typeList, String distance, Double m_latitude, Double m_longitude) {
+			ArrayList<String> typeList, String zip, String distance, Double m_latitude, Double m_longitude) {
 		
 		ArrayList<Provider> allproviders = new ArrayList<Provider>();
 		StringBuffer urlBuff = new StringBuffer();
@@ -62,6 +62,7 @@ public class ProviderHelper {
 		}
 		types = types.substring(0, types.length() - 3);
 		urlBuff.append("&type=" + types);
+		if (zip.length()>0) urlBuff.append("&zip="+zip);
 		if (distance.length()>0){
 			urlBuff.append("&distance="+distance+"&long="+m_longitude+"&lat="+m_latitude);
 		}

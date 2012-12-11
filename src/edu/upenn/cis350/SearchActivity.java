@@ -31,6 +31,7 @@ public class SearchActivity extends Activity {
 	Spinner providertype_spinner;
 	Spinner appointmentonly_spinner;
 	EditText provider_name;
+	EditText zip;
 	EditText distance;
 
 	/**
@@ -46,6 +47,7 @@ public class SearchActivity extends Activity {
 		// Initialize the EditText for search by distance and search by provider
 		// name
 		this.provider_name = (EditText) findViewById(R.id.search_provider_name);
+		this.zip = (EditText) findViewById(R.id.search_provider_zipCode);
 		this.distance = (EditText) findViewById(R.id.search_distance);
 
 		// create button listener that fetch all the info.
@@ -126,8 +128,16 @@ public class SearchActivity extends Activity {
 				toast.show();
 				return;
 			}else{
-
 				providerNameStr = providerNameStr.replace(" ", "%20");
+			}
+			String zipStr =  getEditTextEntry(zip);
+			String zipCode = "\\d{5}";
+			if (zipStr.length() > 0 && !zipStr.matches(zipCode)){
+				//tell user the input was invalid
+				Context context = getApplicationContext();
+				Toast toast = Toast.makeText(context, "The zip code format is not match the USA zip code format.",Toast.LENGTH_SHORT);
+				toast.show();
+				return;
 			}
 
 			//get the provider type from CategoryActivity
@@ -144,6 +154,7 @@ public class SearchActivity extends Activity {
 			i.putExtra("appointment_only", getSpinnerSelection(appointmentonly_spinner));
 			i.putExtra("credit_card", getSpinnerSelection(creditcard_spinner));
 			i.putStringArrayListExtra("typeList", typeList);
+			i.putExtra("zip", getEditTextEntry(zip));
 			i.putExtra("distance", getEditTextEntry(distance));
 
 			//Add more information to the intent

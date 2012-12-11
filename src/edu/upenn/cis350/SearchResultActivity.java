@@ -56,6 +56,7 @@ public class SearchResultActivity extends Activity{
 			String appointment_only = extras.getString("appointment_only");
 			String credit_card = extras.getString("credit_card");
 			ArrayList<String> typeList = extras.getStringArrayList("typeList");
+			String zip = extras.getString("zip");
 			String distance = extras.getString("distance");
 			
 			//Only load the current location when the search criteria includes distance
@@ -69,7 +70,7 @@ public class SearchResultActivity extends Activity{
 			
 			//Obtain a list of satisfied provider by querying the backend database
 			this.satisfiedproviders = ProviderHelper.getSatisfiedProvider(provider_name, has_parking, 
-	        		accepting_new, handicap, appointment_only, credit_card, typeList, distance, this.m_latitude, this.m_longitude); 
+	        		accepting_new, handicap, appointment_only, credit_card, typeList, zip, distance, this.m_latitude, this.m_longitude); 
         
 			if (this.satisfiedproviders.size()==0){
 				Context context = getApplicationContext();
