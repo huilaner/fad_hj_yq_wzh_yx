@@ -929,7 +929,7 @@ public class ProviderProfileActivity extends Activity {
 					private int[] insertConToDB() {
 						// TODO Auto-generated method stub
 						int[] cons=new int[3];
-						for(int i=20,j=0;i<20;i++){
+						for(int i=20,j=0;i<40;i++){
 							if(checkBoxRecord[i]==1){
 								cons[j]=19-i;j++;
 							}
@@ -1362,49 +1362,49 @@ public class ProviderProfileActivity extends Activity {
 				
 			
 			case -6:
-				message = getString(R.string.new_pc1);
+				message = getString(R.string.new_pc1_con);
 				break;
 			case -7:
-				message = getString(R.string.new_pc2);
+				message = getString(R.string.new_pc2_con);
 				break;
 			case -8:
-				message = getString(R.string.new_pc3);
+				message = getString(R.string.new_pc3_con);
 				break;
 			case -9:
-				message = getString(R.string.new_pc4);
+				message = getString(R.string.new_pc4_con);
 				break;
 			case -10:
-				message = getString(R.string.new_pc5);
+				message = getString(R.string.new_pc5_con);
 				break;
 			case -11:
-				message = getString(R.string.new_pc6);
+				message = getString(R.string.new_pc6_con);
 				break;
 			case -12:
-				message = getString(R.string.new_pc7);
+				message = getString(R.string.new_pc7_con);
 				break;
 			case -13:
-				message = getString(R.string.new_pc8);
+				message = getString(R.string.new_pc8_con);
 				break;
 			case -14:
-				message = getString(R.string.new_pc9);
+				message = getString(R.string.new_pc9_con);
 				break;
 			case -15:
-				message = getString(R.string.new_pc10);
+				message = getString(R.string.new_pc10_con);
 				break;
 			case -16:
-				message = getString(R.string.new_pc11);
+				message = getString(R.string.new_pc11_con);
 				break;
 			case -17:
-				message = getString(R.string.new_pc12);
+				message = getString(R.string.new_pc12_con);
 				break;
 			case -18:
-				message = getString(R.string.new_pc13);
+				message = getString(R.string.new_pc13_con);
 				break;
 			case -19:
-				message = getString(R.string.new_pc14);
+				message = getString(R.string.new_pc14_con);
 				break;
 			case -20:
-				message = getString(R.string.new_pc15);
+				message = getString(R.string.new_pc15_con);
 				break;
 				
 			default:
