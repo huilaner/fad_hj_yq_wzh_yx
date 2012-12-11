@@ -1,40 +1,62 @@
-//package testfinal.edu.upenn.cis350;
-//
-//import java.util.ArrayList;
-//
-//import android.app.Activity;
-//import android.test.ActivityInstrumentationTestCase2;
-//import android.widget.*;
-//import edu.upenn.cis350.*;
-//import edu.upenn.cis350.entities.Provider;
-//import edu.upenn.cis350.entities.Rating;
-//
-//
-//public class SearchTest extends ActivityInstrumentationTestCase2<SearchActivity> {
-//	public SearchTest() {
-//		super("edu.upenn.cis350", SearchActivity.class);
-//	}
-//	
-//	private Activity activity;
-//	private TextView title;
-//	private EditText input;
-//	private Button search;
-//	private Button filter;
-//	private ArrayList<Provider> _providers = new ArrayList<Provider>();
-//	
-//	public void setUp() throws Exception {
-//		super.setUp();
-//		activity= getActivity();
-//		search= (Button)activity.findViewById(R.id.search_button);
-//		input = (EditText)activity.findViewById(R.id.search_distance);
-//	}
-//	
-//	public void testSearchButton() {
-//		assertEquals(search.getText(), "Search");
-//	}
-//	public void testTitle() {
-//		assertEquals(title.getText(), "Search for Provider");
-//	}
+package testfinal.edu.upenn.cis350;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.test.ActivityInstrumentationTestCase2;
+import android.widget.*;
+import edu.upenn.cis350.*;
+import edu.upenn.cis350.entities.Provider;
+import edu.upenn.cis350.entities.Rating;
+
+
+public class SearchTest extends ActivityInstrumentationTestCase2<SearchActivity> {
+	public SearchTest() {
+		super("edu.upenn.cis350", SearchActivity.class);
+	}
+	
+	private Activity activity;
+	private TextView title;
+	private EditText input;
+	private Button search;
+	private Button filter;
+	Spinner parking_spinner;
+	Spinner newPatient_spinner;
+	Spinner handicap_spinner;
+	Spinner creditcard_spinner;
+	Spinner appointmentonly_spinner;
+	EditText provider_name;
+	EditText distance;
+	private ArrayList<Provider> _providers = new ArrayList<Provider>();
+	
+	public void setUp() throws Exception {
+		super.setUp();
+		activity= getActivity();
+		search= (Button)activity.findViewById(R.id.search_button);
+		input = (EditText)activity.findViewById(R.id.search_distance);
+		parking_spinner = (Spinner)activity.findViewById(R.id.parking_spinner);
+		newPatient_spinner = (Spinner)activity.findViewById(R.id.newpatient_spinner);
+		handicap_spinner = (Spinner)activity.findViewById(R.id.handicap_spinner);
+		creditcard_spinner = (Spinner)activity.findViewById(R.id.creditcard_spinner);
+		appointmentonly_spinner = (Spinner)activity.findViewById(R.id.appointmentonly_spinner);
+	}
+	
+	public void testSearchButton() {
+		assertEquals(search.getText(), "Find the provider!");
+	}
+	
+	public void testSpinners(){
+		assertEquals(parking_spinner.getCount(),2);
+		
+		assertEquals(newPatient_spinner.getCount(),2);
+		
+		assertEquals(handicap_spinner.getCount(),2);
+		
+		assertEquals(creditcard_spinner.getCount(),2);
+		
+		assertEquals(appointmentonly_spinner.getCount(),2);
+	}
+
 //	public Provider generateProvider(String name, double latitude,
 //			double longitude) {
 //		Rating first = new Rating(
@@ -85,4 +107,4 @@
 //				-75.192789));
 //		_providers.add(generateProvider("Allie Lunday", 39.950481, -75.188687));
 //	}
-//}
+}
