@@ -929,7 +929,7 @@ public class ProviderProfileActivity extends Activity {
 					private int[] insertConToDB() {
 						// TODO Auto-generated method stub
 						int[] cons=new int[3];
-						for(int i=20,j=0;i<20;i++){
+						for(int i=20,j=0;i<40;i++){
 							if(checkBoxRecord[i]==1){
 								cons[j]=19-i;j++;
 							}
