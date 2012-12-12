@@ -14,6 +14,7 @@ $appointments = $_GET['appointment_only'];
 $creditCard = $_GET['credit_card'];
 
 //location
+$zip = $_GET['zip'];
 $lat = $_GET['lat'];
 $long = $_GET['long'];
 $distance = $_GET['distance'];
@@ -27,5 +28,5 @@ if($pid){
 	$sql->getProviderInfo($pid);
 } else {
 	//do a general search
-	$sql ->doSearch($name, $hasParking, $acceptingNew, $type, $handicap, $appointments, $creditCard, $lat, $long, $distance);
+	$sql ->doSearch($name, $hasParking, $acceptingNew, $type, $handicap, $appointments, $creditCard, $zip, $lat, $long, $distance);
 }

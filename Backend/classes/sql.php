@@ -14,7 +14,7 @@ class sql{
 	
 	//searching method
 	//very long, but it's because of the dynamic query
-	function doSearch($name, $hasParking, $acceptingNew, $type, $handicap, $appointments, $creditCard, $lat, $long, $distance){
+	function doSearch($name, $hasParking, $acceptingNew, $type, $handicap, $appointments, $creditCard, $zip, $lat, $long, $distance){
 		
 		//START CREATING QUERY
 		$query = "SELECT * FROM `providers`";
@@ -44,11 +44,13 @@ class sql{
 			} else {
 				$query = $query." AND ";
 			}
-			$types = explode(" ", $type);  
+			$types = explode(" ", $type); 
+                        $query = $query."("; 
 			foreach ($types as &$value) {
                             $query = $query."type = '$value' OR ";
                         }
-                        $query = substr($query, 0, -4);	
+                        $query = substr($query, 0, -4);
+                        $query = $query.")";	
 		}
 		if(!empty($handicap)){
 			if($flag == 1){
@@ -76,6 +78,15 @@ class sql{
 				$query = $query." AND ";
 			}
 			$query = $query."credit_cards = '$creditCard' ";
+		}
+		if(!empty($zip)){
+			if($flag == 1){
+				$flag = 2;
+				$query = $query." WHERE ";
+			} else {
+				$query = $query." AND ";
+			}
+			$query = $query."zip = $zip ";
 		}
 		//FINISH CREATING QUERY
 		
