@@ -559,7 +559,6 @@ public class ProviderProfileActivity extends Activity {
 						// case R.id.pros_checkbox2:
 						// // if (checked) countCheck++;
 						// break;
-						// // TODO: Veggie sandwich
 						// }
 					}
 
@@ -832,7 +831,7 @@ public class ProviderProfileActivity extends Activity {
 						// case R.id.pros_checkbox2:
 						// // if (checked) countCheck++;
 						// break;
-						// // TODO: Veggie sandwich
+						// 
 						// }
 					}
 				});
@@ -927,7 +926,6 @@ public class ProviderProfileActivity extends Activity {
 					}
 
 					private int[] insertConToDB() {
-						// TODO Auto-generated method stub
 						int[] cons=new int[3];
 						for(int i=20,j=0;i<40;i++){
 							if(checkBoxRecord[i]==1){
@@ -1015,7 +1013,7 @@ public class ProviderProfileActivity extends Activity {
 				JSONObject current = reviews.getJSONObject(i);
 				long user_id = Long.parseLong(current.getString("uid"));
 				long provider_id = Long.parseLong(current.getString("pid"));
-				String user_name = getUserNameByUserId(user_id);
+				String user_name = current.getString("name");
 				String time = current.getString("time");
 				String review_summary = current.getString("review_summary");
 				String review = current.getString("review");
@@ -1072,7 +1070,6 @@ public class ProviderProfileActivity extends Activity {
 		try {
 			lastTime = sdf.parse(d);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
 		if (System.currentTimeMillis() - lastTime.getTime() < SIX_MONTH) {
@@ -1088,25 +1085,6 @@ public class ProviderProfileActivity extends Activity {
 	 * @param uid
 	 * @return
 	 */
-	private String getUserNameByUserId(long uid) {
-		// make the HttpRequest
-		String temp_base = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/history.php?uid=";
-		String uri = temp_base + uid;
-		String usersJSON = InternetHelper.httpGetRequest(uri);
-		String user_name = "";
-		// parse the JSON and populate m_ratings from JSON for m_provider
-		try {
-			JSONObject json = new JSONObject(usersJSON);
-			JSONArray reviews = json.getJSONArray("reviews");
-			JSONObject current = reviews.getJSONObject(0);
-			user_name = current.getString("name");
-		} catch (Exception e) {
-			// for logging
-			System.out.println("Users error");
-			e.printStackTrace();
-		}
-		return user_name;
-	}
 
 	private void setRatingImage() {
 		Integer avg = (int) m_provider.getAverageRating();
