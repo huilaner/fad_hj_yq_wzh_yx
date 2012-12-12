@@ -195,13 +195,15 @@
             <TableRow>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1" 
                     android:layout_height="wrap_content"
                     android:text="► Pros"
                     android:textSize="10dp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1" 
                     android:layout_height="wrap_content"
                     android:text="► Cons"
                     android:textSize="10dp" />
@@ -211,14 +213,16 @@
 
                 <TextView
                     android:id="@+id/providerpf_overall_pro1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1" 
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/bullet"
                     android:textSize="10dp" />
 
                 <TextView
                     android:id="@+id/providerpf_overall_con1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1" 
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/bullet"
                     android:textSize="10dp" />
@@ -228,14 +232,16 @@
 
                 <TextView
                     android:id="@+id/providerpf_overall_pro2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1" 
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/bullet"
                     android:textSize="10dp" />
 
                 <TextView
                     android:id="@+id/providerpf_overall_con2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1" 
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/bullet"
                     android:textSize="10dp" />
@@ -245,14 +251,16 @@
 
                 <TextView
                     android:id="@+id/providerpf_overall_pro3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1" 
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/bullet"
                     android:textSize="10dp" />
 
                 <TextView
                     android:id="@+id/providerpf_overall_con3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1" 
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/bullet"
                     android:textSize="10dp" />
