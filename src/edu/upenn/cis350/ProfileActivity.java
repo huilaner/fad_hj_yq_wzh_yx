@@ -72,66 +72,7 @@ public class ProfileActivity extends Activity{
         	genderField = (RadioGroup)this.findViewById(R.id.profile_new_genderGroup);
         	
         	button_poc=(Button)this.findViewById(R.id.profile_poc);
-        	
-        	
-        	button_poc.setOnClickListener(new OnClickListener(){
-
-				public void onClick(View v) {
-					dialog_poc=new Dialog(ownContext);
-					dialog_poc.setContentView(R.layout.profile_poc);
-					
-					providerNameField = (EditText)dialog_poc.findViewById(R.id.provider_poc_name);
-					providerPWField = (EditText)dialog_poc.findViewById(R.id.provider_poc_pw);
-					providerPhilosophyField = (EditText)dialog_poc.findViewById(R.id.provider_poc_text);
-					button_submit_poc=(Button)dialog_poc.findViewById(R.id.submit_poc);
-					button_submit_poc.setOnClickListener(new OnClickListener(){
-
-						public void onClick(View v) {
-							providerName = providerNameField.getText().toString();
-							providerPW = providerPWField.getText().toString();
-							philosophy = parseText(providerPhilosophyField.getText().toString());
-							
-							//get the user's id via the http request, and store it in the database
-							String uri = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/register.php?mode=provider&provider_name=" + providerName + 
-									"&password=" + providerPW + "&philosophy=" + philosophy;
-							String id = InternetHelper.httpGetRequest(uri);
-							if(id.equals("0")){
-								Toast.makeText(ownContext, "Incorrect name or password.", Toast.LENGTH_SHORT).show();
-								finish();
-							}
-							else {
-								Toast.makeText(ownContext, "Your philosophy updated.", Toast.LENGTH_SHORT).show();
-								finish();
-							}
-							//TODO should check if the provider Name exist in the list of providers
-							//if so insert philosophy into database
-							//if not toast "No such provider exists!"
-
-							dialog_poc.hide();
-						}
-
-						private String parseText(String s) {
-							// make sure the input for keyword search is correct
-							if (s.length() > 0	&& !s.matches("[A-Za-z0-9\\s\\.,'!?&&[^\\n]]+?")) {
-								// tell user the input was invalid
-								Context context = getApplicationContext();
-								Toast toast = Toast
-										.makeText(
-												context,
-												"The keyword for search should only contains"
-														+ " English characters, numbers or white space",
-												Toast.LENGTH_SHORT);
-								toast.show();
-								return null;
-							} else {
-								s = s.replace(" ", "%20");
-							}
-							return s;
-						}});
-					dialog_poc.show();
-
-
-				}});
+        	pocBtnListener();
         	
         	//clicking this button saves the information
         	save.setOnClickListener(new OnClickListener(){
@@ -144,6 +85,62 @@ public class ProfileActivity extends Activity{
         	loadProfile();
         }
     }
+
+	public void pocBtnListener() {
+		button_poc.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) {
+				dialog_poc=new Dialog(ownContext);
+				dialog_poc.setContentView(R.layout.profile_poc);
+				
+				providerNameField = (EditText)dialog_poc.findViewById(R.id.provider_poc_name);
+				providerPWField = (EditText)dialog_poc.findViewById(R.id.provider_poc_pw);
+				providerPhilosophyField = (EditText)dialog_poc.findViewById(R.id.provider_poc_text);
+				button_submit_poc=(Button)dialog_poc.findViewById(R.id.submit_poc);
+				button_submit_poc.setOnClickListener(new OnClickListener(){
+
+					public void onClick(View v) {
+						providerName = providerNameField.getText().toString();
+						providerPW = providerPWField.getText().toString();
+						philosophy = parseText(providerPhilosophyField.getText().toString());
+						
+						//get the user's id via the http request, and store it in the database
+						String uri = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/register.php?mode=provider&provider_name=" + providerName + 
+								"&password=" + providerPW + "&philosophy=" + philosophy;
+						String id = InternetHelper.httpGetRequest(uri);
+						if(id.equals("0")){
+							Toast.makeText(ownContext, "Incorrect name or password.", Toast.LENGTH_SHORT).show();
+							finish();
+						}
+						else {
+							Toast.makeText(ownContext, "Your philosophy updated.", Toast.LENGTH_SHORT).show();
+							finish();
+						}
+						dialog_poc.hide();
+					}
+
+					private String parseText(String s) {
+						// make sure the input for keyword search is correct
+						if (s.length() > 0	&& !s.matches("[A-Za-z0-9\\s\\.,'!?&&[^\\n]]+?")) {
+							// tell user the input was invalid
+							Context context = getApplicationContext();
+							Toast toast = Toast
+									.makeText(
+											context,
+											"The keyword for search should only contains"
+													+ " English characters, numbers or white space",
+											Toast.LENGTH_SHORT);
+							toast.show();
+							return null;
+						} else {
+							s = s.replace(" ", "%20");
+						}
+						return s;
+					}});
+				dialog_poc.show();
+
+
+			}});
+	}
 
 	@Override
 	public void onResume(){
@@ -253,6 +250,9 @@ public class ProfileActivity extends Activity{
     	
     	TextView gender = (TextView)this.findViewById(R.id.profile_existing_gender);
     	gender.setText(_userToLoad.getGender());
+    	
+    	button_poc=(Button)this.findViewById(R.id.profile_poc);
+    	pocBtnListener();
 	}
     
 }

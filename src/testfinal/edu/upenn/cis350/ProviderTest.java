@@ -119,66 +119,66 @@ public class ProviderTest extends ActivityInstrumentationTestCase2<ProviderProfi
 	}
 	
 	//tests to make sure everything displays correctly
-//	public void testButtonMap() {
-//		assertNotNull(buttonmap);
-//	}
-//	public void testName() {
-//		assertEquals("testProvider", name.getText());
-//	}
-//	public void testAddress() {
-//		assertEquals("3400 Spruce Street, Philadelphia, PA  19104", address.getText());
-//	}
-//	public void testPhone() {
-//		assertEquals("(215)662-3228", phone.getText());
-//	}
-//	public void testPhilosophy() {
-//		assertNotNull(philosophy);
-//	}
-//	public void testParking() {
-//		assertNotNull(parking);
-//		assertEquals("parking", parking.getText());
-//	}
-//	public void testCreditcard() {
-//		assertNotNull(creditcard);
-//		assertEquals("credit cards", creditcard.getText());
-//	}
-//	public void testAccepting() {
-//		assertNotNull(accepting);
-//		assertEquals("accepting patients", accepting.getText());
-//	}
-//	public void testAppointment() {
-//		assertNotNull(appointment);
-//		assertEquals("by appointment", appointment.getText());
-//	}
-//	public void testPharmacy() {
-//		assertNotNull(pharmacy);
-//		assertEquals("pharmacy", pharmacy.getText());
-//	}
-//	public void testRating() {
-//		assertEquals("3.0", rating.getText());
-//	}
-//	public void testStatistics() {
-//		assertNotNull(statistics);
-//		assertEquals("Statistics on Features", statistics.getText());
-//	}
-//	public void testRate() {
-//		assertNotNull(rate);
-//		assertEquals("Rate Your Doctor!", rate.getText());
-//	}
-//	public void testOverallProsCons() {
-//		assertNotNull(overallProsConsTable);
-//		assertNotNull(overallPros1);
-//		assertNotNull(overallPros2);
-//		assertNotNull(overallPros3);
-//		assertNotNull(overallCons1);
-//		assertNotNull(overallCons2);
-//		assertNotNull(overallCons3);
-//		//TODO	need to test the content of statistic pros and cons after the implementation
-//	}
-	
-	public void testRatings() {
-		assertEquals("", reviewSummary.getText());
+	public void testButtonMap() {
+		assertNotNull(buttonmap);
 	}
+	public void testName() {
+		assertEquals("testProvider", name.getText());
+	}
+	public void testAddress() {
+		assertEquals("3400 Spruce Street, Philadelphia, PA  19104", address.getText());
+	}
+	public void testPhone() {
+		assertEquals("(215)662-3228", phone.getText());
+	}
+	public void testPhilosophy() {
+		assertNotNull(philosophy);
+	}
+	public void testParking() {
+		assertNotNull(parking);
+		assertEquals("parking", parking.getText());
+	}
+	public void testCreditcard() {
+		assertNotNull(creditcard);
+		assertEquals("credit cards", creditcard.getText());
+	}
+	public void testAccepting() {
+		assertNotNull(accepting);
+		assertEquals("accepting patients", accepting.getText());
+	}
+	public void testAppointment() {
+		assertNotNull(appointment);
+		assertEquals("by appointment", appointment.getText());
+	}
+	public void testPharmacy() {
+		assertNotNull(pharmacy);
+		assertEquals("pharmacy", pharmacy.getText());
+	}
+	public void testRating() {
+		assertEquals("3.0", rating.getText());
+	}
+	public void testStatistics() {
+		assertNotNull(statistics);
+		assertEquals("Statistics on Features", statistics.getText());
+	}
+	public void testRate() {
+		assertNotNull(rate);
+		assertEquals("Rate Your Doctor!", rate.getText());
+	}
+	public void testOverallProsCons() {
+		assertNotNull(overallProsConsTable);
+		assertNotNull(overallPros1);
+		assertNotNull(overallPros2);
+		assertNotNull(overallPros3);
+		assertNotNull(overallCons1);
+		assertNotNull(overallCons2);
+		assertNotNull(overallCons3);
+		//TODO	need to test the content of statistic pros and cons after the implementation
+	}
+	
+//	public void testRatings() {
+//		assertEquals("", reviewSummary.getText());
+//	}
 	
 
 }
