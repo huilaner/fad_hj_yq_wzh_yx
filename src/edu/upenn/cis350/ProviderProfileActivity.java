@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import edu.upenn.cis350.entities.Provider;
 import edu.upenn.cis350.entities.Rating;
 import edu.upenn.cis350.util.InternetHelper;
+import edu.upenn.cis350.util.ProviderHelper;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -1355,6 +1356,8 @@ public class ProviderProfileActivity extends Activity {
 				m_ratings.add(currentRating);
 				m_adapter.notifyDataSetChanged();
 			}
+			//request to get the updated provider
+			m_provider = ProviderHelper.getSatisfiedProviderByPID(m_provider.getID());
 			Double averageRating = m_provider.getAverageRating();
 			m_provider_rating.setText(averageRating.toString());
 

@@ -3,7 +3,10 @@ package edu.upenn.cis350.util;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.widget.TextView;
 
 import edu.upenn.cis350.entities.Provider;
 
@@ -164,6 +167,29 @@ public class ProviderHelper {
 		}
 		
 		return allproviders;
+	}
+
+
+	public static Provider getSatisfiedProviderByPID(long pid) {
+		Provider provider = null;
+		StringBuffer urlBuff = new StringBuffer();
+		urlBuff.append(ProviderHelper.DATABASE_SITE);
+		urlBuff.append("?pid=" + pid);
+		//Send the request
+		String jsonString = InternetHelper.httpGetRequest(urlBuff.toString());
+		//Parse the json string
+		try{
+			JSONObject jsonobj = new JSONObject(jsonString);
+			JSONObject providerJsonobj = jsonobj.getJSONObject("provider");
+			provider = ProviderHelper.createProviderFromJson(providerJsonobj);
+		} catch (Exception e){
+			System.out.println("Error parsing the json string");
+		}
+
+		System.out.println("url = "+urlBuff.toString());
+		System.out.println("urljson = " + jsonString);
+		
+		return provider;
 	}
 	
 }
