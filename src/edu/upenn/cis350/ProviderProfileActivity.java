@@ -186,13 +186,19 @@ public class ProviderProfileActivity extends Activity {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onResume() {
 		super.onResume();
 		// get existing Intent data (the ID of provider to be looked at), and
 		// initialize a list of ratings to be populated for the provider.
 		m_provider = (Provider) getIntent().getSerializableExtra("providers");
-		m_ratings = new ArrayList<Rating>();
+		//for test
+		if(m_provider.getName().equals("testProvider")) {
+			m_ratings = (ArrayList<Rating>) getIntent().getSerializableExtra("ratings");
+		}
+		else
+			m_ratings = new ArrayList<Rating>();
 
 		// populate ratings, for RatingAdapter
 		populateRatings();
@@ -288,9 +294,419 @@ public class ProviderProfileActivity extends Activity {
 				// //add for pros and cons
 				m_button_pros = (Button) dialog.findViewById(R.id.button_pros);
 				m_button_cons = (Button) dialog.findViewById(R.id.button_cons);
-
 				// add for pros and cons
 				// pros checkbox pops up
+				prosBtnListener();
+				// cons checkbox pops up
+				consBtnListener();
+
+				reviewText = (EditText) dialog
+						.findViewById(R.id.providerpf_rate_review);
+				reviewSummaryText = (EditText) dialog
+						.findViewById(R.id.providerpf_rate_review_summary);
+				reviewButton = (Button) dialog
+						.findViewById(R.id.providerpf_rate_button_submit);
+				ratingbar = (RatingBar) dialog
+						.findViewById(R.id.providerpf_rate_bar);
+				rating_communication_bar = (RatingBar) dialog
+						.findViewById(R.id.providerpf_rate_communication_bar);
+				rating_environment_bar = (RatingBar) dialog
+						.findViewById(R.id.providerpf_rate_environment_bar);
+				rating_friendliness_bar = (RatingBar) dialog
+						.findViewById(R.id.providerpf_rate_friendly_bar);
+
+				// new features!!!!!!!!
+				rating_professionalSkills_bar = (RatingBar) dialog
+						.findViewById(R.id.providerpf_rate_professsionalSkills_bar);
+				rating_costs_bar = (RatingBar) dialog
+						.findViewById(R.id.providerpf_rate_costs_bar);
+				rating_availability_bar = (RatingBar) dialog
+						.findViewById(R.id.providerpf_rate_availability_bar);
+
+				reviewButton.setOnClickListener(new OnClickListener() {
+
+					public void onClick(View arg0) {
+
+						String review = reviewText.getText().toString();
+						String review_summary = reviewSummaryText.getText()
+								.toString();
+
+						review = parseText(review);
+						review_summary = parseText(review_summary);
+
+						SharedPreferences settings = getSharedPreferences("UserData", 0);
+						System.out.println(settings);
+						String uid = settings.getString("Id", null);					
+						float rating = ratingbar.getRating();
+						float friendliness = rating_friendliness_bar
+								.getRating();
+						float communication = rating_communication_bar
+								.getRating();
+						float environment = rating_environment_bar.getRating();
+						// new features!!!!!!!!!
+						float professionalSkills = rating_professionalSkills_bar
+								.getRating();
+						float costs = rating_costs_bar.getRating();
+						float availability = rating_availability_bar
+								.getRating();
+
+						//clear checkBoxRecord array
+
+						int[] pros=insertProToDB();
+						int[] cons=insertConToDB();
+
+						for(int i=0;i<40;i++) checkBoxRecord[i]=0;
+
+						int pro1 = pros[0];
+						int pro2 = pros[1];
+						int pro3 = pros[2];
+						int con1 = cons[0];
+						int con2 = cons[1];
+						int con3 = cons[2];
+
+						m_provider.getID();
+						
+						
+						String temp_base = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/ratings.php?mode=insert";
+						String url = temp_base + "&uid=" + uid + "&pid="
+								+ m_provider.getID() + "&rating="
+								+ (int) rating + "&review_summary="
+								+ review_summary + "&review=" + review
+								+ "&friendliness=" + (int) friendliness
+								+ "&communication=" + (int) communication
+								+ "&office_environment=" + (int) environment
+								+ "&professional=" + (int) professionalSkills
+								+ "&costs=" + (int) costs + "&availability="
+								+ (int) availability + "&pro1=" + pro1
+								+ "&pro2=" + pro2 + "&pro3=" + pro3 + "&con1="
+								+ con1 + "&con2=" + con2 + "&con3=" + con3;
+						System.out.println(url);
+						InternetHelper.httpGetRequest(url);
+						Toast.makeText(m_context, "Review submitted!", Toast.LENGTH_LONG).show();
+						populateRatings();
+						dialog.hide();
+					}
+
+					private int[] insertConToDB() {
+						int[] cons=new int[3];
+						for(int i=20,j=0;i<40;i++){
+							if(checkBoxRecord[i]==1){
+								cons[j]=19-i;j++;
+							}
+						}
+						return cons;
+					}
+
+					private int[] insertProToDB() {
+
+						int[] pros = new int[3];
+						for(int i=0,j=0;i<20;i++){
+							if(checkBoxRecord[i]==1){
+								pros[j]=i+1;j++;
+							}
+						}
+						return pros;
+					}
+
+					public String parseText(String review) {
+						// make sure the input for keyword search is correct
+						if (review.length() > 0
+								&& !review
+										.matches("[A-Za-z0-9\\s\\.,'!?&&[^\\n]]+?")) {
+							// tell user the input was invalid
+							Context context = getApplicationContext();
+							Toast toast = Toast
+									.makeText(
+											context,
+											"The keyword for search should only contains"
+													+ " English characters, numbers or white space",
+											Toast.LENGTH_SHORT);
+							toast.show();
+							return null;
+						} else {
+							review = review.replace(" ", "%20");
+						}
+						return review;
+					}
+				});
+				dialog.show();
+
+			}
+
+			public void consBtnListener() {
+				m_button_cons.setOnClickListener(new OnClickListener() {
+					int countCheck = 0;
+
+					public void onClick(View v) {
+						dialog_cons = new Dialog(m_context);
+						dialog_cons.setContentView(R.layout.worst_checkbox);
+						dialog_cons.setTitle("Worst thing about this provider");
+						// checkbox
+						checkBox_cons1 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox1);
+						checkBox_cons1.setChecked(checkBoxRecord[20]==1?true:false);
+						checkBox_cons2 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox2);
+						checkBox_cons2.setChecked(checkBoxRecord[21]==1?true:false);
+						checkBox_cons3 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox3);
+						checkBox_cons3.setChecked(checkBoxRecord[22]==1?true:false);
+						checkBox_cons4 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox4);
+						checkBox_cons4.setChecked(checkBoxRecord[23]==1?true:false);
+						checkBox_cons5 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox5);
+						checkBox_cons5.setChecked(checkBoxRecord[24]==1?true:false);
+						
+						//add more cons
+						checkBox_cons_N1 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox_new1);
+						checkBox_cons_N1.setChecked(checkBoxRecord[25]==1?true:false);
+						
+						checkBox_cons_N2 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox_new2);
+						checkBox_cons_N2.setChecked(checkBoxRecord[26]==1?true:false);
+						
+						checkBox_cons_N3 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox_new3);
+						checkBox_cons_N3.setChecked(checkBoxRecord[27]==1?true:false);
+						
+						checkBox_cons_N4 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox_new4);
+						checkBox_cons_N4.setChecked(checkBoxRecord[28]==1?true:false);
+						
+						checkBox_cons_N5 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox_new5);
+						checkBox_cons_N5.setChecked(checkBoxRecord[29]==1?true:false);
+						
+						checkBox_cons_N6 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox_new6);
+						checkBox_cons_N6.setChecked(checkBoxRecord[30]==1?true:false);
+						
+						checkBox_cons_N7 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox_new7);
+						checkBox_cons_N7.setChecked(checkBoxRecord[31]==1?true:false);
+						
+						checkBox_cons_N8 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox_new8);
+						checkBox_cons_N8.setChecked(checkBoxRecord[32]==1?true:false);
+						
+						checkBox_cons_N9 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox_new9);
+						checkBox_cons_N9.setChecked(checkBoxRecord[33]==1?true:false);
+						
+						checkBox_cons_N10 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox_new10);
+						checkBox_cons_N10.setChecked(checkBoxRecord[34]==1?true:false);
+						
+						checkBox_cons_N11 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox_new11);
+						checkBox_cons_N11.setChecked(checkBoxRecord[35]==1?true:false);
+						
+						checkBox_cons_N12 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox_new12);
+						checkBox_cons_N12.setChecked(checkBoxRecord[36]==1?true:false);
+						
+						checkBox_cons_N13 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox_new13);
+						checkBox_cons_N13.setChecked(checkBoxRecord[37]==1?true:false);
+						
+						checkBox_cons_N14 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox_new14);
+						checkBox_cons_N14.setChecked(checkBoxRecord[38]==1?true:false);
+						
+						checkBox_cons_N15 = (CheckBox) dialog_cons
+								.findViewById(R.id.cons_checkbox_new15);
+						checkBox_cons_N15.setChecked(checkBoxRecord[39]==1?true:false);
+						
+						
+						
+						button_cons_ok = (Button) dialog_cons
+								.findViewById(R.id.cons_ok);
+
+						button_cons_ok
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										dialog_cons.hide();
+									}
+								});
+
+						checkBox_cons1
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons1,21);
+									}
+								});
+
+						checkBox_cons2
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons2,22);
+									}
+								});
+
+						checkBox_cons3
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons3,23);
+									}
+								});
+
+						checkBox_cons4
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons4,24);
+									}
+								});
+
+						checkBox_cons5
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons5,25);
+									}
+								});
+						
+						checkBox_cons_N1
+						.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons_N1,26);
+							}
+						});
+						
+						checkBox_cons_N2
+						.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons_N2,27);
+							}
+						});
+						
+						checkBox_cons_N3
+						.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons_N3,28);
+							}
+						});
+						
+						checkBox_cons_N4
+						.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons_N4,29);
+							}
+						});
+						
+						checkBox_cons_N5
+						.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons_N5,30);
+							}
+						});
+						
+						checkBox_cons_N6
+						.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons_N6,31);
+							}
+						});
+						
+						checkBox_cons_N7
+						.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons_N7,32);
+							}
+						});
+						
+						checkBox_cons_N8
+						.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons_N8,33);
+							}
+						});
+						
+						checkBox_cons_N9
+						.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons_N9,34);
+							}
+						});
+						
+						checkBox_cons_N10
+						.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons_N10,35);
+							}
+						});
+						
+						checkBox_cons_N11
+						.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons_N11,36);
+							}
+						});
+						
+						checkBox_cons_N12
+						.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons_N12,37);
+							}
+						});
+						
+						checkBox_cons_N13
+						.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons_N13,38);
+							}
+						});
+						
+						checkBox_cons_N14
+						.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons_N14,39);
+							}
+						});
+						
+						checkBox_cons_N15
+						.setOnClickListener(new OnClickListener() {
+							public void onClick(View v) {
+								onCheckboxClicked(checkBox_cons_N15,40);
+							}
+						});
+
+						dialog_cons.show();
+					}
+
+					public void onCheckboxClicked(View view, int index) {
+						// Is the view now checked?
+						boolean checked = ((CheckBox) view).isChecked();
+
+						if (checked) {
+							if (countCheck >= 3) {// it will allow 3 checkboxes
+													// only
+								Toast.makeText(m_context,
+										"Should not check more than 3!",
+										Toast.LENGTH_LONG).show();
+								((CheckBox) view).setChecked(false);
+							} else {
+								((CheckBox) view).setChecked(true);
+								countCheck++;
+								checkBoxRecord[index-1]=checked?1:0;
+							}
+						} else
+							countCheck--;
+						// Check which checkbox was clicked
+						// switch(view.getId()) {
+						// case R.id.pros_checkbox1:
+						// // if (checked) countCheck++;
+						// break;
+						// case R.id.pros_checkbox2:
+						// // if (checked) countCheck++;
+						// break;
+						// 
+						// }
+					}
+				});
+			}
+
+			public void prosBtnListener() {
 				m_button_pros.setOnClickListener(new OnClickListener() {
 					int countCheck = 0;
 
@@ -563,412 +979,6 @@ public class ProviderProfileActivity extends Activity {
 					}
 
 				});
-
-				// cons checkbox pops up
-				m_button_cons.setOnClickListener(new OnClickListener() {
-					int countCheck = 0;
-
-					public void onClick(View v) {
-						dialog_cons = new Dialog(m_context);
-						dialog_cons.setContentView(R.layout.worst_checkbox);
-						dialog_cons.setTitle("Worst thing about this provider");
-						// checkbox
-						checkBox_cons1 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox1);
-						checkBox_cons1.setChecked(checkBoxRecord[20]==1?true:false);
-						checkBox_cons2 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox2);
-						checkBox_cons2.setChecked(checkBoxRecord[21]==1?true:false);
-						checkBox_cons3 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox3);
-						checkBox_cons3.setChecked(checkBoxRecord[22]==1?true:false);
-						checkBox_cons4 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox4);
-						checkBox_cons4.setChecked(checkBoxRecord[23]==1?true:false);
-						checkBox_cons5 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox5);
-						checkBox_cons5.setChecked(checkBoxRecord[24]==1?true:false);
-						
-						//add more cons
-						checkBox_cons_N1 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox_new1);
-						checkBox_cons_N1.setChecked(checkBoxRecord[25]==1?true:false);
-						
-						checkBox_cons_N2 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox_new2);
-						checkBox_cons_N2.setChecked(checkBoxRecord[26]==1?true:false);
-						
-						checkBox_cons_N3 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox_new3);
-						checkBox_cons_N3.setChecked(checkBoxRecord[27]==1?true:false);
-						
-						checkBox_cons_N4 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox_new4);
-						checkBox_cons_N4.setChecked(checkBoxRecord[28]==1?true:false);
-						
-						checkBox_cons_N5 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox_new5);
-						checkBox_cons_N5.setChecked(checkBoxRecord[29]==1?true:false);
-						
-						checkBox_cons_N6 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox_new6);
-						checkBox_cons_N6.setChecked(checkBoxRecord[30]==1?true:false);
-						
-						checkBox_cons_N7 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox_new7);
-						checkBox_cons_N7.setChecked(checkBoxRecord[31]==1?true:false);
-						
-						checkBox_cons_N8 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox_new8);
-						checkBox_cons_N8.setChecked(checkBoxRecord[32]==1?true:false);
-						
-						checkBox_cons_N9 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox_new9);
-						checkBox_cons_N9.setChecked(checkBoxRecord[33]==1?true:false);
-						
-						checkBox_cons_N10 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox_new10);
-						checkBox_cons_N10.setChecked(checkBoxRecord[34]==1?true:false);
-						
-						checkBox_cons_N11 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox_new11);
-						checkBox_cons_N11.setChecked(checkBoxRecord[35]==1?true:false);
-						
-						checkBox_cons_N12 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox_new12);
-						checkBox_cons_N12.setChecked(checkBoxRecord[36]==1?true:false);
-						
-						checkBox_cons_N13 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox_new13);
-						checkBox_cons_N13.setChecked(checkBoxRecord[37]==1?true:false);
-						
-						checkBox_cons_N14 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox_new14);
-						checkBox_cons_N14.setChecked(checkBoxRecord[38]==1?true:false);
-						
-						checkBox_cons_N15 = (CheckBox) dialog_cons
-								.findViewById(R.id.cons_checkbox_new15);
-						checkBox_cons_N15.setChecked(checkBoxRecord[39]==1?true:false);
-						
-						
-						
-						button_cons_ok = (Button) dialog_cons
-								.findViewById(R.id.cons_ok);
-
-						button_cons_ok
-								.setOnClickListener(new OnClickListener() {
-									public void onClick(View v) {
-										dialog_cons.hide();
-									}
-								});
-
-						checkBox_cons1
-								.setOnClickListener(new OnClickListener() {
-									public void onClick(View v) {
-										onCheckboxClicked(checkBox_cons1,21);
-									}
-								});
-
-						checkBox_cons2
-								.setOnClickListener(new OnClickListener() {
-									public void onClick(View v) {
-										onCheckboxClicked(checkBox_cons2,22);
-									}
-								});
-
-						checkBox_cons3
-								.setOnClickListener(new OnClickListener() {
-									public void onClick(View v) {
-										onCheckboxClicked(checkBox_cons3,23);
-									}
-								});
-
-						checkBox_cons4
-								.setOnClickListener(new OnClickListener() {
-									public void onClick(View v) {
-										onCheckboxClicked(checkBox_cons4,24);
-									}
-								});
-
-						checkBox_cons5
-								.setOnClickListener(new OnClickListener() {
-									public void onClick(View v) {
-										onCheckboxClicked(checkBox_cons5,25);
-									}
-								});
-						
-						checkBox_cons_N1
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N1,26);
-							}
-						});
-						
-						checkBox_cons_N2
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N2,27);
-							}
-						});
-						
-						checkBox_cons_N3
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N3,28);
-							}
-						});
-						
-						checkBox_cons_N4
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N4,29);
-							}
-						});
-						
-						checkBox_cons_N5
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N5,30);
-							}
-						});
-						
-						checkBox_cons_N6
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N6,31);
-							}
-						});
-						
-						checkBox_cons_N7
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N7,32);
-							}
-						});
-						
-						checkBox_cons_N8
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N8,33);
-							}
-						});
-						
-						checkBox_cons_N9
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N9,34);
-							}
-						});
-						
-						checkBox_cons_N10
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N10,35);
-							}
-						});
-						
-						checkBox_cons_N11
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N11,36);
-							}
-						});
-						
-						checkBox_cons_N12
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N12,37);
-							}
-						});
-						
-						checkBox_cons_N13
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N13,38);
-							}
-						});
-						
-						checkBox_cons_N14
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N14,39);
-							}
-						});
-						
-						checkBox_cons_N15
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N15,40);
-							}
-						});
-
-						dialog_cons.show();
-					}
-
-					public void onCheckboxClicked(View view, int index) {
-						// Is the view now checked?
-						boolean checked = ((CheckBox) view).isChecked();
-
-						if (checked) {
-							if (countCheck >= 3) {// it will allow 3 checkboxes
-													// only
-								Toast.makeText(m_context,
-										"Should not check more than 3!",
-										Toast.LENGTH_LONG).show();
-								((CheckBox) view).setChecked(false);
-							} else {
-								((CheckBox) view).setChecked(true);
-								countCheck++;
-								checkBoxRecord[index-1]=checked?1:0;
-							}
-						} else
-							countCheck--;
-						// Check which checkbox was clicked
-						// switch(view.getId()) {
-						// case R.id.pros_checkbox1:
-						// // if (checked) countCheck++;
-						// break;
-						// case R.id.pros_checkbox2:
-						// // if (checked) countCheck++;
-						// break;
-						// 
-						// }
-					}
-				});
-
-				reviewText = (EditText) dialog
-						.findViewById(R.id.providerpf_rate_review);
-				reviewSummaryText = (EditText) dialog
-						.findViewById(R.id.providerpf_rate_review_summary);
-				reviewButton = (Button) dialog
-						.findViewById(R.id.providerpf_rate_button_submit);
-				ratingbar = (RatingBar) dialog
-						.findViewById(R.id.providerpf_rate_bar);
-				rating_communication_bar = (RatingBar) dialog
-						.findViewById(R.id.providerpf_rate_communication_bar);
-				rating_environment_bar = (RatingBar) dialog
-						.findViewById(R.id.providerpf_rate_environment_bar);
-				rating_friendliness_bar = (RatingBar) dialog
-						.findViewById(R.id.providerpf_rate_friendly_bar);
-
-				// new features!!!!!!!!
-				rating_professionalSkills_bar = (RatingBar) dialog
-						.findViewById(R.id.providerpf_rate_professsionalSkills_bar);
-				rating_costs_bar = (RatingBar) dialog
-						.findViewById(R.id.providerpf_rate_costs_bar);
-				rating_availability_bar = (RatingBar) dialog
-						.findViewById(R.id.providerpf_rate_availability_bar);
-
-				reviewButton.setOnClickListener(new OnClickListener() {
-
-					public void onClick(View arg0) {
-
-						String review = reviewText.getText().toString();
-						String review_summary = reviewSummaryText.getText()
-								.toString();
-
-						review = parseText(review);
-						review_summary = parseText(review_summary);
-
-						SharedPreferences settings = getSharedPreferences("UserData", 0);
-						System.out.println(settings);
-						String uid = settings.getString("Id", null);					
-						float rating = ratingbar.getRating();
-						float friendliness = rating_friendliness_bar
-								.getRating();
-						float communication = rating_communication_bar
-								.getRating();
-						float environment = rating_environment_bar.getRating();
-						// new features!!!!!!!!!
-						float professionalSkills = rating_professionalSkills_bar
-								.getRating();
-						float costs = rating_costs_bar.getRating();
-						float availability = rating_availability_bar
-								.getRating();
-
-
-						//clear checkBoxRecord array
-
-
-						int[] pros=insertProToDB();
-						int[] cons=insertConToDB();
-
-						for(int i=0;i<40;i++) checkBoxRecord[i]=0;
-
-						int pro1 = pros[0];
-						int pro2 = pros[1];
-						int pro3 = pros[2];
-						int con1 = cons[0];
-						int con2 = cons[1];
-						int con3 = cons[2];
-
-						m_provider.getID();
-						
-						
-						String temp_base = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/ratings.php?mode=insert";
-						String url = temp_base + "&uid=" + uid + "&pid="
-								+ m_provider.getID() + "&rating="
-								+ (int) rating + "&review_summary="
-								+ review_summary + "&review=" + review
-								+ "&friendliness=" + (int) friendliness
-								+ "&communication=" + (int) communication
-								+ "&office_environment=" + (int) environment
-								+ "&professional=" + (int) professionalSkills
-								+ "&costs=" + (int) costs + "&availability="
-								+ (int) availability + "&pro1=" + pro1
-								+ "&pro2=" + pro2 + "&pro3=" + pro3 + "&con1="
-								+ con1 + "&con2=" + con2 + "&con3=" + con3;
-						System.out.println(url);
-						InternetHelper.httpGetRequest(url);
-						Toast.makeText(m_context, "Review submitted!", Toast.LENGTH_LONG).show();
-						populateRatings();
-						dialog.hide();
-					}
-
-					private int[] insertConToDB() {
-						int[] cons=new int[3];
-						for(int i=20,j=0;i<40;i++){
-							if(checkBoxRecord[i]==1){
-								cons[j]=19-i;j++;
-							}
-						}
-						return cons;
-					}
-
-					private int[] insertProToDB() {
-
-						int[] pros = new int[3];
-						for(int i=0,j=0;i<20;i++){
-							if(checkBoxRecord[i]==1){
-								pros[j]=i+1;j++;
-							}
-						}
-						return pros;
-					}
-
-					public String parseText(String review) {
-						// make sure the input for keyword search is correct
-						if (review.length() > 0
-								&& !review
-										.matches("[A-Za-z0-9\\s\\.,'!?&&[^\\n]]+?")) {
-							// tell user the input was invalid
-							Context context = getApplicationContext();
-							Toast toast = Toast
-									.makeText(
-											context,
-											"The keyword for search should only contains"
-													+ " English characters, numbers or white space",
-											Toast.LENGTH_SHORT);
-							toast.show();
-							return null;
-						} else {
-							review = review.replace(" ", "%20");
-						}
-						return review;
-					}
-				});
-				dialog.show();
-
 			}
 		});
 
