@@ -1,11 +1,9 @@
 package edu.upenn.cis350;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-
+import java.util.Arrays;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -46,6 +44,32 @@ public class ProviderProfileActivity extends Activity {
 	private TextView m_provider_phone;
 	private TextView m_provider_address;
 	private TextView m_provider_rating;
+	private TextView m_provider_pro1;
+	private TextView m_provider_pro2;
+	private TextView m_provider_pro3;
+	private TextView m_provider_con1;
+	private TextView m_provider_con2;
+	private TextView m_provider_con3;
+	private TextView overall_pro1;
+	private TextView overall_pro2;
+	private TextView overall_pro3;
+	private TextView overall_pro4;
+	private TextView overall_pro5;
+	private TextView overall_con1;
+	private TextView overall_con2;
+	private TextView overall_con3;
+	private TextView overall_con4;
+	private TextView overall_con5;
+	private TextView overall_pro1_percentage;
+	private TextView overall_pro2_percentage;
+	private TextView overall_pro3_percentage;
+	private TextView overall_pro4_percentage;
+	private TextView overall_pro5_percentage;
+	private TextView overall_con1_percentage;
+	private TextView overall_con2_percentage;
+	private TextView overall_con3_percentage;
+	private TextView overall_con4_percentage;
+	private TextView overall_con5_percentage;
 
 	private Dialog dialog;
 	private Dialog dialog2;
@@ -112,6 +136,20 @@ public class ProviderProfileActivity extends Activity {
 	int[] checkBoxRecord=new int[40];
 	boolean isMultipleReviewer = false;
 	long SIX_MONTH = 15778500000L;
+	
+	private class Pair implements Comparable<Pair> {
+		int index;
+		int occurance;
+
+		public Pair(int index, int occurance) {
+			this.index = index;
+			this.occurance = occurance;
+		}
+
+		public int compareTo(Pair other) {
+			return (this.occurance <= other.occurance) ? 1 : -1;
+		}
+	}
 
 	/**
 	 * Create each provider's profile
@@ -141,6 +179,18 @@ public class ProviderProfileActivity extends Activity {
 				.findViewById(R.id.providerpf_average_rating_text);
 		m_provider_star_rating = (ImageView) this
 				.findViewById(R.id.providerpf_average_stars);
+		m_provider_pro1 = (TextView) this
+				.findViewById(R.id.providerpf_overall_pro1);
+		m_provider_pro2 = (TextView) this
+				.findViewById(R.id.providerpf_overall_pro2);
+		m_provider_pro3 = (TextView) this
+				.findViewById(R.id.providerpf_overall_pro3);
+		m_provider_con1 = (TextView) this
+				.findViewById(R.id.providerpf_overall_con1);
+		m_provider_con2 = (TextView) this
+				.findViewById(R.id.providerpf_overall_con2);
+		m_provider_con3 = (TextView) this
+				.findViewById(R.id.providerpf_overall_con3);
 
 		// Initialize the icons of "has parking", "appointment only", etc
 		this.initializeIcons();
@@ -220,6 +270,10 @@ public class ProviderProfileActivity extends Activity {
 			// public void onCreate(){
 			//
 			// }
+			
+			private String parsePercentage(int vote, double number) {
+				return (Double.toString(vote / number * 100)) + "%";
+			}
 
 			// add feature button
 			public void onClick(View v) {
@@ -227,6 +281,101 @@ public class ProviderProfileActivity extends Activity {
 				dialog2.setContentView(R.layout.newaddbutton);
 				dialog2.setTitle("Average Feature Rating");
 
+				overall_pro1 = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro1);
+				overall_pro2 = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro2);
+				overall_pro3 = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro3);
+				overall_pro4 = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro4);
+				overall_pro5 = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro5);
+				
+				overall_con1 = (TextView) dialog2.findViewById(R.id.providerpf_overall_con1);
+				overall_con2 = (TextView) dialog2.findViewById(R.id.providerpf_overall_con2);
+				overall_con3 = (TextView) dialog2.findViewById(R.id.providerpf_overall_con3);
+				overall_con4 = (TextView) dialog2.findViewById(R.id.providerpf_overall_con4);
+				overall_con5 = (TextView) dialog2.findViewById(R.id.providerpf_overall_con5);
+
+				overall_pro1_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro1_percentage);
+				overall_pro2_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro2_percentage);
+				overall_pro3_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro3_percentage);
+				overall_pro4_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro4_percentage);
+				overall_pro5_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro5_percentage);
+				
+				overall_con1_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_con1_percentage);
+				overall_con2_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_con2_percentage);
+				overall_con3_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_con3_percentage);
+				overall_con4_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_con4_percentage);
+				overall_con5_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_con5_percentage);
+				
+				double length = (double)m_ratings.size();
+				int pros[] = new int[20];
+				int cons[] = new int[20];
+				
+				for (Rating rating: m_ratings) {
+					int pro1 = rating.getPro1();
+					int pro2 = rating.getPro2();
+					int pro3 = rating.getPro3();
+					int con1 = rating.getCon1();
+					int con2 = rating.getCon2();
+					int con3 = rating.getCon3();
+					if (pro1 != 0)
+						pros[pro1 - 1]++;
+					if (pro2 != 0)
+						pros[pro2 - 1]++;
+					if (pro3 != 0)
+						pros[pro3 - 1]++;
+					if (con1 != 0)
+						cons[-con1 - 1]++;
+					if (con2 != 0)
+						cons[-con2 - 1]++;
+					if (con3 != 0)
+						cons[-con3 - 1]++;
+					//System.out.println(Integer.toString(pro1) + Integer.toString(pro2) + Integer.toString(pro3));
+				}
+				
+				int[] proIndices = getSortedIndices(pros, 20, 5);
+				int[] conIndices = getSortedIndices(cons, 20, 5);
+				
+				if (proIndices[0] != 0) {
+					overall_pro1.setText(getProAndConString(proIndices[0]));
+					overall_pro1_percentage.setText(parsePercentage(pros[proIndices[0] - 1], length));
+				}
+				if (proIndices[1] != 0) {
+					overall_pro2.setText(getProAndConString(proIndices[1]));
+					overall_pro2_percentage.setText(parsePercentage(pros[proIndices[1] - 1], length));
+				}
+				if (proIndices[2] != 0) {
+					overall_pro3.setText(getProAndConString(proIndices[2]));
+					overall_pro3_percentage.setText(parsePercentage(pros[proIndices[2] - 1], length));
+				}
+				if (proIndices[3] != 0) {
+					overall_pro4.setText(getProAndConString(proIndices[3]));
+					overall_pro4_percentage.setText(parsePercentage(pros[proIndices[3] - 1], length));
+				}
+				if (proIndices[4] != 0) {
+					overall_pro5.setText(getProAndConString(proIndices[4]));
+					overall_pro5_percentage.setText(parsePercentage(pros[proIndices[4] - 1], length));
+				}
+				
+				if (conIndices[0] != 0) {
+					overall_con1.setText(getProAndConString(-conIndices[0]));
+					overall_con1_percentage.setText(parsePercentage(cons[conIndices[0] - 1], length));
+				}
+				if (conIndices[1] != 0) {
+					overall_con2.setText(getProAndConString(-conIndices[1]));
+					overall_con2_percentage.setText(parsePercentage(cons[conIndices[1] - 1], length));
+				}
+				if (conIndices[2] != 0) {
+					overall_con3.setText(getProAndConString(-conIndices[2]));
+					overall_con3_percentage.setText(parsePercentage(cons[conIndices[2] - 1], length));
+				}
+				if (conIndices[3] != 0) {
+					overall_con4.setText(getProAndConString(-conIndices[3]));
+					overall_con4_percentage.setText(parsePercentage(cons[conIndices[3] - 1], length));
+				}
+				if (conIndices[4] != 0) {
+					overall_con5.setText(getProAndConString(-conIndices[4]));
+					overall_con5_percentage.setText(parsePercentage(cons[conIndices[4] - 1], length));
+				}
+				
 				Integer overallAvg = (int) m_provider.getAverageRating();
 				avg_rating_overall_bar = (RatingBar) dialog2
 						.findViewById(R.id.average_overall_bar);
@@ -1006,7 +1155,24 @@ public class ProviderProfileActivity extends Activity {
 
 	}
 	
-	
+	private int[] getSortedIndices(int array[], int len, int count) {
+		int[] result = new int[count];
+		Pair[] pairs = new Pair[len];
+		for (int i = 0; i < len; i++) {
+			pairs[i] = new Pair(i + 1, array[i]);
+		}
+
+		Arrays.sort(pairs);
+
+		for (int i = 0; i < count; i++) {
+			if (pairs[i].occurance != 0) {
+				result[i] = pairs[i].index;
+			} else {
+				break;
+			}
+		}
+		return result;
+	}
 
 	private void populateRatings() {
 		// make the HttpRequest
@@ -1014,6 +1180,8 @@ public class ProviderProfileActivity extends Activity {
 		String ratingsJSON = InternetHelper.httpGetRequest(uri);
 		SharedPreferences settings = getSharedPreferences("UserData", 0);
 		String currentUid = settings.getString("Id", null);	
+		int pros[] = new int[20];
+		int cons[] = new int[20];
 		
 		// parse the JSON and populate m_ratings from JSON for m_provider
 		try {
@@ -1045,6 +1213,19 @@ public class ProviderProfileActivity extends Activity {
 				int con1 = Integer.parseInt(current.getString("con1"));
 				int con2 = Integer.parseInt(current.getString("con2"));
 				int con3 = Integer.parseInt(current.getString("con3"));
+				
+				if (pro1 != 0)
+					pros[pro1 - 1]++;
+				if (pro2 != 0)
+					pros[pro2 - 1]++;
+				if (pro3 != 0)
+					pros[pro3 - 1]++;
+				if (con1 != 0)
+					cons[-con1 - 1]++;
+				if (con2 != 0)
+					cons[-con2 - 1]++;
+				if (con3 != 0)
+					cons[-con3 - 1]++;
 
 				Rating currentRating = new Rating(user_id, provider_id, user_name, time,
 						review_summary, review, (int) rating,
@@ -1057,6 +1238,22 @@ public class ProviderProfileActivity extends Activity {
 			}
 			Double averageRating = m_provider.getAverageRating();
 			m_provider_rating.setText(averageRating.toString());
+			
+			int[] proIndices = getSortedIndices(pros, 20, 3);
+			int[] conIndices = getSortedIndices(cons, 20, 3);
+			if (proIndices[0] != 0)
+				m_provider_pro1.setText(getProAndConString(proIndices[0]));
+			if (proIndices[1] != 0)
+				m_provider_pro2.setText(getProAndConString(proIndices[1]));
+			if (proIndices[2] != 0)
+				m_provider_pro3.setText(getProAndConString(proIndices[2]));
+			if (conIndices[0] != 0)
+				m_provider_con1.setText(getProAndConString(-conIndices[0]));
+			if (conIndices[1] != 0)
+				m_provider_con2.setText(getProAndConString(-conIndices[1]));
+			if (conIndices[2] != 0)
+				m_provider_con3.setText(getProAndConString(-conIndices[2]));
+			
 			setRatingImage();
 		} catch (Exception e) {
 			// for logging
@@ -1126,9 +1323,143 @@ public class ProviderProfileActivity extends Activity {
 			button.setVisibility(Button.GONE);
 		}
 	}
+	
+	public String getProAndConString(int label) {
+		String message;
+		switch (label) {
+		case 1:
+			message = getString(R.string.pros1);
+			break;
+		case 2:
+			message = getString(R.string.pros2);
+			break;
+		case 3:
+			message = getString(R.string.pros3);
+			break;
+		case 4:
+			message = getString(R.string.pros4);
+			break;
+		case 5:
+			message = getString(R.string.pros5);
+			break;
+		case -1:
+			message = getString(R.string.cons1);
+			break;
+		case -2:
+			message = getString(R.string.cons2);
+			break;
+		case -3:
+			message = getString(R.string.cons3);
+			break;
+		case -4:
+			message = getString(R.string.cons4);
+			break;
+		case -5:
+			message = getString(R.string.cons5);
+			break;
+			
+		case 6:
+			message = getString(R.string.new_pc1);
+			break;
+		case 7:
+			message = getString(R.string.new_pc2);
+			break;
+		case 8:
+			message = getString(R.string.new_pc3);
+			break;
+		case 9:
+			message = getString(R.string.new_pc4);
+			break;
+		case 10:
+			message = getString(R.string.new_pc5);
+			break;
+		case 11:
+			message = getString(R.string.new_pc6);
+			break;
+		case 12:
+			message = getString(R.string.new_pc7);
+			break;
+		case 13:
+			message = getString(R.string.new_pc8);
+			break;
+		case 14:
+			message = getString(R.string.new_pc9);
+			break;
+		case 15:
+			message = getString(R.string.new_pc10);
+			break;
+		case 16:
+			message = getString(R.string.new_pc11);
+			break;
+		case 17:
+			message = getString(R.string.new_pc12);
+			break;
+		case 18:
+			message = getString(R.string.new_pc13);
+			break;
+		case 19:
+			message = getString(R.string.new_pc14);
+			break;
+		case 20:
+			message = getString(R.string.new_pc15);
+			break;
+			
+		
+		case -6:
+			message = getString(R.string.new_pc1_con);
+			break;
+		case -7:
+			message = getString(R.string.new_pc2_con);
+			break;
+		case -8:
+			message = getString(R.string.new_pc3_con);
+			break;
+		case -9:
+			message = getString(R.string.new_pc4_con);
+			break;
+		case -10:
+			message = getString(R.string.new_pc5_con);
+			break;
+		case -11:
+			message = getString(R.string.new_pc6_con);
+			break;
+		case -12:
+			message = getString(R.string.new_pc7_con);
+			break;
+		case -13:
+			message = getString(R.string.new_pc8_con);
+			break;
+		case -14:
+			message = getString(R.string.new_pc9_con);
+			break;
+		case -15:
+			message = getString(R.string.new_pc10_con);
+			break;
+		case -16:
+			message = getString(R.string.new_pc11_con);
+			break;
+		case -17:
+			message = getString(R.string.new_pc12_con);
+			break;
+		case -18:
+			message = getString(R.string.new_pc13_con);
+			break;
+		case -19:
+			message = getString(R.string.new_pc14_con);
+			break;
+		case -20:
+			message = getString(R.string.new_pc15_con);
+			break;
+			
+		default:
+			message = "";
+		}
+		return message;
+	}
 
 	// inner class for rating adapter. Needs to reference m_ratings
 	class RatingAdapter extends BaseExpandableListAdapter {
+		@SuppressWarnings("unused")
 		private ProviderProfileActivity mContext = null;
 
 		public RatingAdapter(ProviderProfileActivity context) {
@@ -1267,139 +1598,5 @@ public class ProviderProfileActivity extends Activity {
         public boolean isChildSelectable(int groupPosition, int childPosition) {
                 return false;
         }
-
-		public String getProAndConString(int label) {
-			String message;
-			switch (label) {
-			case 1:
-				message = getString(R.string.pros1);
-				break;
-			case 2:
-				message = getString(R.string.pros2);
-				break;
-			case 3:
-				message = getString(R.string.pros3);
-				break;
-			case 4:
-				message = getString(R.string.pros4);
-				break;
-			case 5:
-				message = getString(R.string.pros5);
-				break;
-			case -1:
-				message = getString(R.string.cons1);
-				break;
-			case -2:
-				message = getString(R.string.cons2);
-				break;
-			case -3:
-				message = getString(R.string.cons3);
-				break;
-			case -4:
-				message = getString(R.string.cons4);
-				break;
-			case -5:
-				message = getString(R.string.cons5);
-				break;
-				
-			case 6:
-				message = getString(R.string.new_pc1);
-				break;
-			case 7:
-				message = getString(R.string.new_pc2);
-				break;
-			case 8:
-				message = getString(R.string.new_pc3);
-				break;
-			case 9:
-				message = getString(R.string.new_pc4);
-				break;
-			case 10:
-				message = getString(R.string.new_pc5);
-				break;
-			case 11:
-				message = getString(R.string.new_pc6);
-				break;
-			case 12:
-				message = getString(R.string.new_pc7);
-				break;
-			case 13:
-				message = getString(R.string.new_pc8);
-				break;
-			case 14:
-				message = getString(R.string.new_pc9);
-				break;
-			case 15:
-				message = getString(R.string.new_pc10);
-				break;
-			case 16:
-				message = getString(R.string.new_pc11);
-				break;
-			case 17:
-				message = getString(R.string.new_pc12);
-				break;
-			case 18:
-				message = getString(R.string.new_pc13);
-				break;
-			case 19:
-				message = getString(R.string.new_pc14);
-				break;
-			case 20:
-				message = getString(R.string.new_pc15);
-				break;
-				
-			
-			case -6:
-				message = getString(R.string.new_pc1_con);
-				break;
-			case -7:
-				message = getString(R.string.new_pc2_con);
-				break;
-			case -8:
-				message = getString(R.string.new_pc3_con);
-				break;
-			case -9:
-				message = getString(R.string.new_pc4_con);
-				break;
-			case -10:
-				message = getString(R.string.new_pc5_con);
-				break;
-			case -11:
-				message = getString(R.string.new_pc6_con);
-				break;
-			case -12:
-				message = getString(R.string.new_pc7_con);
-				break;
-			case -13:
-				message = getString(R.string.new_pc8_con);
-				break;
-			case -14:
-				message = getString(R.string.new_pc9_con);
-				break;
-			case -15:
-				message = getString(R.string.new_pc10_con);
-				break;
-			case -16:
-				message = getString(R.string.new_pc11_con);
-				break;
-			case -17:
-				message = getString(R.string.new_pc12_con);
-				break;
-			case -18:
-				message = getString(R.string.new_pc13_con);
-				break;
-			case -19:
-				message = getString(R.string.new_pc14_con);
-				break;
-			case -20:
-				message = getString(R.string.new_pc15_con);
-				break;
-				
-			default:
-				message = "";
-			}
-			return message;
-		}
-
 	}
 }
