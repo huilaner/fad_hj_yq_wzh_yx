@@ -2,10 +2,9 @@ package testfinal.edu.upenn.cis350;
 import edu.upenn.cis350.*;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.Button;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.widget.ListView;
 
 
 /**
@@ -22,15 +21,18 @@ public class TestHistory extends ActivityInstrumentationTestCase2<HistoryActivit
 	}
 
 	private Activity activity;
-	private ScrollView sv;
+	private ListView lv;
 	
 	
 	
 	
 	public void setUp() throws Exception {
 		super.setUp();
-		activity= getActivity();
-		sv = (ScrollView)activity.findViewById(R.id.scrollView1);
+		Intent addEvent = new Intent();
+		addEvent.putExtra("id", (long)0);
+		setActivityIntent(addEvent);
+		activity = getActivity();
+		lv = (ListView)activity.findViewById(R.id.history_res);
 		
 	}
 	
@@ -43,7 +45,7 @@ public class TestHistory extends ActivityInstrumentationTestCase2<HistoryActivit
 		//wait for UI Thread to finish
 		getInstrumentation().waitForIdleSync();
 
-		assertNotNull(sv);
+		assertNotNull(lv);
 
 		
 

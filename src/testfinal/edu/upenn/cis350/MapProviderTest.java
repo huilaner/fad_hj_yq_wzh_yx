@@ -6,10 +6,6 @@ import edu.upenn.cis350.*;
 
 import android.app.Activity;
 
-import android.widget.Button;
-import android.widget.ScrollView;
-import android.widget.TextView;
-
 /**
  * This class effectively cannot be tested as it relies almost exclusively on the Maps framework and interactions with the user's inputs
  * @author DXU

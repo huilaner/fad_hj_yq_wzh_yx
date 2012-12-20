@@ -5,8 +5,6 @@ import edu.upenn.cis350.*;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
-import android.widget.TextView;
-
 
 public class MenuTest extends ActivityInstrumentationTestCase2<VoiceActivity> {
 	
@@ -17,9 +15,6 @@ public class MenuTest extends ActivityInstrumentationTestCase2<VoiceActivity> {
 	}
 	
 	private Activity activity;
-	private Activity tempactivity;
-	private TextView sample;
-	private Button button;
 	private Button searchbutton;
 	private Button historybutton;
 	private Button profilebutton;

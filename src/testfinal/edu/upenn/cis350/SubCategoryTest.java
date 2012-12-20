@@ -1,11 +1,8 @@
 package testfinal.edu.upenn.cis350;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.TextView;
 import edu.upenn.cis350.*;
 
 

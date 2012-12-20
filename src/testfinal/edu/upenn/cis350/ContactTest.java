@@ -1,6 +1,5 @@
 package testfinal.edu.upenn.cis350;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
@@ -20,7 +19,6 @@ public class ContactTest extends ActivityInstrumentationTestCase2<ContactActivit
 	private TextView more;
 	private TextView info_name;
 	private Button info_email;
-	private TextView info_number;
 	private TextView info_more;
 	
 	

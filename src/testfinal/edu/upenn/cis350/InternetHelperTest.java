@@ -2,8 +2,6 @@ package testfinal.edu.upenn.cis350;
 
 import org.apache.http.client.HttpClient;
 
-import edu.upenn.cis350.ContactActivity;
-import edu.upenn.cis350.util.InternetHelper;
 import junit.framework.TestCase;
 
 /**

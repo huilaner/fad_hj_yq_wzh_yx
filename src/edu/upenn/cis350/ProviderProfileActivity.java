@@ -125,27 +125,27 @@ public class ProviderProfileActivity extends Activity {
 	private CheckBox checkBox_cons3;
 	private CheckBox checkBox_cons4;
 	private CheckBox checkBox_cons5;
-	
+
 	private CheckBox checkBox_pros_N1, checkBox_pros_N2, checkBox_pros_N3,
-	checkBox_pros_N4, checkBox_pros_N5, checkBox_pros_N6,
-	checkBox_pros_N7, checkBox_pros_N8, checkBox_pros_N9,
-	checkBox_pros_N10, checkBox_pros_N11, checkBox_pros_N12,
-	checkBox_pros_N13, checkBox_pros_N14, checkBox_pros_N15;
+			checkBox_pros_N4, checkBox_pros_N5, checkBox_pros_N6,
+			checkBox_pros_N7, checkBox_pros_N8, checkBox_pros_N9,
+			checkBox_pros_N10, checkBox_pros_N11, checkBox_pros_N12,
+			checkBox_pros_N13, checkBox_pros_N14, checkBox_pros_N15;
 	private CheckBox checkBox_cons_N1, checkBox_cons_N2, checkBox_cons_N3,
-	checkBox_cons_N4, checkBox_cons_N5, checkBox_cons_N6,
-	checkBox_cons_N7, checkBox_cons_N8, checkBox_cons_N9,
-	checkBox_cons_N10, checkBox_cons_N11, checkBox_cons_N12,
-	checkBox_cons_N13, checkBox_cons_N14, checkBox_cons_N15;
+			checkBox_cons_N4, checkBox_cons_N5, checkBox_cons_N6,
+			checkBox_cons_N7, checkBox_cons_N8, checkBox_cons_N9,
+			checkBox_cons_N10, checkBox_cons_N11, checkBox_cons_N12,
+			checkBox_cons_N13, checkBox_cons_N14, checkBox_cons_N15;
 
 	private Button button_pros_ok;
 	private Button button_cons_ok;
 
 	private RatingAdapter m_adapter;
 
-	int[] checkBoxRecord=new int[40];
-	boolean isMultipleReviewer = false;
+	int[] checkBoxRecord = new int[40];
+	public boolean isMultipleReviewer = false;
 	long SIX_MONTH = 15778500000L;
-	
+
 	private class Pair implements Comparable<Pair> {
 		int index;
 		int occurance;
@@ -171,7 +171,8 @@ public class ProviderProfileActivity extends Activity {
 		m_button_map = (Button) this.findViewById(R.id.button_providerpf_map);
 		m_button_review = (Button) this
 				.findViewById(R.id.providerpf_rate_button);
-		m_comments = (ExpandableListView) this.findViewById(R.id.providerpf_comments);
+		m_comments = (ExpandableListView) this
+				.findViewById(R.id.providerpf_comments);
 		m_adapter = new RatingAdapter(m_context);
 		m_comments.setAdapter(m_adapter);
 		m_comments.setGroupIndicator(null);
@@ -245,19 +246,13 @@ public class ProviderProfileActivity extends Activity {
 
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void onResume() {
 		super.onResume();
 		// get existing Intent data (the ID of provider to be looked at), and
 		// initialize a list of ratings to be populated for the provider.
 		m_provider = (Provider) getIntent().getSerializableExtra("providers");
-		//for test
-		if(m_provider.getName().equals("testProvider")) {
-			m_ratings = (ArrayList<Rating>) getIntent().getSerializableExtra("ratings");
-		}
-		else
-			m_ratings = new ArrayList<Rating>();
+		m_ratings = new ArrayList<Rating>();
 
 		// populate ratings, for RatingAdapter
 		populateRatings();
@@ -279,6 +274,7 @@ public class ProviderProfileActivity extends Activity {
 			// public void onCreate(){
 			//
 			// }
+
 			private String parsePercentage(int vote, double number) {
 				return (Double.toString(vote / number * 100)) + "%";
 			}
@@ -289,35 +285,55 @@ public class ProviderProfileActivity extends Activity {
 				dialog2.setContentView(R.layout.newaddbutton);
 				dialog2.setTitle("Average Feature Rating");
 
-				overall_pro1 = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro1);
-				overall_pro2 = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro2);
-				overall_pro3 = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro3);
-				overall_pro4 = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro4);
-				overall_pro5 = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro5);
+				overall_pro1 = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_pro1);
+				overall_pro2 = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_pro2);
+				overall_pro3 = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_pro3);
+				overall_pro4 = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_pro4);
+				overall_pro5 = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_pro5);
 
-				overall_con1 = (TextView) dialog2.findViewById(R.id.providerpf_overall_con1);
-				overall_con2 = (TextView) dialog2.findViewById(R.id.providerpf_overall_con2);
-				overall_con3 = (TextView) dialog2.findViewById(R.id.providerpf_overall_con3);
-				overall_con4 = (TextView) dialog2.findViewById(R.id.providerpf_overall_con4);
-				overall_con5 = (TextView) dialog2.findViewById(R.id.providerpf_overall_con5);
+				overall_con1 = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_con1);
+				overall_con2 = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_con2);
+				overall_con3 = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_con3);
+				overall_con4 = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_con4);
+				overall_con5 = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_con5);
 
-				overall_pro1_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro1_percentage);
-				overall_pro2_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro2_percentage);
-				overall_pro3_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro3_percentage);
-				overall_pro4_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro4_percentage);
-				overall_pro5_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_pro5_percentage);
+				overall_pro1_percentage = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_pro1_percentage);
+				overall_pro2_percentage = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_pro2_percentage);
+				overall_pro3_percentage = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_pro3_percentage);
+				overall_pro4_percentage = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_pro4_percentage);
+				overall_pro5_percentage = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_pro5_percentage);
 
-				overall_con1_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_con1_percentage);
-				overall_con2_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_con2_percentage);
-				overall_con3_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_con3_percentage);
-				overall_con4_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_con4_percentage);
-				overall_con5_percentage = (TextView) dialog2.findViewById(R.id.providerpf_overall_con5_percentage);
+				overall_con1_percentage = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_con1_percentage);
+				overall_con2_percentage = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_con2_percentage);
+				overall_con3_percentage = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_con3_percentage);
+				overall_con4_percentage = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_con4_percentage);
+				overall_con5_percentage = (TextView) dialog2
+						.findViewById(R.id.providerpf_overall_con5_percentage);
 
-				double length = (double)m_ratings.size();
+				double length = (double) m_ratings.size();
 				int pros[] = new int[20];
 				int cons[] = new int[20];
 
-				for (Rating rating: m_ratings) {
+				for (Rating rating : m_ratings) {
 					int pro1 = rating.getPro1();
 					int pro2 = rating.getPro2();
 					int pro3 = rating.getPro3();
@@ -336,7 +352,6 @@ public class ProviderProfileActivity extends Activity {
 						cons[-con2 - 1]++;
 					if (con3 != 0)
 						cons[-con3 - 1]++;
-					//System.out.println(Integer.toString(pro1) + Integer.toString(pro2) + Integer.toString(pro3));
 				}
 
 				int[] proIndices = getSortedIndices(pros, 20, 5);
@@ -344,46 +359,56 @@ public class ProviderProfileActivity extends Activity {
 
 				if (proIndices[0] != 0) {
 					overall_pro1.setText(getProAndConString(proIndices[0]));
-					overall_pro1_percentage.setText(parsePercentage(pros[proIndices[0] - 1], length));
+					overall_pro1_percentage.setText(parsePercentage(
+							pros[proIndices[0] - 1], length));
 				}
 				if (proIndices[1] != 0) {
 					overall_pro2.setText(getProAndConString(proIndices[1]));
-					overall_pro2_percentage.setText(parsePercentage(pros[proIndices[1] - 1], length));
+					overall_pro2_percentage.setText(parsePercentage(
+							pros[proIndices[1] - 1], length));
 				}
 				if (proIndices[2] != 0) {
 					overall_pro3.setText(getProAndConString(proIndices[2]));
-					overall_pro3_percentage.setText(parsePercentage(pros[proIndices[2] - 1], length));
+					overall_pro3_percentage.setText(parsePercentage(
+							pros[proIndices[2] - 1], length));
 				}
 				if (proIndices[3] != 0) {
 					overall_pro4.setText(getProAndConString(proIndices[3]));
-					overall_pro4_percentage.setText(parsePercentage(pros[proIndices[3] - 1], length));
+					overall_pro4_percentage.setText(parsePercentage(
+							pros[proIndices[3] - 1], length));
 				}
 				if (proIndices[4] != 0) {
 					overall_pro5.setText(getProAndConString(proIndices[4]));
-					overall_pro5_percentage.setText(parsePercentage(pros[proIndices[4] - 1], length));
+					overall_pro5_percentage.setText(parsePercentage(
+							pros[proIndices[4] - 1], length));
 				}
 
 				if (conIndices[0] != 0) {
 					overall_con1.setText(getProAndConString(-conIndices[0]));
-					overall_con1_percentage.setText(parsePercentage(cons[conIndices[0] - 1], length));
+					overall_con1_percentage.setText(parsePercentage(
+							cons[conIndices[0] - 1], length));
 				}
 				if (conIndices[1] != 0) {
 					overall_con2.setText(getProAndConString(-conIndices[1]));
-					overall_con2_percentage.setText(parsePercentage(cons[conIndices[1] - 1], length));
+					overall_con2_percentage.setText(parsePercentage(
+							cons[conIndices[1] - 1], length));
 				}
 				if (conIndices[2] != 0) {
 					overall_con3.setText(getProAndConString(-conIndices[2]));
-					overall_con3_percentage.setText(parsePercentage(cons[conIndices[2] - 1], length));
+					overall_con3_percentage.setText(parsePercentage(
+							cons[conIndices[2] - 1], length));
 				}
 				if (conIndices[3] != 0) {
 					overall_con4.setText(getProAndConString(-conIndices[3]));
-					overall_con4_percentage.setText(parsePercentage(cons[conIndices[3] - 1], length));
+					overall_con4_percentage.setText(parsePercentage(
+							cons[conIndices[3] - 1], length));
 				}
 				if (conIndices[4] != 0) {
 					overall_con5.setText(getProAndConString(-conIndices[4]));
-					overall_con5_percentage.setText(parsePercentage(cons[conIndices[4] - 1], length));
+					overall_con5_percentage.setText(parsePercentage(
+							cons[conIndices[4] - 1], length));
 				}
-				
+
 				Integer overallAvg = (int) m_provider.getAverageRating();
 				avg_rating_overall_bar = (RatingBar) dialog2
 						.findViewById(R.id.average_overall_bar);
@@ -433,16 +458,21 @@ public class ProviderProfileActivity extends Activity {
 		m_button_review.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				SharedPreferences settings = getSharedPreferences("UserData", 0);
-				String uid = settings.getString("Id", null);	
-				if(uid==null) {
-					Toast.makeText(m_context, "Please first register to post review.", Toast.LENGTH_LONG).show();
+				String uid = settings.getString("Id", null);
+				if (uid == null) {
+					Toast.makeText(m_context,
+							"Please first register to post review.",
+							Toast.LENGTH_LONG).show();
 					return;
 				}
-				if(isMultipleReviewer) {
-					Toast.makeText(m_context, "You can't post a review for the same provider within six months.", Toast.LENGTH_LONG).show();
+				if (isMultipleReviewer) {
+					Toast.makeText(
+							m_context,
+							"You can't post a review for the same provider within six months.",
+							Toast.LENGTH_LONG).show();
 					return;
 				}
-				
+
 				dialog = new Dialog(m_context);
 
 				dialog.setContentView(R.layout.provider_pf_rate);
@@ -491,9 +521,10 @@ public class ProviderProfileActivity extends Activity {
 						review = parseText(review);
 						review_summary = parseText(review_summary);
 
-						SharedPreferences settings = getSharedPreferences("UserData", 0);
+						SharedPreferences settings = getSharedPreferences(
+								"UserData", 0);
 						System.out.println(settings);
-						String uid = settings.getString("Id", null);					
+						String uid = settings.getString("Id", null);
 						float rating = ratingbar.getRating();
 						float friendliness = rating_friendliness_bar
 								.getRating();
@@ -507,12 +538,13 @@ public class ProviderProfileActivity extends Activity {
 						float availability = rating_availability_bar
 								.getRating();
 
-						//clear checkBoxRecord array
+						// clear checkBoxRecord array
 
-						int[] pros=insertProToDB();
-						int[] cons=insertConToDB();
+						int[] pros = insertProToDB();
+						int[] cons = insertConToDB();
 
-						for(int i=0;i<40;i++) checkBoxRecord[i]=0;
+						for (int i = 0; i < 40; i++)
+							checkBoxRecord[i] = 0;
 
 						int pro1 = pros[0];
 						int pro2 = pros[1];
@@ -522,8 +554,7 @@ public class ProviderProfileActivity extends Activity {
 						int con3 = cons[2];
 
 						m_provider.getID();
-						
-						
+
 						String temp_base = "https://fling.seas.upenn.edu/~xieyuhui/cgi-bin/ratings.php?mode=insert";
 						String url = temp_base + "&uid=" + uid + "&pid="
 								+ m_provider.getID() + "&rating="
@@ -539,16 +570,21 @@ public class ProviderProfileActivity extends Activity {
 								+ con1 + "&con2=" + con2 + "&con3=" + con3;
 						System.out.println(url);
 						InternetHelper.httpGetRequest(url);
-						Toast.makeText(m_context, "Review submitted!", Toast.LENGTH_LONG).show();
+						Toast.makeText(m_context, "Review submitted!",
+								Toast.LENGTH_LONG).show();
+						// request to get the updated provider
+						m_provider = ProviderHelper
+								.getSatisfiedProviderByPID(m_provider.getID());
 						populateRatings();
 						dialog.hide();
 					}
 
 					private int[] insertConToDB() {
-						int[] cons=new int[3];
-						for(int i=20,j=0;i<40;i++){
-							if(checkBoxRecord[i]==1){
-								cons[j]=19-i;j++;
+						int[] cons = new int[3];
+						for (int i = 20, j = 0; i < 40; i++) {
+							if (checkBoxRecord[i] == 1) {
+								cons[j] = 19 - i;
+								j++;
 							}
 						}
 						return cons;
@@ -557,9 +593,10 @@ public class ProviderProfileActivity extends Activity {
 					private int[] insertProToDB() {
 
 						int[] pros = new int[3];
-						for(int i=0,j=0;i<20;i++){
-							if(checkBoxRecord[i]==1){
-								pros[j]=i+1;j++;
+						for (int i = 0, j = 0; i < 20; i++) {
+							if (checkBoxRecord[i] == 1) {
+								pros[j] = i + 1;
+								j++;
 							}
 						}
 						return pros;
@@ -601,83 +638,121 @@ public class ProviderProfileActivity extends Activity {
 						// checkbox
 						checkBox_cons1 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox1);
-						checkBox_cons1.setChecked(checkBoxRecord[20]==1?true:false);
+						checkBox_cons1
+								.setChecked(checkBoxRecord[20] == 1 ? true
+										: false);
 						checkBox_cons2 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox2);
-						checkBox_cons2.setChecked(checkBoxRecord[21]==1?true:false);
+						checkBox_cons2
+								.setChecked(checkBoxRecord[21] == 1 ? true
+										: false);
 						checkBox_cons3 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox3);
-						checkBox_cons3.setChecked(checkBoxRecord[22]==1?true:false);
+						checkBox_cons3
+								.setChecked(checkBoxRecord[22] == 1 ? true
+										: false);
 						checkBox_cons4 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox4);
-						checkBox_cons4.setChecked(checkBoxRecord[23]==1?true:false);
+						checkBox_cons4
+								.setChecked(checkBoxRecord[23] == 1 ? true
+										: false);
 						checkBox_cons5 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox5);
-						checkBox_cons5.setChecked(checkBoxRecord[24]==1?true:false);
-						
-						//add more cons
+						checkBox_cons5
+								.setChecked(checkBoxRecord[24] == 1 ? true
+										: false);
+
+						// add more cons
 						checkBox_cons_N1 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox_new1);
-						checkBox_cons_N1.setChecked(checkBoxRecord[25]==1?true:false);
-						
+						checkBox_cons_N1
+								.setChecked(checkBoxRecord[25] == 1 ? true
+										: false);
+
 						checkBox_cons_N2 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox_new2);
-						checkBox_cons_N2.setChecked(checkBoxRecord[26]==1?true:false);
-						
+						checkBox_cons_N2
+								.setChecked(checkBoxRecord[26] == 1 ? true
+										: false);
+
 						checkBox_cons_N3 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox_new3);
-						checkBox_cons_N3.setChecked(checkBoxRecord[27]==1?true:false);
-						
+						checkBox_cons_N3
+								.setChecked(checkBoxRecord[27] == 1 ? true
+										: false);
+
 						checkBox_cons_N4 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox_new4);
-						checkBox_cons_N4.setChecked(checkBoxRecord[28]==1?true:false);
-						
+						checkBox_cons_N4
+								.setChecked(checkBoxRecord[28] == 1 ? true
+										: false);
+
 						checkBox_cons_N5 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox_new5);
-						checkBox_cons_N5.setChecked(checkBoxRecord[29]==1?true:false);
-						
+						checkBox_cons_N5
+								.setChecked(checkBoxRecord[29] == 1 ? true
+										: false);
+
 						checkBox_cons_N6 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox_new6);
-						checkBox_cons_N6.setChecked(checkBoxRecord[30]==1?true:false);
-						
+						checkBox_cons_N6
+								.setChecked(checkBoxRecord[30] == 1 ? true
+										: false);
+
 						checkBox_cons_N7 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox_new7);
-						checkBox_cons_N7.setChecked(checkBoxRecord[31]==1?true:false);
-						
+						checkBox_cons_N7
+								.setChecked(checkBoxRecord[31] == 1 ? true
+										: false);
+
 						checkBox_cons_N8 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox_new8);
-						checkBox_cons_N8.setChecked(checkBoxRecord[32]==1?true:false);
-						
+						checkBox_cons_N8
+								.setChecked(checkBoxRecord[32] == 1 ? true
+										: false);
+
 						checkBox_cons_N9 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox_new9);
-						checkBox_cons_N9.setChecked(checkBoxRecord[33]==1?true:false);
-						
+						checkBox_cons_N9
+								.setChecked(checkBoxRecord[33] == 1 ? true
+										: false);
+
 						checkBox_cons_N10 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox_new10);
-						checkBox_cons_N10.setChecked(checkBoxRecord[34]==1?true:false);
-						
+						checkBox_cons_N10
+								.setChecked(checkBoxRecord[34] == 1 ? true
+										: false);
+
 						checkBox_cons_N11 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox_new11);
-						checkBox_cons_N11.setChecked(checkBoxRecord[35]==1?true:false);
-						
+						checkBox_cons_N11
+								.setChecked(checkBoxRecord[35] == 1 ? true
+										: false);
+
 						checkBox_cons_N12 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox_new12);
-						checkBox_cons_N12.setChecked(checkBoxRecord[36]==1?true:false);
-						
+						checkBox_cons_N12
+								.setChecked(checkBoxRecord[36] == 1 ? true
+										: false);
+
 						checkBox_cons_N13 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox_new13);
-						checkBox_cons_N13.setChecked(checkBoxRecord[37]==1?true:false);
-						
+						checkBox_cons_N13
+								.setChecked(checkBoxRecord[37] == 1 ? true
+										: false);
+
 						checkBox_cons_N14 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox_new14);
-						checkBox_cons_N14.setChecked(checkBoxRecord[38]==1?true:false);
-						
+						checkBox_cons_N14
+								.setChecked(checkBoxRecord[38] == 1 ? true
+										: false);
+
 						checkBox_cons_N15 = (CheckBox) dialog_cons
 								.findViewById(R.id.cons_checkbox_new15);
-						checkBox_cons_N15.setChecked(checkBoxRecord[39]==1?true:false);
-						
-						
-						
+						checkBox_cons_N15
+								.setChecked(checkBoxRecord[39] == 1 ? true
+										: false);
+
 						button_cons_ok = (Button) dialog_cons
 								.findViewById(R.id.cons_ok);
 
@@ -691,142 +766,142 @@ public class ProviderProfileActivity extends Activity {
 						checkBox_cons1
 								.setOnClickListener(new OnClickListener() {
 									public void onClick(View v) {
-										onCheckboxClicked(checkBox_cons1,21);
+										onCheckboxClicked(checkBox_cons1, 21);
 									}
 								});
 
 						checkBox_cons2
 								.setOnClickListener(new OnClickListener() {
 									public void onClick(View v) {
-										onCheckboxClicked(checkBox_cons2,22);
+										onCheckboxClicked(checkBox_cons2, 22);
 									}
 								});
 
 						checkBox_cons3
 								.setOnClickListener(new OnClickListener() {
 									public void onClick(View v) {
-										onCheckboxClicked(checkBox_cons3,23);
+										onCheckboxClicked(checkBox_cons3, 23);
 									}
 								});
 
 						checkBox_cons4
 								.setOnClickListener(new OnClickListener() {
 									public void onClick(View v) {
-										onCheckboxClicked(checkBox_cons4,24);
+										onCheckboxClicked(checkBox_cons4, 24);
 									}
 								});
 
 						checkBox_cons5
 								.setOnClickListener(new OnClickListener() {
 									public void onClick(View v) {
-										onCheckboxClicked(checkBox_cons5,25);
+										onCheckboxClicked(checkBox_cons5, 25);
 									}
 								});
-						
+
 						checkBox_cons_N1
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N1,26);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons_N1, 26);
+									}
+								});
+
 						checkBox_cons_N2
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N2,27);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons_N2, 27);
+									}
+								});
+
 						checkBox_cons_N3
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N3,28);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons_N3, 28);
+									}
+								});
+
 						checkBox_cons_N4
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N4,29);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons_N4, 29);
+									}
+								});
+
 						checkBox_cons_N5
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N5,30);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons_N5, 30);
+									}
+								});
+
 						checkBox_cons_N6
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N6,31);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons_N6, 31);
+									}
+								});
+
 						checkBox_cons_N7
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N7,32);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons_N7, 32);
+									}
+								});
+
 						checkBox_cons_N8
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N8,33);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons_N8, 33);
+									}
+								});
+
 						checkBox_cons_N9
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N9,34);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons_N9, 34);
+									}
+								});
+
 						checkBox_cons_N10
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N10,35);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons_N10, 35);
+									}
+								});
+
 						checkBox_cons_N11
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N11,36);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons_N11, 36);
+									}
+								});
+
 						checkBox_cons_N12
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N12,37);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons_N12, 37);
+									}
+								});
+
 						checkBox_cons_N13
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N13,38);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons_N13, 38);
+									}
+								});
+
 						checkBox_cons_N14
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N14,39);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons_N14, 39);
+									}
+								});
+
 						checkBox_cons_N15
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_cons_N15,40);
-							}
-						});
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_cons_N15, 40);
+									}
+								});
 
 						dialog_cons.show();
 					}
@@ -845,7 +920,7 @@ public class ProviderProfileActivity extends Activity {
 							} else {
 								((CheckBox) view).setChecked(true);
 								countCheck++;
-								checkBoxRecord[index-1]=checked?1:0;
+								checkBoxRecord[index - 1] = checked ? 1 : 0;
 							}
 						} else
 							countCheck--;
@@ -857,7 +932,7 @@ public class ProviderProfileActivity extends Activity {
 						// case R.id.pros_checkbox2:
 						// // if (checked) countCheck++;
 						// break;
-						// 
+						//
 						// }
 					}
 				});
@@ -877,81 +952,115 @@ public class ProviderProfileActivity extends Activity {
 						checkBox_pros1 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox1);
 
-						checkBox_pros1.setChecked(checkBoxRecord[0]==1?true:false);
+						checkBox_pros1.setChecked(checkBoxRecord[0] == 1 ? true
+								: false);
 						checkBox_pros2 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox2);
-						checkBox_pros2.setChecked(checkBoxRecord[1]==1?true:false);
+						checkBox_pros2.setChecked(checkBoxRecord[1] == 1 ? true
+								: false);
 						checkBox_pros3 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox3);
-						checkBox_pros3.setChecked(checkBoxRecord[2]==1?true:false);
+						checkBox_pros3.setChecked(checkBoxRecord[2] == 1 ? true
+								: false);
 						checkBox_pros4 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox4);
-						checkBox_pros4.setChecked(checkBoxRecord[3]==1?true:false);
+						checkBox_pros4.setChecked(checkBoxRecord[3] == 1 ? true
+								: false);
 						checkBox_pros5 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox5);
-						checkBox_pros5.setChecked(checkBoxRecord[4]==1?true:false);
-						
-						//added more pros
+						checkBox_pros5.setChecked(checkBoxRecord[4] == 1 ? true
+								: false);
+
+						// added more pros
 						checkBox_pros_N1 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox_new1);
-						checkBox_pros_N1.setChecked(checkBoxRecord[5]==1?true:false);
-						
+						checkBox_pros_N1
+								.setChecked(checkBoxRecord[5] == 1 ? true
+										: false);
+
 						checkBox_pros_N2 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox_new2);
-						checkBox_pros_N2.setChecked(checkBoxRecord[6]==1?true:false);
-						
+						checkBox_pros_N2
+								.setChecked(checkBoxRecord[6] == 1 ? true
+										: false);
+
 						checkBox_pros_N3 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox_new3);
-						checkBox_pros_N3.setChecked(checkBoxRecord[7]==1?true:false);
-						
+						checkBox_pros_N3
+								.setChecked(checkBoxRecord[7] == 1 ? true
+										: false);
+
 						checkBox_pros_N4 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox_new4);
-						checkBox_pros_N4.setChecked(checkBoxRecord[8]==1?true:false);
-						
+						checkBox_pros_N4
+								.setChecked(checkBoxRecord[8] == 1 ? true
+										: false);
+
 						checkBox_pros_N5 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox_new5);
-						checkBox_pros_N5.setChecked(checkBoxRecord[9]==1?true:false);
-						
+						checkBox_pros_N5
+								.setChecked(checkBoxRecord[9] == 1 ? true
+										: false);
+
 						checkBox_pros_N6 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox_new6);
-						checkBox_pros_N6.setChecked(checkBoxRecord[10]==1?true:false);
-						
+						checkBox_pros_N6
+								.setChecked(checkBoxRecord[10] == 1 ? true
+										: false);
+
 						checkBox_pros_N7 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox_new7);
-						checkBox_pros_N7.setChecked(checkBoxRecord[11]==1?true:false);
-						
+						checkBox_pros_N7
+								.setChecked(checkBoxRecord[11] == 1 ? true
+										: false);
+
 						checkBox_pros_N8 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox_new8);
-						checkBox_pros_N8.setChecked(checkBoxRecord[12]==1?true:false);
-						
+						checkBox_pros_N8
+								.setChecked(checkBoxRecord[12] == 1 ? true
+										: false);
+
 						checkBox_pros_N9 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox_new9);
-						checkBox_pros_N9.setChecked(checkBoxRecord[13]==1?true:false);
-						
+						checkBox_pros_N9
+								.setChecked(checkBoxRecord[13] == 1 ? true
+										: false);
+
 						checkBox_pros_N10 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox_new10);
-						checkBox_pros_N10.setChecked(checkBoxRecord[14]==1?true:false);
-						
+						checkBox_pros_N10
+								.setChecked(checkBoxRecord[14] == 1 ? true
+										: false);
+
 						checkBox_pros_N11 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox_new11);
-						checkBox_pros_N11.setChecked(checkBoxRecord[15]==1?true:false);
-						
+						checkBox_pros_N11
+								.setChecked(checkBoxRecord[15] == 1 ? true
+										: false);
+
 						checkBox_pros_N12 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox_new12);
-						checkBox_pros_N12.setChecked(checkBoxRecord[16]==1?true:false);
-						
+						checkBox_pros_N12
+								.setChecked(checkBoxRecord[16] == 1 ? true
+										: false);
+
 						checkBox_pros_N13 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox_new13);
-						checkBox_pros_N13.setChecked(checkBoxRecord[17]==1?true:false);
-						
+						checkBox_pros_N13
+								.setChecked(checkBoxRecord[17] == 1 ? true
+										: false);
+
 						checkBox_pros_N14 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox_new14);
-						checkBox_pros_N14.setChecked(checkBoxRecord[18]==1?true:false);
-						
+						checkBox_pros_N14
+								.setChecked(checkBoxRecord[18] == 1 ? true
+										: false);
+
 						checkBox_pros_N15 = (CheckBox) dialog_pros
 								.findViewById(R.id.pros_checkbox_new15);
-						checkBox_pros_N15.setChecked(checkBoxRecord[19]==1?true:false);
-						
+						checkBox_pros_N15
+								.setChecked(checkBoxRecord[19] == 1 ? true
+										: false);
 
 						button_pros_ok = (Button) dialog_pros
 								.findViewById(R.id.pros_ok);
@@ -965,142 +1074,142 @@ public class ProviderProfileActivity extends Activity {
 						checkBox_pros1
 								.setOnClickListener(new OnClickListener() {
 									public void onClick(View v) {
-										onCheckboxClicked(checkBox_pros1,1);
+										onCheckboxClicked(checkBox_pros1, 1);
 									}
 								});
 
 						checkBox_pros2
 								.setOnClickListener(new OnClickListener() {
 									public void onClick(View v) {
-										onCheckboxClicked(checkBox_pros2,2);
+										onCheckboxClicked(checkBox_pros2, 2);
 									}
 								});
 
 						checkBox_pros3
 								.setOnClickListener(new OnClickListener() {
 									public void onClick(View v) {
-										onCheckboxClicked(checkBox_pros3,3);
+										onCheckboxClicked(checkBox_pros3, 3);
 									}
 								});
 
 						checkBox_pros4
 								.setOnClickListener(new OnClickListener() {
 									public void onClick(View v) {
-										onCheckboxClicked(checkBox_pros4,4);
+										onCheckboxClicked(checkBox_pros4, 4);
 									}
 								});
 
 						checkBox_pros5
 								.setOnClickListener(new OnClickListener() {
 									public void onClick(View v) {
-										onCheckboxClicked(checkBox_pros5,5);
+										onCheckboxClicked(checkBox_pros5, 5);
 									}
 								});
-						
+
 						checkBox_pros_N1
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_pros_N1,6);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_pros_N1, 6);
+									}
+								});
+
 						checkBox_pros_N2
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_pros_N2,7);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_pros_N2, 7);
+									}
+								});
+
 						checkBox_pros_N3
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_pros_N3,8);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_pros_N3, 8);
+									}
+								});
+
 						checkBox_pros_N4
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_pros_N4,9);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_pros_N4, 9);
+									}
+								});
+
 						checkBox_pros_N5
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_pros_N5,10);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_pros_N5, 10);
+									}
+								});
+
 						checkBox_pros_N6
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_pros_N6,11);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_pros_N6, 11);
+									}
+								});
+
 						checkBox_pros_N7
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_pros_N7,12);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_pros_N7, 12);
+									}
+								});
+
 						checkBox_pros_N8
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_pros_N8,13);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_pros_N8, 13);
+									}
+								});
+
 						checkBox_pros_N9
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_pros_N9,14);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_pros_N9, 14);
+									}
+								});
+
 						checkBox_pros_N10
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_pros_N10,15);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_pros_N10, 15);
+									}
+								});
+
 						checkBox_pros_N11
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_pros_N11,16);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_pros_N11, 16);
+									}
+								});
+
 						checkBox_pros_N12
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_pros_N12,17);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_pros_N12, 17);
+									}
+								});
+
 						checkBox_pros_N13
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_pros_N13,18);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_pros_N13, 18);
+									}
+								});
+
 						checkBox_pros_N14
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_pros_N14,19);
-							}
-						});
-						
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_pros_N14, 19);
+									}
+								});
+
 						checkBox_pros_N15
-						.setOnClickListener(new OnClickListener() {
-							public void onClick(View v) {
-								onCheckboxClicked(checkBox_pros_N15,20);
-							}
-						});
+								.setOnClickListener(new OnClickListener() {
+									public void onClick(View v) {
+										onCheckboxClicked(checkBox_pros_N15, 20);
+									}
+								});
 
 						dialog_pros.show();
 					}
@@ -1119,7 +1228,7 @@ public class ProviderProfileActivity extends Activity {
 							} else {
 								((CheckBox) view).setChecked(true);
 								countCheck++;
-								checkBoxRecord[index-1]=checked?1:0;
+								checkBoxRecord[index - 1] = checked ? 1 : 0;
 							}
 
 						} else
@@ -1162,8 +1271,8 @@ public class ProviderProfileActivity extends Activity {
 		setRatingImage();
 
 	}
-	
-	private int[] getSortedIndices(int array[], int len, int count) {
+
+	public int[] getSortedIndices(int array[], int len, int count) {
 		int[] result = new int[count];
 		Pair[] pairs = new Pair[len];
 		for (int i = 0; i < len; i++) {
@@ -1181,49 +1290,27 @@ public class ProviderProfileActivity extends Activity {
 		}
 		return result;
 	}
-	
 
+	@SuppressWarnings("unchecked")
 	private void populateRatings() {
 		// make the HttpRequest
 		String uri = BASE_URL + m_provider.getID();
 		String ratingsJSON = InternetHelper.httpGetRequest(uri);
 		SharedPreferences settings = getSharedPreferences("UserData", 0);
-		String currentUid = settings.getString("Id", null);	
-		
+		String currentUid = settings.getString("Id", null);
 		int pros[] = new int[20];
-	    int cons[] = new int[20];
-	    
-//	    m_ratings = new ArrayList<Rating>();
-		// parse the JSON and populate m_ratings from JSON for m_provider
-		try {
-			JSONObject json = new JSONObject(ratingsJSON);
-			JSONArray reviews = json.getJSONArray("reviews");
-			for (int i = 0; i < reviews.length(); i++) {
-				JSONObject current = reviews.getJSONObject(i);
-				long user_id = Long.parseLong(current.getString("uid"));
-				long provider_id = Long.parseLong(current.getString("pid"));
-				String user_name = current.getString("name");
-				String time = current.getString("time");
-				String review_summary = current.getString("review_summary");
-				String review = current.getString("review");
-				float rating = Float.parseFloat(current.getString("rating"));
-				float friendliness = Float.parseFloat(current
-						.getString("friendliness"));
-				float communication = Float.parseFloat(current
-						.getString("communication"));
-				float environment = Float.parseFloat(current
-						.getString("office_environment"));
-				float professional = Float.parseFloat(current
-						.getString("professional"));
-				float costs = Float.parseFloat(current.getString("costs"));
-				float availability = Float.parseFloat(current
-						.getString("availability"));
-				int pro1 = Integer.parseInt(current.getString("pro1"));
-				int pro2 = Integer.parseInt(current.getString("pro2"));
-				int pro3 = Integer.parseInt(current.getString("pro3"));
-				int con1 = Integer.parseInt(current.getString("con1"));
-				int con2 = Integer.parseInt(current.getString("con2"));
-				int con3 = Integer.parseInt(current.getString("con3"));
+		int cons[] = new int[20];
+		// for test
+		if (getIntent().hasExtra("ratings")) {
+			m_ratings = (ArrayList<Rating>) getIntent().getSerializableExtra(
+					"ratings");
+			for (Rating m_rating : m_ratings) {
+				int pro1 = m_rating.getPro1();
+				int pro2 = m_rating.getPro2();
+				int pro3 = m_rating.getPro3();
+				int con1 = m_rating.getCon1();
+				int con2 = m_rating.getCon2();
+				int con3 = m_rating.getCon3();
 
 				if (pro1 != 0)
 					pros[pro1 - 1]++;
@@ -1237,63 +1324,131 @@ public class ProviderProfileActivity extends Activity {
 					cons[-con2 - 1]++;
 				if (con3 != 0)
 					cons[-con3 - 1]++;
-				
-				Rating currentRating = new Rating(user_id, provider_id, user_name, time,
-						review_summary, review, (int) rating,
-						(int) communication, (int) environment,
-						(int) friendliness, (int) professional, (int) costs,
-						(int) availability, pro1, pro2, pro3, con1, con2, con3);
-				checkMultipleReviewer(time, currentUid, String.valueOf(user_id));
-				m_ratings.add(currentRating);
-				m_adapter.notifyDataSetChanged();
 			}
-			Double averageRating = m_provider.getAverageRating();
-			
-			//request to get the updated provider
-			if(!m_provider.getName().equals("testProvider"))
-				m_provider = ProviderHelper.getSatisfiedProviderByPID(m_provider.getID());
-			m_provider_rating.setText(averageRating.toString());
-			
-			int[] proIndices = getSortedIndices(pros, 20, 3);
-			int[] conIndices = getSortedIndices(cons, 20, 3);
-			if (proIndices[0] != 0)
-				m_provider_pro1.setText(getProAndConString(proIndices[0]));
-			if (proIndices[1] != 0)
-				m_provider_pro2.setText(getProAndConString(proIndices[1]));
-			if (proIndices[2] != 0)
-				m_provider_pro3.setText(getProAndConString(proIndices[2]));
-			if (conIndices[0] != 0)
-				m_provider_con1.setText(getProAndConString(-conIndices[0]));
-			if (conIndices[1] != 0)
-				m_provider_con2.setText(getProAndConString(-conIndices[1]));
-			if (conIndices[2] != 0)
-				m_provider_con3.setText(getProAndConString(-conIndices[2]));
-			
-			setRatingImage();
-		} catch (Exception e) {
-			// for logging
-			System.out.println("Ratings error");
-			e.printStackTrace();
+		} else {
+			m_ratings = new ArrayList<Rating>();
+			try {
+				JSONObject json = new JSONObject(ratingsJSON);
+				JSONArray reviews = json.getJSONArray("reviews");
+				for (int i = 0; i < reviews.length(); i++) {
+					JSONObject current = reviews.getJSONObject(i);
+					long user_id = Long.parseLong(current.getString("uid"));
+					long provider_id = Long.parseLong(current.getString("pid"));
+					String user_name = current.getString("name");
+					String time = current.getString("time");
+					String review_summary = current.getString("review_summary");
+					String review = current.getString("review");
+					float rating = Float
+							.parseFloat(current.getString("rating"));
+					float friendliness = Float.parseFloat(current
+							.getString("friendliness"));
+					float communication = Float.parseFloat(current
+							.getString("communication"));
+					float environment = Float.parseFloat(current
+							.getString("office_environment"));
+					float professional = Float.parseFloat(current
+							.getString("professional"));
+					float costs = Float.parseFloat(current.getString("costs"));
+					float availability = Float.parseFloat(current
+							.getString("availability"));
+					int pro1 = Integer.parseInt(current.getString("pro1"));
+					int pro2 = Integer.parseInt(current.getString("pro2"));
+					int pro3 = Integer.parseInt(current.getString("pro3"));
+					int con1 = Integer.parseInt(current.getString("con1"));
+					int con2 = Integer.parseInt(current.getString("con2"));
+					int con3 = Integer.parseInt(current.getString("con3"));
+
+					if (pro1 != 0)
+						pros[pro1 - 1]++;
+					if (pro2 != 0)
+						pros[pro2 - 1]++;
+					if (pro3 != 0)
+						pros[pro3 - 1]++;
+					if (con1 != 0)
+						cons[-con1 - 1]++;
+					if (con2 != 0)
+						cons[-con2 - 1]++;
+					if (con3 != 0)
+						cons[-con3 - 1]++;
+
+					Rating currentRating = new Rating(user_id, provider_id,
+							user_name, time, review_summary, review,
+							(int) rating, (int) communication,
+							(int) environment, (int) friendliness,
+							(int) professional, (int) costs,
+							(int) availability, pro1, pro2, pro3, con1, con2,
+							con3);
+					checkMultipleReviewer(time, currentUid,
+							String.valueOf(user_id));
+					m_ratings.add(currentRating);
+					m_adapter.notifyDataSetChanged();
+				}
+				Double averageRating = m_provider.getAverageRating();
+				m_provider_rating.setText(averageRating.toString());
+
+				int[] proIndices = getSortedIndices(pros, 20, 3);
+				int[] conIndices = getSortedIndices(cons, 20, 3);
+				if (proIndices[0] != 0)
+					m_provider_pro1.setText(getProAndConString(proIndices[0]));
+				if (proIndices[1] != 0)
+					m_provider_pro2.setText(getProAndConString(proIndices[1]));
+				if (proIndices[2] != 0)
+					m_provider_pro3.setText(getProAndConString(proIndices[2]));
+				if (conIndices[0] != 0)
+					m_provider_con1.setText(getProAndConString(-conIndices[0]));
+				if (conIndices[1] != 0)
+					m_provider_con2.setText(getProAndConString(-conIndices[1]));
+				if (conIndices[2] != 0)
+					m_provider_con3.setText(getProAndConString(-conIndices[2]));
+
+				setRatingImage();
+			} catch (Exception e) {
+				// for logging
+				System.out.println("Ratings error");
+				e.printStackTrace();
+			}
 		}
+		// parse the JSON and populate m_ratings from JSON for m_provider
+		Double averageRating = m_provider.getAverageRating();
+		m_provider_rating.setText(averageRating.toString());
+
+		int[] proIndices = getSortedIndices(pros, 20, 3);
+		int[] conIndices = getSortedIndices(cons, 20, 3);
+		if (proIndices[0] != 0)
+			m_provider_pro1.setText(getProAndConString(proIndices[0]));
+		if (proIndices[1] != 0)
+			m_provider_pro2.setText(getProAndConString(proIndices[1]));
+		if (proIndices[2] != 0)
+			m_provider_pro3.setText(getProAndConString(proIndices[2]));
+		if (conIndices[0] != 0)
+			m_provider_con1.setText(getProAndConString(-conIndices[0]));
+		if (conIndices[1] != 0)
+			m_provider_con2.setText(getProAndConString(-conIndices[1]));
+		if (conIndices[2] != 0)
+			m_provider_con3.setText(getProAndConString(-conIndices[2]));
+
+		setRatingImage();
 	}
 
-	private void checkMultipleReviewer(String time, String currentUid, String user_id) {
-		if(currentUid != null && currentUid.equals(user_id)) {
-			if(withinSixMonth(time)) {
-				System.out.println("isMultipleReviewer = " + isMultipleReviewer);
+	public void checkMultipleReviewer(String time, String currentUid,
+			String user_id) {
+		if (currentUid != null && currentUid.equals(user_id)) {
+			if (withinSixMonth(time)) {
+				System.out
+						.println("isMultipleReviewer = " + isMultipleReviewer);
 				isMultipleReviewer = true;
 			}
 		}
 	}
-	
-	private boolean withinSixMonth(String d) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");  
+
+	public boolean withinSixMonth(String d) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		java.util.Date lastTime = null;
 		try {
 			lastTime = sdf.parse(d);
 		} catch (ParseException e) {
 			e.printStackTrace();
-		}  
+		}
 		if (System.currentTimeMillis() - lastTime.getTime() < SIX_MONTH) {
 			return true;
 		}
@@ -1338,7 +1493,7 @@ public class ProviderProfileActivity extends Activity {
 			button.setVisibility(Button.GONE);
 		}
 	}
-	
+
 	public String getProAndConString(int label) {
 		String message;
 		switch (label) {
@@ -1419,7 +1574,6 @@ public class ProviderProfileActivity extends Activity {
 			message = getString(R.string.new_pc15);
 			break;
 
-
 		case -6:
 			message = getString(R.string.new_pc1_con);
 			break;
@@ -1473,7 +1627,7 @@ public class ProviderProfileActivity extends Activity {
 	}
 
 	// inner class for rating adapter. Needs to reference m_ratings
-	class RatingAdapter extends BaseExpandableListAdapter {
+	public class RatingAdapter extends BaseExpandableListAdapter {
 		@SuppressWarnings("unused")
 		private ProviderProfileActivity mContext = null;
 
@@ -1481,24 +1635,25 @@ public class ProviderProfileActivity extends Activity {
 			this.mContext = context;
 		}
 
-        public boolean areAllItemsEnabled() {
-                return false;
-        }
+		public boolean areAllItemsEnabled() {
+			return false;
+		}
 
-        public Object getChild(int groupPosition, int childPosition) {
-                return m_ratings.get(groupPosition);
-        }
+		public Object getChild(int groupPosition, int childPosition) {
+			return m_ratings.get(groupPosition);
+		}
 
-        public long getChildId(int groupPosition, int childPosition) {
-                return childPosition;
-        }
+		public long getChildId(int groupPosition, int childPosition) {
+			return childPosition;
+		}
 
-        public View getChildView(int groupPosition, int childPosition,
-                        boolean isLastChild, View convertView, ViewGroup parent) {
-        	View list_result = convertView;
+		public View getChildView(int groupPosition, int childPosition,
+				boolean isLastChild, View convertView, ViewGroup parent) {
+			View list_result = convertView;
 			if (list_result == null) {
 				LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				list_result = inflater.inflate(R.layout.provider_pf_comment, null);
+				list_result = inflater.inflate(R.layout.provider_pf_comment,
+						null);
 			}
 
 			Rating currentRating = m_ratings.get(groupPosition);
@@ -1539,33 +1694,34 @@ public class ProviderProfileActivity extends Activity {
 			tv_provider_desc.setText(review);
 
 			return list_result;
-        }
+		}
 
-        public int getChildrenCount(int groupPosition) {
-                return 1;
-        }
+		public int getChildrenCount(int groupPosition) {
+			return 1;
+		}
 
-        public Object getGroup(int groupPosition) {
-                return m_ratings.get(groupPosition);
-        }
+		public Object getGroup(int groupPosition) {
+			return m_ratings.get(groupPosition);
+		}
 
-        public int getGroupCount() {
-        	if (m_ratings != null)
-                return m_ratings.size();
-        	return 0;
-        }
+		public int getGroupCount() {
+			if (m_ratings != null)
+				return m_ratings.size();
+			return 0;
+		}
 
-        public long getGroupId(int groupPosition) {
-                return groupPosition;
-        }
+		public long getGroupId(int groupPosition) {
+			return groupPosition;
+		}
 
-        public View getGroupView(int groupPosition, boolean isExpanded,
-                        View convertView, ViewGroup parent) {
-        	
-        	View view = convertView;
+		public View getGroupView(int groupPosition, boolean isExpanded,
+				View convertView, ViewGroup parent) {
+
+			View view = convertView;
 			if (view == null) {
 				LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = inflater.inflate(R.layout.provider_pf_comment_title, null);
+				view = inflater.inflate(R.layout.provider_pf_comment_title,
+						null);
 			}
 
 			View list_result = view;
@@ -1573,7 +1729,7 @@ public class ProviderProfileActivity extends Activity {
 			Rating currentRating = m_ratings.get(groupPosition);
 			String date = currentRating.getDate().substring(0, 11); // only show
 																	// the date
-			//long user_id = currentRating.getUser();
+			// long user_id = currentRating.getUser();
 			String review_user_name = "By ";
 			review_user_name += currentRating.getUser_name();
 
@@ -1586,35 +1742,34 @@ public class ProviderProfileActivity extends Activity {
 			TextView tv_provider_user_name = (TextView) list_result
 					.findViewById(R.id.providerpf_user_name);
 			tv_provider_user_name.setText(review_user_name);
-        	
-			ImageView image=(ImageView) view.findViewById(R.id.providerpf_details);
-			if(isExpanded)
+
+			ImageView image = (ImageView) view
+					.findViewById(R.id.providerpf_details);
+			if (isExpanded)
 				image.setBackgroundResource(R.drawable.btn_browser2);
-			else image.setBackgroundResource(R.drawable.btn_browser);
+			else
+				image.setBackgroundResource(R.drawable.btn_browser);
 
 			return list_result;
-        }
+		}
 
-        public boolean isEmpty() {
-                return false;
-        }
+		public boolean isEmpty() {
+			return false;
+		}
 
-        /*
-         * Indicates whether the child and group IDs are stable across changes to
-         * the underlying data.
-         */
-        public boolean hasStableIds() {
-                return false;
-        }
+		/*
+		 * Indicates whether the child and group IDs are stable across changes
+		 * to the underlying data.
+		 */
+		public boolean hasStableIds() {
+			return false;
+		}
 
-        /*
-         * Whether the child at the specified position is selectable.
-         */
-        public boolean isChildSelectable(int groupPosition, int childPosition) {
-                return false;
-        }
-
-		
-
+		/*
+		 * Whether the child at the specified position is selectable.
+		 */
+		public boolean isChildSelectable(int groupPosition, int childPosition) {
+			return false;
+		}
 	}
 }

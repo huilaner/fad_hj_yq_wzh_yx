@@ -7,18 +7,21 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.*;
 import edu.upenn.cis350.*;
 import edu.upenn.cis350.entities.Provider;
-import edu.upenn.cis350.entities.Rating;
 
 
 public class SearchTest extends ActivityInstrumentationTestCase2<SearchActivity> {
+	@SuppressWarnings("deprecation")
 	public SearchTest() {
 		super("edu.upenn.cis350", SearchActivity.class);
 	}
-	
+
 	private Activity activity;
+	@SuppressWarnings("unused")
 	private TextView title;
+	@SuppressWarnings("unused")
 	private EditText input;
 	private Button search;
+	@SuppressWarnings("unused")
 	private Button filter;
 	Spinner parking_spinner;
 	Spinner newPatient_spinner;
@@ -27,8 +30,9 @@ public class SearchTest extends ActivityInstrumentationTestCase2<SearchActivity>
 	Spinner appointmentonly_spinner;
 	EditText provider_name;
 	EditText distance;
+	@SuppressWarnings("unused")
 	private ArrayList<Provider> _providers = new ArrayList<Provider>();
-	
+
 	public void setUp() throws Exception {
 		super.setUp();
 		activity= getActivity();
@@ -40,20 +44,20 @@ public class SearchTest extends ActivityInstrumentationTestCase2<SearchActivity>
 		creditcard_spinner = (Spinner)activity.findViewById(R.id.creditcard_spinner);
 		appointmentonly_spinner = (Spinner)activity.findViewById(R.id.appointmentonly_spinner);
 	}
-	
+
 	public void testSearchButton() {
 		assertEquals(search.getText(), "Find the provider!");
 	}
-	
+
 	public void testSpinners(){
 		assertEquals(parking_spinner.getCount(),2);
-		
+
 		assertEquals(newPatient_spinner.getCount(),2);
-		
+
 		assertEquals(handicap_spinner.getCount(),2);
-		
+
 		assertEquals(creditcard_spinner.getCount(),2);
-		
+
 		assertEquals(appointmentonly_spinner.getCount(),2);
 	}
 
