@@ -1,11 +1,9 @@
 package testfinal.edu.upenn.cis350;
 
 import java.util.ArrayList;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 import edu.upenn.cis350.*;
@@ -46,18 +44,9 @@ public class ProviderTest extends ActivityInstrumentationTestCase2<ProviderProfi
 	
 	private ExpandableListView expandableListView;
 	private View titleView;
-	private View expandedView;
 	private RatingBar stars;
 	private TextView userName;
 	private TextView date;
-	private TextView reviewSummary;
-	private TextView tv_pro1;
-	private TextView tv_pro2;
-	private TextView tv_pro3;
-	private TextView tv_con1;
-	private TextView tv_con2;
-	private TextView tv_con3;
-	private TextView review;
 	
 	private Provider m_provider;
 	private ArrayList<Rating> m_ratings;
@@ -192,7 +181,6 @@ public class ProviderTest extends ActivityInstrumentationTestCase2<ProviderProfi
 		assertNotNull(overallCons1);
 		assertNotNull(overallCons2);
 		assertNotNull(overallCons3);
-		//TODO	need to test the content of statistic pros and cons after the implementation
 	}
 	
 	public void testRatings() {
@@ -200,26 +188,9 @@ public class ProviderTest extends ActivityInstrumentationTestCase2<ProviderProfi
 		stars = (RatingBar) titleView.findViewById(R.id.providerpf_comment_stars);
 		date = (TextView) titleView.findViewById(R.id.providerpf_comment_date);		
 		userName = (TextView) titleView.findViewById(R.id.providerpf_user_name);
-//		reviewSummary = (TextView) titleView.findViewById(R.id.providerpf_rate_review_summary);
-//		tv_pro1 = (TextView) titleView.findViewById(R.id.providerpf_review_pro1);
-//		tv_pro2 = (TextView) titleView.findViewById(R.id.providerpf_review_pro2);
-//		tv_pro3 = (TextView) titleView.findViewById(R.id.providerpf_review_pro3);
-//		tv_con1 = (TextView) titleView.findViewById(R.id.providerpf_review_con1);
-//		tv_con2 = (TextView) titleView.findViewById(R.id.providerpf_review_con2);
-//		tv_con3 = (TextView) titleView.findViewById(R.id.providerpf_review_con3);
-//		review = (TextView) titleView.findViewById(R.id.providerpf_comment_review);
 		assertEquals("By username1", userName.getText());
 		assertEquals("2012-12-12 ", date.getText());
-		assertEquals(5.0, stars.getRating(), 0.0);
-//		assertEquals("one line comment", reviewSummary.getText());
-//		assertEquals("review content", review.getText());
-//		assertEquals("", tv_pro1.getText());
-//		assertEquals("By username1", tv_pro2.getText());
-//		assertEquals("By username1", tv_pro3.getText());
-//		assertEquals("By username1", tv_con1.getText());
-//		assertEquals("By username1", tv_con2.getText());
-//		assertEquals("By username1", tv_con3.getText());
-		
+		assertEquals(5.0, stars.getRating(), 0.0);		
 		
 		titleView = expandableListView.getChildAt(1);
 		stars = (RatingBar) titleView.findViewById(R.id.providerpf_comment_stars);
