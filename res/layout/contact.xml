@@ -22,6 +22,8 @@
         android:text="@string/contact_more"
         />
     
+    
+    
     <TextView
         android:id="@+id/contact_info_name"
         android:layout_width="wrap_content"
@@ -41,6 +43,14 @@
         android:text="evanswu@nursingupenn.edu"
 		
          />
+   <Button android:id="@+id/contact_info_email_version2"
+        
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textColor="#000"
+        android:text="huijia@seas.upenn.edu"
+		
+         />
     
     <Button android:id="@+id/contact_info_call"
         
@@ -50,18 +60,26 @@
         android:text="1-215-255-2555"
 		
          />
-    
-    <ImageView 
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <ImageView
         android:id="@+id/nursinglogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:src="@drawable/nursing"
-        />
-    
-    
-    
-    
-    
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/nursing" />
+    
+        <ImageView
+            android:id="@+id/seaslogo"
+            android:layout_width="126dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/nursinglogo"
+            android:src="@drawable/seas" />
+
+        </RelativeLayout>
 
 </LinearLayout>

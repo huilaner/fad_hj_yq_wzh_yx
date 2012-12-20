@@ -194,7 +194,7 @@ public class ProviderTest extends
 	}
 
 	public void testRate() {
-		assertEquals("Rate Your Doctor!", rate.getText());
+		assertEquals("Rate the Provider!", rate.getText());
 	}
 
 	public void testOverallProsCons() {

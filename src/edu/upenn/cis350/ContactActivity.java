@@ -20,6 +20,7 @@ public class ContactActivity extends Activity{
 
 	Button phone;
 	Button email;
+	Button email2;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -31,6 +32,7 @@ public class ContactActivity extends Activity{
 		super.onResume();
 		phone= (Button)this.findViewById(R.id.contact_info_call);
 		email= (Button)this.findViewById(R.id.contact_info_email_now);
+		email2 = (Button)this.findViewById(R.id.contact_info_email_version2);
 		
 		email.setOnClickListener(new OnClickListener(){
 
@@ -38,6 +40,19 @@ public class ContactActivity extends Activity{
 				
 				Intent it= new Intent(Intent.ACTION_SEND);
 				String[] tos= {"evanswu@nursing.upenn.edu"};
+				it.putExtra(Intent.EXTRA_EMAIL, tos);
+				it.putExtra(Intent.EXTRA_SUBJECT, "Comment on Consumer Voice");
+				it.setType("text/plain");
+				startActivity(it);
+			}
+		});
+		
+		email2.setOnClickListener(new OnClickListener(){
+
+			public void onClick(View v) {
+				
+				Intent it= new Intent(Intent.ACTION_SEND);
+				String[] tos= {"huijia@seas.upenn.edu"};
 				it.putExtra(Intent.EXTRA_EMAIL, tos);
 				it.putExtra(Intent.EXTRA_SUBJECT, "Comment on Consumer Voice");
 				it.setType("text/plain");
